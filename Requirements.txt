@@ -1,6 +1,5 @@
-Traci
-Numpy
-Sumolib
-Gams
-Gamsapi
-
+traci
+sumolib
+numpy
+gamsapi
+matplotlib
