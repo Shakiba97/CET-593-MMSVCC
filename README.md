@@ -7,11 +7,11 @@ This project involves the implementation of an MPC-based Signal-Vehicle Coupled 
 Python 3.12   
 GAMS 46.5  
 SUMO 1.20.0          
-traci
-sumolib
-numpy
-gamsapi
-matplotlib
+traci  
+sumolib  
+numpy  
+gamsapi  
+matplotlib  
 
 ### Installation
 Please follow this link https://www.gams.com/latest/docs/API_PY_GETTING_STARTED.html to install the GAMS dependencies. 
