@@ -27,4 +27,4 @@ The whole process is summarized in the diagram below:
 ![MPC Agent Diagram](Slides/MultiScale%20Traffic%20Control%20Diagram.png)
 
  
-Detailed documentiations can be found in /Slides/documentation.docx.  
+Detailed documentiations on the algorithm can be found in /Slides/documentation.docx.  
