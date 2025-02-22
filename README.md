@@ -1,4 +1,4 @@
-# MMSVCC (Multimodal-Multiscale-Traffic-Control)
+# MMSVCC (Multimodal Multiscale Signal-Vehicle Coupled Control)
 
 ## About
 This project involves the implementation of an MPC-based Signal-Vehicle Coupled Control (SVCC) model on a single unified 4-leg, 3-lane intersection (inspired by ***), aiming to optimize traffic flow and minimizing fuel consumption of vehicles.
