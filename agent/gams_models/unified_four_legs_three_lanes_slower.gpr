@@ -1,0 +1,686 @@
+[PROJECT]
+
+[GDXDISP: d_0 Par 0]
+PlaneDim=0
+RowDim=0
+Squeeze=1
+SqTrail0=0
+Order=
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: h Par 0]
+PlaneDim=0
+RowDim=0
+Squeeze=1
+SqTrail0=0
+Order=
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: i Set 1]
+PlaneDim=0
+RowDim=1
+Squeeze=1
+SqTrail0=0
+Order=1
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: j Set 1]
+PlaneDim=0
+RowDim=1
+Squeeze=1
+SqTrail0=0
+Order=1
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: k Set 1]
+PlaneDim=0
+RowDim=1
+Squeeze=1
+SqTrail0=0
+Order=1
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: lane_length Par 1]
+PlaneDim=0
+RowDim=1
+Squeeze=1
+SqTrail0=0
+Order=1
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: r Set 1]
+PlaneDim=0
+RowDim=1
+Squeeze=1
+SqTrail0=0
+Order=1
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: r_dynamics Par 1]
+PlaneDim=0
+RowDim=1
+Squeeze=1
+SqTrail0=0
+Order=1
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: s_init Par 2]
+PlaneDim=0
+RowDim=2
+Squeeze=1
+SqTrail0=0
+Order=1,2
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: tau Par 0]
+PlaneDim=0
+RowDim=0
+Squeeze=1
+SqTrail0=0
+Order=
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: v_init Par 2]
+PlaneDim=0
+RowDim=2
+Squeeze=1
+SqTrail0=0
+Order=1,2
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: veh_dynamics Par 2]
+PlaneDim=0
+RowDim=2
+Squeeze=1
+SqTrail0=0
+Order=1,2
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: vehicle_indi Set 2]
+PlaneDim=0
+RowDim=2
+Squeeze=1
+SqTrail0=0
+Order=1,2
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: wt_init Par 2]
+PlaneDim=0
+RowDim=2
+Squeeze=1
+SqTrail0=0
+Order=1,2
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: car_following Equ 3]
+PlaneDim=0
+RowDim=3
+Squeeze=1
+SqTrail0=0
+Order=1,2,3,4
+Decim=7
+PlaneRownr=-1
+
+[RP:SLOWER_MAIN_BY20210719]
+1=
+
+[GDXDISP: p Var 2]
+PlaneDim=0
+RowDim=2
+Squeeze=1
+SqTrail0=0
+Order=1,2,3
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: p_init Par 1]
+PlaneDim=0
+RowDim=1
+Squeeze=1
+SqTrail0=0
+Order=1
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: cost Equ 0]
+PlaneDim=0
+RowDim=0
+Squeeze=1
+SqTrail0=0
+Order=1
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: dynamics_position Equ 3]
+PlaneDim=0
+RowDim=3
+Squeeze=1
+SqTrail0=0
+Order=1,2,3,4
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: f Var 0]
+PlaneDim=0
+RowDim=0
+Squeeze=1
+SqTrail0=0
+Order=1
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: g Var 3]
+PlaneDim=0
+RowDim=3
+Squeeze=1
+SqTrail0=0
+Order=1,2,3,4
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: g_2 Var 3]
+PlaneDim=0
+RowDim=3
+Squeeze=1
+SqTrail0=0
+Order=1,2,3,4
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: la Var 2]
+PlaneDim=0
+RowDim=2
+Squeeze=1
+SqTrail0=0
+Order=1,2,3
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: model_status Par 0]
+PlaneDim=0
+RowDim=0
+Squeeze=1
+SqTrail0=0
+Order=
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: s_init Par 1]
+PlaneDim=0
+RowDim=1
+Squeeze=1
+SqTrail0=0
+Order=1
+Decim=7
+PlaneRownr=-1
+
+[RP:SLOWER_MAIN]
+1=
+
+[GDXDISP: f Par 1]
+PlaneDim=0
+RowDim=1
+Squeeze=1
+SqTrail0=0
+Order=1
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: g Par 4]
+PlaneDim=0
+RowDim=4
+Squeeze=1
+SqTrail0=0
+Order=1,2,3,4
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: g_2 Par 4]
+PlaneDim=0
+RowDim=4
+Squeeze=1
+SqTrail0=0
+Order=1,2,3,4
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: index Set 1]
+PlaneDim=0
+RowDim=1
+Squeeze=1
+SqTrail0=0
+Order=1
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: la Par 3]
+PlaneDim=0
+RowDim=3
+Squeeze=1
+SqTrail0=0
+Order=1,2,3
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: p Par 3]
+PlaneDim=0
+RowDim=3
+Squeeze=1
+SqTrail0=0
+Order=1,2,3
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: v Par 4]
+PlaneDim=0
+RowDim=4
+Squeeze=1
+SqTrail0=0
+Order=1,2,3,4
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: s Par 4]
+PlaneDim=0
+RowDim=4
+Squeeze=1
+SqTrail0=0
+Order=1,2,3,4
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: v_init Par 1]
+PlaneDim=0
+RowDim=1
+Squeeze=1
+SqTrail0=0
+Order=1
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: v_terminal Par 1]
+PlaneDim=0
+RowDim=1
+Squeeze=1
+SqTrail0=0
+Order=1
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: veh_dynamics Par 1]
+PlaneDim=0
+RowDim=1
+Squeeze=1
+SqTrail0=0
+Order=1
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: dynamics_position_2 Equ 3]
+PlaneDim=0
+RowDim=3
+Squeeze=1
+SqTrail0=0
+Order=1,2,3,4
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: dynamics_position_3 Equ 3]
+PlaneDim=0
+RowDim=3
+Squeeze=1
+SqTrail0=0
+Order=1,2,3,4
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: g_3 Var 2]
+PlaneDim=0
+RowDim=2
+Squeeze=1
+SqTrail0=0
+Order=1,2,3
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: signal_phase_sum Equ 1]
+PlaneDim=0
+RowDim=1
+Squeeze=1
+SqTrail0=0
+Order=1,2
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: solver_status Par 0]
+PlaneDim=0
+RowDim=0
+Squeeze=1
+SqTrail0=0
+Order=
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: s Var 3]
+PlaneDim=0
+RowDim=3
+Squeeze=1
+SqTrail0=0
+Order=1,2,3,4
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: phase_equal_9 Equ 1]
+PlaneDim=0
+RowDim=1
+Squeeze=1
+SqTrail0=0
+Order=1,2
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: phase_equal_8 Equ 1]
+PlaneDim=0
+RowDim=1
+Squeeze=1
+SqTrail0=0
+Order=1,2
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: phase_equal_7 Equ 1]
+PlaneDim=0
+RowDim=1
+Squeeze=1
+SqTrail0=0
+Order=1,2
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: phase_equal_6 Equ 1]
+PlaneDim=0
+RowDim=1
+Squeeze=1
+SqTrail0=0
+Order=1,2
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: phase_equal_5 Equ 1]
+PlaneDim=0
+RowDim=1
+Squeeze=1
+SqTrail0=0
+Order=1,2
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: phase_equal_4 Equ 1]
+PlaneDim=0
+RowDim=1
+Squeeze=1
+SqTrail0=0
+Order=1,2
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: phase_equal_3 Equ 1]
+PlaneDim=0
+RowDim=1
+Squeeze=1
+SqTrail0=0
+Order=1,2
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: phase_equal_2 Equ 1]
+PlaneDim=0
+RowDim=1
+Squeeze=1
+SqTrail0=0
+Order=1,2
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: phase_equal_12 Equ 1]
+PlaneDim=0
+RowDim=1
+Squeeze=1
+SqTrail0=0
+Order=1,2
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: phase_equal_11 Equ 1]
+PlaneDim=0
+RowDim=1
+Squeeze=1
+SqTrail0=0
+Order=1,2
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: phase_equal_10 Equ 1]
+PlaneDim=0
+RowDim=1
+Squeeze=1
+SqTrail0=0
+Order=1,2
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: phase_equal_1 Equ 1]
+PlaneDim=0
+RowDim=1
+Squeeze=1
+SqTrail0=0
+Order=1,2
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: s_2 Par 4]
+PlaneDim=0
+RowDim=4
+Squeeze=1
+SqTrail0=0
+Order=1,2,3,4
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: s_terminal Par 1]
+PlaneDim=0
+RowDim=1
+Squeeze=1
+SqTrail0=0
+Order=1
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: a Var 2]
+PlaneDim=0
+RowDim=2
+Squeeze=1
+SqTrail0=0
+Order=1,2,3
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: gamma Par 1]
+PlaneDim=0
+RowDim=1
+Squeeze=1
+SqTrail0=0
+Order=1
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: g_3 Par 3]
+PlaneDim=0
+RowDim=3
+Squeeze=1
+SqTrail0=0
+Order=1,2,3
+Decim=7
+PlaneRownr=-1
+
+[RP:FASTER_REAL_MAIN]
+1=
+
+[RP:SLOWER_REAL_POSITION_AS_STATE]
+1=
+
+[RP:FASTER_REAL_POSITION_AS_STATE_MAIN]
+1=
+
+[RP:SLOWER_REAL_REVISED_MAIN]
+1=
+
+[RP:SLOWER_REAL_SIMPLEST_MAIN]
+1=
+
+[RP:SLOWER_REAL_YELLOW_MAIN]
+1=
+
+[RP:SLOWER_REAL_MAIN]
+1=
+
+[GDXDISP: r_critical_points Par 1]
+PlaneDim=0
+RowDim=1
+Squeeze=1
+SqTrail0=0
+Order=1
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: r_arrival Par 2]
+PlaneDim=0
+RowDim=2
+Squeeze=1
+SqTrail0=0
+Order=1,2
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: r_arrival Par 3]
+PlaneDim=0
+RowDim=3
+Squeeze=1
+SqTrail0=0
+Order=1,2,3
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: dynamics_position Equ 2]
+PlaneDim=0
+RowDim=2
+Squeeze=1
+SqTrail0=0
+Order=1,2,3
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: dynamics_speed Equ 2]
+PlaneDim=0
+RowDim=2
+Squeeze=1
+SqTrail0=0
+Order=1,2,3
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: fuel_consumption Equ 2]
+PlaneDim=0
+RowDim=2
+Squeeze=1
+SqTrail0=0
+Order=1,2,3
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: f_inst Var 2]
+PlaneDim=0
+RowDim=2
+Squeeze=1
+SqTrail0=0
+Order=1,2,3
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: position_penalty Equ 2]
+PlaneDim=0
+RowDim=2
+Squeeze=1
+SqTrail0=0
+Order=1,2,3
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: s_critical Par 2]
+PlaneDim=0
+RowDim=2
+Squeeze=1
+SqTrail0=0
+Order=1,2
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: s Var 2]
+PlaneDim=0
+RowDim=2
+Squeeze=1
+SqTrail0=0
+Order=1,2,3
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: v Var 2]
+PlaneDim=0
+RowDim=2
+Squeeze=1
+SqTrail0=0
+Order=1,2,3
+Decim=7
+PlaneRownr=-1
+
+[RP:SLOWER_REAL_POSITION_AS_STATE_MAIN]
+1=
+
+[RP:SLOWER_REAL_POSITION_AS_STATE_MAIN_BACKUP]
+1=
+
+[RP:UNIFIED_FOUR_LEGS_THREE_LANES_SLOWER]
+1=
+
+[MRUFILES]
+1=C:\Users\guoqq17\Desktop\Qiangqiang Guo\multi_scale_vehicle_signal_coupled_control_multi_intersection_mtf\gams_files\slower_real_position_as_state_main_backup.gms
+2=C:\Users\guoqq17\Desktop\Qiangqiang Guo\multi_scale_vehicle_signal_coupled_control_multi_intersection_mtf\gams_files\slower_real_position_as_state_main.lst
+3=C:\Users\guoqq17\Desktop\Qiangqiang Guo\multi_scale_vehicle_signal_coupled_control_multi_intersection_mtf\gams_files\slower_real_position_as_state_main.gms
+4=C:\Users\guoqq17\Desktop\Qiangqiang Guo\multi_scale_vehicle_signal_coupled_control_multi_intersection_mtf\gams_files\_gams_py_gdb6902.gdx
+5=C:\Users\guoqq17\Desktop\Qiangqiang Guo\multi_scale_vehicle_signal_coupled_control_multi_intersection_mtf\gams_files\_gams_py_gdb5444.gdx
+6=C:\Users\guoqq17\Desktop\Qiangqiang Guo\multi_scale_vehicle_signal_coupled_control_multi_intersection_mtf\gams_files\_gams_py_gdb7605.gdx
+7=C:\Users\guoqq17\Desktop\Qiangqiang Guo\multi_scale_vehicle_signal_coupled_control_multi_intersection_mtf\gams_files\_gams_py_gdb7604.gdx
+8=C:\Users\guoqq17\Desktop\Qiangqiang Guo\multi_scale_vehicle_signal_coupled_control_multi_intersection_mtf\gams_files\_gams_py_gdb7601.gdx
+
+[OPENWINDOW_1]
+FILE0=C:\Users\Ohay\Desktop\Shakiba\Multiscale-Traffic-Control\SourceCodes\agent\gams_models\unified_four_legs_three_lanes_slower.gms
+FILE1=C:\Users\Ohay\Desktop\Shakiba\Multiscale-Traffic-Control\SourceCodes\agent\gams_models\unified_four_legs_three_lanes_slower.gms
+MAXIM=1
+TOP=50
+LEFT=50
+HEIGHT=400
+WIDTH=400

@@ -1,0 +1,79 @@
+B 2 C o m p i l a t i o n
+B 203 Include File Summary
+B 220 Equation Listing    SOLVE m Using MINLP From line 134
+D 221 cost
+D 229 cost_throughput
+D 236 cost_distance
+D 247 cost_transition
+D 270 cost_delay
+D 275 vehicle_dynamics_1
+D 286 vehicle_dynamics_2
+D 309 car_following
+D 314 vehicle_position_1
+D 325 vehicle_position_2
+D 336 traffic_rule
+D 347 signal_rule_1
+D 358 signal_rule_2
+D 381 signal_rule_3
+D 404 phase_equal_1
+D 415 phase_equal_2
+D 426 phase_equal_3
+D 437 phase_equal_4
+D 448 phase_equal_5
+D 459 phase_equal_6
+D 470 phase_equal_7
+D 481 phase_equal_8
+D 492 phase_equal_9
+D 503 phase_equal_10
+D 514 phase_equal_11
+D 525 phase_equal_12
+B 538 Column Listing      SOLVE m Using MINLP From line 134
+E 539 f
+E 547 f_throughput
+E 555 f_dist
+E 563 f_transit
+E 571 f_delay
+E 579 s
+E 611 g
+E 638 p
+E 671 p_c
+E 701 r
+B 719 Model Statistics    SOLVE m Using MINLP From line 134
+B 737 Solution Report     SOLVE m Using MINLP From line 134
+F 758 cost
+F 759 cost_throughput
+F 760 cost_distance
+F 761 cost_transition
+F 762 cost_delay
+F 774 vehicle_dynamics_1
+F 785 vehicle_dynamics_2
+F 796 car_following
+F 801 vehicle_position_1
+F 813 vehicle_position_2
+F 825 traffic_rule
+F 836 signal_rule_1
+F 889 signal_rule_2
+F 900 signal_rule_3
+F 912 phase_equal_1
+F 924 phase_equal_2
+F 936 phase_equal_3
+F 948 phase_equal_4
+F 960 phase_equal_5
+F 972 phase_equal_6
+F 984 phase_equal_7
+F 996 phase_equal_8
+F 1008 phase_equal_9
+F 1020 phase_equal_10
+F 1032 phase_equal_11
+F 1044 phase_equal_12
+G 1051 f
+G 1055 f_throughput
+G 1056 f_dist
+G 1057 f_transit
+G 1058 f_delay
+G 1065 s
+G 1077 g
+G 1089 p
+G 1150 p_c
+G 1212 r
+B 1309 E x e c u t i o n

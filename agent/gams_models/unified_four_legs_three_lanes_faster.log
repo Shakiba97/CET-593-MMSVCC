@@ -1,0 +1,44 @@
+
+--- Job unified_four_legs_three_lanes_faster.gms Start 02/14/24 20:29:17 24.9.1 r63795 WEX-WEI x86 64bit/MS Windows
+GAMS 24.9.1   Copyright (C) 1987-2017 GAMS Development. All rights reserved
+Licensee: Small MUD - 5 User License                     G161020:1349AO-WIN
+          University of Washington, Seattle, Civil and EnvironmentalDC12815
+          License for teaching and research at degree granting institutions
+          License Admin: Xuegang Ban, banx@uw.edu                          
+--- Starting compilation
+--- unified_four_legs_three_lanes_faster.gms(20) 2 Mb
+--- GDXin=C:\Users\guoqq17\Desktop\Qiangqiang Guo\Multiscale-Traffic-Control\SourceCodes\agent\gams_models\_gams_py_gdb1.gdx
+--- unified_four_legs_three_lanes_faster.gms(23) 3 Mb 6 Errors
+*** Error 492 in C:\Users\guoqq17\Desktop\Qiangqiang Guo\Multiscale-Traffic-Control\SourceCodes\agent\gams_models\unified_four_legs_three_lanes_faster.gms
+    Symbol not in GDX
+*** Error 492 in C:\Users\guoqq17\Desktop\Qiangqiang Guo\Multiscale-Traffic-Control\SourceCodes\agent\gams_models\unified_four_legs_three_lanes_faster.gms
+    Symbol not in GDX
+*** Error 495 in C:\Users\guoqq17\Desktop\Qiangqiang Guo\Multiscale-Traffic-Control\SourceCodes\agent\gams_models\unified_four_legs_three_lanes_faster.gms
+    Load dimensions are different
+*** Error 492 in C:\Users\guoqq17\Desktop\Qiangqiang Guo\Multiscale-Traffic-Control\SourceCodes\agent\gams_models\unified_four_legs_three_lanes_faster.gms
+    Symbol not in GDX
+*** Error 492 in C:\Users\guoqq17\Desktop\Qiangqiang Guo\Multiscale-Traffic-Control\SourceCodes\agent\gams_models\unified_four_legs_three_lanes_faster.gms
+    Symbol not in GDX
+*** Error 495 in C:\Users\guoqq17\Desktop\Qiangqiang Guo\Multiscale-Traffic-Control\SourceCodes\agent\gams_models\unified_four_legs_three_lanes_faster.gms
+    Load dimensions are different
+--- unified_four_legs_three_lanes_faster.gms(64) 3 Mb 7 Errors
+*** Error 141 in C:\Users\guoqq17\Desktop\Qiangqiang Guo\Multiscale-Traffic-Control\SourceCodes\agent\gams_models\unified_four_legs_three_lanes_faster.gms
+    Symbol declared but no values have been assigned. Check for missing
+       data definition, assignment, data loading or implicit assignment
+       via a solve statement.
+       A wild shot: You may have spurious commas in the explanatory
+       text of a declaration. Check symbol reference list.
+--- unified_four_legs_three_lanes_faster.gms(65) 3 Mb 8 Errors
+*** Error 141 in C:\Users\guoqq17\Desktop\Qiangqiang Guo\Multiscale-Traffic-Control\SourceCodes\agent\gams_models\unified_four_legs_three_lanes_faster.gms
+    Symbol declared but no values have been assigned. Check for missing
+       data definition, assignment, data loading or implicit assignment
+       via a solve statement.
+       A wild shot: You may have spurious commas in the explanatory
+       text of a declaration. Check symbol reference list.
+--- unified_four_legs_three_lanes_faster.gms(69) 3 Mb 9 Errors
+*** Error 257 in C:\Users\guoqq17\Desktop\Qiangqiang Guo\Multiscale-Traffic-Control\SourceCodes\agent\gams_models\unified_four_legs_three_lanes_faster.gms
+    Solve statement not checked because of previous errors
+--- unified_four_legs_three_lanes_faster.gms(71) 3 Mb 9 Errors
+*** Status: Compilation error(s)
+--- Job unified_four_legs_three_lanes_faster.gms Stop 02/14/24 20:29:18 elapsed 0:00:00.140
+Exit code = 2

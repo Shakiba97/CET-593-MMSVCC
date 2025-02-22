@@ -1,0 +1,96 @@
+
+--- Job unified_four_legs_three_lanes_slower.gms Start 02/14/24 20:27:57 24.9.1 r63795 WEX-WEI x86 64bit/MS Windows
+GAMS 24.9.1   Copyright (C) 1987-2017 GAMS Development. All rights reserved
+Licensee: Small MUD - 5 User License                     G161020:1349AO-WIN
+          University of Washington, Seattle, Civil and EnvironmentalDC12815
+          License for teaching and research at degree granting institutions
+          License Admin: Xuegang Ban, banx@uw.edu                          
+--- Starting compilation
+--- unified_four_legs_three_lanes_slower.gms(23) 2 Mb
+--- GDXin=C:\Users\guoqq17\Desktop\Qiangqiang Guo\Multiscale-Traffic-Control\SourceCodes\agent\gams_models\_gams_py_gdb0.gdx
+--- unified_four_legs_three_lanes_slower.gms(136) 3 Mb
+--- Starting execution: elapsed 0:00:00.005
+--- unified_four_legs_three_lanes_slower.gms(133) 4 Mb
+--- Generating MINLP model m
+--- unified_four_legs_three_lanes_slower.gms(134) 6 Mb
+---   182 rows  215 columns  801 non-zeroes
+---   0 nl-code  0 nl-non-zeroes
+---   195 discrete-columns
+--- unified_four_legs_three_lanes_slower.gms(134) 4 Mb
+--- Executing SCIP: elapsed 0:00:00.071
+
+SCIP             24.9.1 r63795 Released Aug 30, 2017 WEI x86 64bit/MS Windows 
+SCIP version 4.0 (9d3c1b1)
+Copyright (C) 2002-2017 Konrad-Zuse-Zentrum fuer Informationstechnik Berlin (ZIB)
+
+External codes: 
+  CPLEX 12.7.1.0       Linear Programming Solver developed by IBM (www.cplex.com)
+  CppAD 20160000.1     Algorithmic Differentiation of C++ algorithms developed by B. Bell (www.coin-or.org/CppAD)
+  Ipopt 3.12           Interior Point Optimizer developed by A. Waechter et.al. (www.coin-or.org/Ipopt)
+
+reading option file C:\Users\guoqq17\Desktop\Qiangqiang Guo\Multiscale-Traffic-Control\SourceCodes\agent\gams_models\scip.opt
+[../../../ThirdParty/SCIP/scip/src/scip/paramset.c:2565] ERROR: cannot open file <C:\Users\guoqq17\Desktop\Qiangqiang Guo\Multiscale-Traffic-Control\SourceCodes\agent\gams_models\scip.opt> for reading
+C:\Users\guoqq17\Desktop\Qiangqiang Guo\Multiscale-Traffic-Control\SourceCodes\agent\gams_models\scip.opt: No such file or directory
+[../../../ThirdParty/SCIP/scip/src/scip/set.c:3138] ERROR: Error <-4> in function call
+[../../../ThirdParty/SCIP/scip/src/scip/scip.c:4932] ERROR: Error <-4> in function call
+Reading of optionfile C:\Users\guoqq17\Desktop\Qiangqiang Guo\Multiscale-Traffic-Control\SourceCodes\agent\gams_models\scip.opt failed with SCIP return code <-4>!
+non-default parameter settings:
+limits/time = 1000
+limits/gap = 0.1
+lp/threads = 1
+misc/printreason = FALSE
+timing/clocktype = 2
+display/nfrac/active = 2
+
+original problem has 214 variables (203 bin, 0 int, 11 cont) and 181 constraints
+
+all 1 solutions given by solution candidate storage are infeasible
+
+presolving:
+(round 1, fast)       61 del vars, 44 del conss, 0 add conss, 35 chg bounds, 20 chg sides, 0 chg coeffs, 0 upgd conss, 0 impls, 76 clqs
+(round 2, fast)       80 del vars, 63 del conss, 0 add conss, 35 chg bounds, 20 chg sides, 0 chg coeffs, 0 upgd conss, 0 impls, 79 clqs
+(round 3, exhaustive) 80 del vars, 70 del conss, 0 add conss, 35 chg bounds, 26 chg sides, 0 chg coeffs, 0 upgd conss, 0 impls, 79 clqs
+(round 4, exhaustive) 80 del vars, 70 del conss, 0 add conss, 35 chg bounds, 26 chg sides, 0 chg coeffs, 111 upgd conss, 0 impls, 79 clqs
+(round 5, medium)     140 del vars, 70 del conss, 0 add conss, 35 chg bounds, 86 chg sides, 60 chg coeffs, 111 upgd conss, 0 impls, 59 clqs
+(round 6, fast)       140 del vars, 90 del conss, 0 add conss, 35 chg bounds, 86 chg sides, 60 chg coeffs, 111 upgd conss, 0 impls, 59 clqs
+(round 7, exhaustive) 140 del vars, 130 del conss, 0 add conss, 35 chg bounds, 86 chg sides, 60 chg coeffs, 111 upgd conss, 0 impls, 59 clqs
+(round 8, exhaustive) 148 del vars, 130 del conss, 0 add conss, 35 chg bounds, 86 chg sides, 60 chg coeffs, 111 upgd conss, 0 impls, 59 clqs
+(round 9, fast)       148 del vars, 130 del conss, 0 add conss, 35 chg bounds, 86 chg sides, 61 chg coeffs, 111 upgd conss, 0 impls, 60 clqs
+   (0.0s) probing cycle finished: starting next cycle
+(round 10, exhaustive) 155 del vars, 130 del conss, 0 add conss, 35 chg bounds, 86 chg sides, 61 chg coeffs, 111 upgd conss, 0 impls, 737 clqs
+(round 11, fast)       155 del vars, 137 del conss, 0 add conss, 35 chg bounds, 86 chg sides, 61 chg coeffs, 111 upgd conss, 0 impls, 737 clqs
+(round 12, exhaustive) 155 del vars, 138 del conss, 0 add conss, 35 chg bounds, 86 chg sides, 61 chg coeffs, 111 upgd conss, 0 impls, 737 clqs
+   (0.0s) probing: 51/74 (68.9%) - 0 fixings, 7 aggregations, 692 implications, 0 bound changes
+   (0.0s) probing aborted: 50/50 successive totally useless probings
+presolving (13 rounds: 13 fast, 8 medium, 7 exhaustive):
+ 155 deleted vars, 138 deleted constraints, 0 added constraints, 35 tightened bounds, 0 added holes, 86 changed sides, 61 changed coefficients
+ 0 implications, 737 cliques
+presolved problem has 74 variables (74 bin, 0 int, 0 impl, 0 cont) and 43 constraints
+     10 constraints of type <setppc>
+     33 constraints of type <logicor>
+transformed objective value is always integral (scale: 5)
+Presolving Time: 0.00
+
+ time | node  | left  |LP iter|LP it/n| mem |mdpt |frac |vars |cons |cols |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+k 1.0s|     1 |     0 |     0 |     - |1950k|   0 |   - |  74 |  43 |  74 |  43 |   0 |   0 |   0 |7.000000e+000 |1.700000e+001 | 142.86%
+* 1.0s|     1 |     0 |     0 |     - |1950k|   0 |   - |  74 |  43 |  74 |  43 |   0 |   0 |   0 |7.000000e+000 |7.000000e+000 |   0.00%
+  1.0s|     1 |     0 |     0 |     - |1950k|   0 |   - |  74 |  43 |  74 |  43 |   0 |   0 |   0 |7.000000e+000 |7.000000e+000 |   0.00%
+
+SCIP Status        : problem is solved [optimal solution found]
+Solving Time (sec) : 1.00
+Solving Nodes      : 1
+Primal Bound       : +7.00000000000000e+000 (2 solutions)
+Dual Bound         : +7.00000000000000e+000
+Gap                : 0.00 %
+
+
+--- Restarting execution
+--- unified_four_legs_three_lanes_slower.gms(134) 2 Mb
+--- Reading solution for model m
+***
+*** Solver did not provide marginals for model m
+***
+--- Executing after solve: elapsed 0:00:00.716
+--- unified_four_legs_three_lanes_slower.gms(136) 3 Mb
+*** Status: Normal completion
+--- Job unified_four_legs_three_lanes_slower.gms Stop 02/14/24 20:27:58 elapsed 0:00:00.776

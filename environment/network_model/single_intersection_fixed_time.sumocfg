@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/sumoConfiguration.xsd">
+
+    <input>
+        <net-file value="single_intersection_pedestrian_X.net.xml"/>
+        <route-files value="single_intersection.rou.xml"/>
+        <additional-files value="single_intersection.add_fixed_time.xml"/>
+    </input>
+
+    <time>
+        <begin value="0"/>
+    </time>
+
+    <report>
+        <verbose value="true"/>
+        <no-step-log value="true"/>
+    </report>
+
+	<!-- <output>
+		<tripinfo-output value = "tripinfo1.xml" />
+	</output> -->
+
+	<processing>
+		<waiting-time-memory value = "1000" />
+	</processing>
+
+	<!-- <guionly>
+		<quit-on-end value = "true" />
+	</guionly> -->
+
+</configuration>

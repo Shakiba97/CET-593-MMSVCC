@@ -1,0 +1,22 @@
+display/verblevel = 5  # how much detail to include in log
+#limits/time = 0.1
+#limits/gap = 0.0001   # Relative Gap
+#lp/solvefreq = 1  # frequency for solving LP at the nodes
+#lp/resolveiterfac = 1   # factor of average LP iterations that is used as LP iteration limit for LP resolve (higher, *later resolve for LP. lower, sooner resolve of LP)
+#lp/solver = "cplex"
+#lp/threads = 64  # number of processors used paralle : default is zero which means the solver would decide itself
+#presolving/maxrestarts = 1
+#presolving/maxrounds = 0    # maximal number of presolving rounds
+#branching/preferbinary = TRUE
+#limits/nodes = 10000
+#gams/interactive = "set emphasis easycip set loadgams optimize write gamssol quit"
+#gams/interactive = "set emphasis feasibility set loadgams optimize write gamssol quit"
+# set heuristic emphasis aggressive
+# apparently the interactive shell is not available in demo mode
+#gams/interactive = "set emphasis feasibility set heuristic emphasis fast set presolving emphasis fast set separating emphasis fast set loadgams optimize write gamssol quit"
+gams/interactive = "set emphasis numerics set loadgams optimize write gamssol quit"
+heuristics/completesol/beforepresol = 1
+presolving/enable=1 
+heuristics/completesol=1
+preprocessing/enable=1
+heuristics/rounding=1

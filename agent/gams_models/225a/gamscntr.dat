@@ -1,0 +1,217 @@
+52
+4 61 0 0 465  0.00000000000000E+0000 5  0.00000000000000E+0000 0 0
+664 184 0 0 183 544 120 0 0 0 0 0
+733 384 0 0 0 0 0 0
+2371 384
+733 0 0 0 0 0 0 0 0 733
+6 0 0 0 0 0 0
+0 5 0
+7025 33 20
+ 1.00000000000000E-0004  0.00000000000000E+0000 0
+0  0.00000000000000E+0000 0  0.00000000000000E+0000
+ 1.00000000000000E+0010 2147483647 0
+11 0
+ 0.00000000000000E+0000 0 0 0  1.00000000000000E+0000 0 0 0 0  1.00000000000000E-0005 0
+1 100
+0 0 0 0 0
+ 0.00000000000000E+0000  0.00000000000000E+0000  0.00000000000000E+0000  0.00000000000000E+0000  0.00000000000000E+0000
+/home/naderian/Desktop/Shakiba/Shakiba97(Multiscale-Traffic-Control)/SourceCodes/agent/gams_models/225a/gamsmatr.dat
+/home/naderian/Desktop/Shakiba/Shakiba97(Multiscale-Traffic-Control)/SourceCodes/agent/gams_models/225a/gamsinst.dat
+/home/naderian/Desktop/Shakiba/Shakiba97(Multiscale-Traffic-Control)/SourceCodes/agent/gams_models/ipopt.opt
+/home/naderian/Desktop/Shakiba/Shakiba97(Multiscale-Traffic-Control)/SourceCodes/agent/gams_models/225a/gamsstat.dat
+/home/naderian/Desktop/Shakiba/Shakiba97(Multiscale-Traffic-Control)/SourceCodes/agent/gams_models/225a/gamssolu.dat
+/home/naderian/Desktop/Shakiba/Shakiba97(Multiscale-Traffic-Control)/SourceCodes/agent/gams_models/_gams_py_gjo2095.log
+/home/naderian/Desktop/Shakiba/Shakiba97(Multiscale-Traffic-Control)/SourceCodes/agent/gams_models/225a/gamsdict.dat
+0
+20:01:39
+08/05/24
+/home/naderian/Desktop/Shakiba/Shakiba97(Multiscale-Traffic-Control)/SourceCodes/agent/gams_models/
+/home/naderian/Downloads/gams46.5_linux_x64_64_sfx/
+/home/naderian/Desktop/Shakiba/Shakiba97(Multiscale-Traffic-Control)/SourceCodes/agent/gams_models/225a/
+32767 2147483647
+0 0 45 45508 45493 61727
+Xuegang Ban, Single User License               G240621|0002AO-LNX0
+University of Washington, Civil and Environmental Engineering    0
+1028217101CP                                                     0
+1 1 1 0
+225a/gmsprmun.dat
+15 49 23
+LP          11 0
+MIP         11 0
+RMIP        11 0
+NLP         5 23
+MCP         41 0
+MPEC        35 0
+RMPEC       35 0
+CNS         5 0
+DNLP        5 0
+RMINLP      5 0
+MINLP       15 0
+QCP         5 0
+MIQCP       44 0
+RMIQCP      5 0
+EMP         25 0
+ALPHAECP    11 5 1 0 0 0 0 0 0 0 0 0 0 1 0 1 0 0
+gmsecpus.run
+gmsecpux.out
+ANTIGONE    2011 5 1 0 0 0 1 0 0 0 1 1 1 1 1 1 1 0
+gmsgenus.run
+gmsgenux.out
+BARON       1001 5 1 1 1 1 1 0 0 0 1 1 1 1 1 1 1 0
+gmsba_us.run
+gmsba_ux.out
+CBC         2011 5 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0
+gmsgenus.run
+gmsgenux.out
+CONOPT      1 0 1 1 0 1 1 0 0 0 1 1 1 0 1 0 1 0
+gmsgenus.run
+gmsgenux.out
+CONOPT3     1 0 1 1 0 1 1 0 0 0 1 1 1 0 1 0 1 0
+gmsgenus.run
+gmsgenux.out
+CONOPT4     1 0 1 1 0 1 1 0 0 0 1 1 1 0 1 0 1 0
+gmsgenus.run optconopt.def
+gmsgenux.out
+CONVERT     103011 5 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+gmsgenus.run optconvert.def
+gmsgenux.out
+CONVERTOLD  103011 5 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0
+gmscv_us.run
+gmscv_ux.out
+COPT        1011 5 1 1 1 1 0 0 0 0 0 0 0 0 1 1 1 0
+gmsgenus.run
+gmsgenux.out
+CPLEX       2011 5 1 1 1 1 0 0 0 0 0 0 0 0 1 1 1 0
+gmsgenus.run
+gmsgenux.out
+DE          102011 5 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1
+gmsgenus.run
+gmsgenux.out
+DECISC      2011 5 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+gmsdecus.run optdecis.def
+DECISM      2011 5 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+gmsdemus.run optdecis.def
+DICOPT      1 5 1 0 0 0 0 0 0 0 0 0 0 1 0 1 0 0
+gmsdi_us.run
+gmsdi_ux.out
+EXAMINER    103011 5 1 1 1 1 1 1 1 1 0 1 1 1 1 1 1 0
+gmsgenus.run
+gmsgenux.out
+EXAMINER2   103011 5 1 1 1 1 1 1 0 0 0 1 1 1 1 1 1 0
+gmsgenus.run optexaminer.def
+gmsgenux.out
+GAMSCHK     103011 5 1 1 1 1 1 1 0 0 0 1 1 1 1 1 1 0
+gmsck_us.run
+gmsck_ux.out
+GLOMIQO     2011 5 1 0 0 0 1 0 0 0 1 1 1 1 1 1 1 0
+gmsgenus.run
+gmsgenux.out
+GUROBI      11 5 1 1 1 1 1 0 0 0 0 1 1 1 1 1 1 0
+gmsgenus.run
+gmsgenux.out
+GUSS        1001 5 1 1 1 1 1 1 0 0 1 1 1 1 1 1 1 0
+gmsgenus.run
+gmsgenux.out
+HIGHS       11 5 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0
+gmsgenus.run
+gmsgenux.out
+IPOPT       11 5 1 1 0 1 1 0 0 0 1 1 1 0 1 0 1 0
+gmsgenus.run
+gmsgenux.out
+IPOPTH      11 5 1 1 0 1 1 0 0 0 1 1 1 0 1 0 1 0
+gmsgenus.run optipopt.def
+gmsgenux.out
+JAMS        101011 5 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1
+gmsja_us.run
+gmsja_ux.out
+KESTREL     103010 5 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0
+gmske_us.run
+KNITRO      103011 0 1 1 0 1 1 1 1 1 1 1 1 1 1 1 1 0
+gmsgenus.run
+gmsgenux.out
+LINDO       1 5 1 1 1 1 1 0 0 0 0 1 1 1 1 1 1 1
+gmsgenus.run
+gmsgenux.out
+LINDOGLOBAL 1 5 1 1 1 1 1 0 0 0 0 1 1 1 1 1 1 0
+gmsgenus.run
+gmsgenux.out
+LOGMIP      101011 5 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1
+gmsja_us.run optjams.def
+gmsja_ux.out
+MILES       103001 5 1 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0
+gmsmceus.run
+gmsmceux.out
+MINOS       1 0 1 1 0 1 1 0 0 0 1 1 1 0 1 0 1 0
+gmsgenus.run
+gmsgenux.out
+MOSEK       11 5 1 1 1 1 1 0 0 0 0 1 1 1 1 1 1 0
+gmsgenus.run
+gmsgenux.out
+MPSGE       100001 5 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+gmsgewus.run
+gmsgewux.out
+NLPEC       103001 0 1 0 0 0 0 1 1 1 0 0 0 0 0 0 0 0
+gmscvnus.run
+gmscvnux.out
+ODHCPLEX    2011 5 1 0 1 0 0 0 0 0 0 0 0 0 0 1 0 0
+gmsgenus.run
+gmsgenux.out
+OSICPLEX    2011 5 1 1 1 1 0 0 0 0 0 0 0 0 1 1 1 0
+gmsgenus.run
+gmsgenux.out
+OSIGUROBI   11 5 1 1 1 1 1 0 0 0 0 1 1 1 1 1 1 0
+gmsgenus.run
+gmsgenux.out
+OSIMOSEK    11 5 1 1 1 1 1 0 0 0 0 1 1 1 1 1 1 0
+gmsgenus.run
+gmsgenux.out
+OSIXPRESS   11 5 1 1 1 1 1 0 0 0 1 1 1 1 1 1 1 0
+gmsgenus.run
+gmsgenux.out
+PATH        103001 5 1 0 0 0 0 1 0 0 1 0 0 0 0 0 0 0
+gmsgenus.run
+gmsgenux.out
+PATHNLP     11 5 1 1 0 1 1 0 0 0 0 1 1 0 1 0 1 0
+gmsptnus.run
+gmsptnux.out
+QUADMINOS   1 0 1 1 0 1 0 0 0 0 0 0 0 0 0 0 0 0
+gmsgenus.run optminos.def
+gmsgenux.out
+SBB         11 5 1 0 0 0 0 0 0 0 0 0 0 1 0 1 0 0
+gmssb_us.run
+gmssb_ux.out
+SCIP        2001 5 1 0 1 0 1 0 0 0 1 1 1 1 1 1 1 0
+gmsgenus.run
+gmsgenux.out
+SHOT        1001 5 1 0 0 0 0 0 0 0 0 0 0 1 0 1 0 0
+gmsgenus.run
+gmsgenux.out
+SNOPT       1 0 1 1 0 1 1 0 0 0 1 1 1 0 1 0 1 0
+gmsgenus.run
+gmsgenux.out
+SOPLEX      11 5 1 1 0 1 0 0 0 0 0 0 0 0 0 0 0 0
+gmsgenus.run
+gmsgenux.out
+XPRESS      11 5 1 1 1 1 1 0 0 0 1 1 1 1 1 1 1 0
+gmsgenus.run
+gmsgenux.out
+11343893C0C0                                                     0
+DC16927      g 1                               A Invoice         0
+banx@uw.edu                                                      0
+1 /home/naderian/.local/share/GAMS/gamslice.txt
+1 /home/naderian/Downloads/gams46.5_linux_x64_64_sfx/gmscmpun.txt
+/home/naderian/Desktop/Shakiba/Shakiba97(Multiscale-Traffic-Control)/SourceCodes/agent/gams_models/_gams_py_gjo2095.dat
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0  1.00000000000000E+0000 0 70
+0 0 0
+0 0 0 1 0
+/home/naderian/Desktop/Shakiba/Shakiba97(Multiscale-Traffic-Control)/SourceCodes/agent/gams_models/m.so
+/home/naderian/Desktop/Shakiba/Shakiba97(Multiscale-Traffic-Control)/SourceCodes/agent/gams_models/225a/sbbinfo.dat
+/home/naderian/Desktop/Shakiba/Shakiba97(Multiscale-Traffic-Control)/SourceCodes/agent/gams_models/225a/gamscntr.dat
+/home/naderian/Desktop/Shakiba/Shakiba97(Multiscale-Traffic-Control)/SourceCodes/agent/gams_models/
+dat
+ 1.00000000000000E+0299
+
+
+/home/naderian/Desktop/Shakiba/Shakiba97(Multiscale-Traffic-Control)/SourceCodes/agent/gams_models/unified_four_legs_three_lanes_faster.gms
+ 2.37100000000000E+0003  3.84000000000000E+0002

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<connections>
+   <connection from="2_1" to="1_5" fromLane="2" toLane="2"/>
+   <connection from="2_1" to="1_5" fromLane="2" toLane="1"/>
+   <connection from="2_1" to="1_4" fromLane="1" toLane="2"/>
+   <connection from="2_1" to="1_4" fromLane="1" toLane="1"/>
+   <connection from="2_1" to="1_4" fromLane="0" toLane="0"/>
+   <connection from="2_1" to="1_3" fromLane="0" toLane="0"/>
+   <connection from="3_1" to="1_2" fromLane="2" toLane="2"/>
+   <connection from="3_1" to="1_2" fromLane="2" toLane="1"/>
+   <connection from="3_1" to="1_5" fromLane="1" toLane="2"/>
+   <connection from="3_1" to="1_5" fromLane="1" toLane="1"/>
+   <connection from="3_1" to="1_5" fromLane="0" toLane="0"/>
+   <connection from="3_1" to="1_4" fromLane="0" toLane="0"/>
+   <connection from="4_1" to="1_3" fromLane="2" toLane="2"/>
+   <connection from="4_1" to="1_3" fromLane="2" toLane="1"/>
+   <connection from="4_1" to="1_2" fromLane="1" toLane="2"/>
+   <connection from="4_1" to="1_2" fromLane="1" toLane="1"/>
+   <connection from="4_1" to="1_2" fromLane="0" toLane="0"/>
+   <connection from="4_1" to="1_5" fromLane="0" toLane="0"/>
+   <connection from="5_1" to="1_4" fromLane="2" toLane="2"/>
+   <connection from="5_1" to="1_4" fromLane="2" toLane="1"/>
+   <connection from="5_1" to="1_3" fromLane="1" toLane="2"/>
+   <connection from="5_1" to="1_3" fromLane="1" toLane="1"/>
+   <connection from="5_1" to="1_3" fromLane="0" toLane="0"/>
+   <connection from="5_1" to="1_2" fromLane="0" toLane="0"/>
+</connections>

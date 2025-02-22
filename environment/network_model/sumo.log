@@ -1,0 +1,26 @@
+***Starting server on port 55396 ***
+Loading net-file from 'C:\Users\Ohay\Desktop\Shakiba\Multiscale-Traffic-Control\SourceCodes\environment/network_model/single_intersection.net.xml' ... done (7ms).
+Loading additional-files from 'C:\Users\Ohay\Desktop\Shakiba\Multiscale-Traffic-Control\SourceCodes\environment/network_model/single_intersection.add.xml' ... done (0ms).
+Warning: Missing yellow phase in tlLogic '1', program 'my_program' for tl-index 12 when switching to phase 1.
+Warning: Missing yellow phase in tlLogic '1', program 'my_program' for tl-index 0 when switching to phase 2.
+Warning: Missing yellow phase in tlLogic '1', program 'my_program' for tl-index 12 when switching to phase 3.
+Warning: Missing yellow phase in tlLogic '1', program 'my_program' for tl-index 4 when switching to phase 4.
+Warning: Missing yellow phase in tlLogic '1', program 'my_program' for tl-index 6 when switching to phase 5.
+Warning: Missing yellow phase in tlLogic '1', program 'my_program' for tl-index 0 when switching to phase 6.
+Warning: Missing yellow phase in tlLogic '1', program 'my_program' for tl-index 6 when switching to phase 7.
+Warning: Missing yellow phase in tlLogic '1', program 'my_program' for tl-index 10 when switching to phase 8.
+Loading done.
+Simulation started with time: 0.00.
+Error: tcpip::Socket::recvAndCheck @ recv: peer shutdown
+Quitting (on error).
+Simulation ended at time: 136.00
+Performance: 
+ Duration: 65.86s
+ TraCI-Duration: 61.48s
+ Real time factor: 2.06514
+ UPS: 79.128388
+Vehicles: 
+ Inserted: 78 (Loaded: 127)
+ Running: 31
+ Waiting: 0
+

@@ -1,0 +1,1326 @@
+GAMS 24.9.1  r63795 Released Aug 30, 2017 WEX-WEI x86 64bit/MS Windows 02/14/24 20:27:57 Page 1
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+C o m p i l a t i o n
+
+
+   1  option minlp=SCIP;
+   2  parameter
+   3           model_status,
+   4           solver_status;
+   5  sets
+   6           i 'vehicles',
+   7           j 'lanes',
+   8           l 'signal phases',
+   9           k 'prediction steps',
+  10           vehicle_indi 'indicators showing that whether there is a vehicle 
+      i at lane j';
+  11   
+  12  parameter
+  13           h 'length of the time interval, i.e., the step size',
+  14           d_0 'd_0 in the car-following model',
+  15           k_dynamics(k) 'dynamic prediction steps used to calculate the dif
+      ferences',
+  16           lane_length(j) 'length of lane j',
+  17           veh_dynamics(i,j) 'indicator of vehicles to calculate the car-fol
+      lowing distances',
+  18           gamma(k) 'discount ratio',
+  19           s_init(i,j) 'initial position of vehicle i at lane j',
+  20           wt_init(i,j) 'initial waiting time of vehicle i at lane j',
+  21           p_init(l) 'initial phases';
+  22   
+GDXIN   C:\Users\guoqq17\Desktop\Qiangqiang Guo\Multiscale-Traffic-Control\Sourc
+        eCodes\agent\gams_models\_gams_py_gdb0.gdx
+  24  *$if not set gdxincname $abort 'no include file name for data file provide
+      d'
+  25  *$gdxin %gdxincname%
+--- LOAD  i = 9:i
+--- LOAD  j = 1:j
+--- LOAD  l = 2:l
+--- LOAD  k = 3:k
+--- LOAD  vehicle_indi = 10:vehicle_indi
+--- LOAD  h = 4:h
+--- LOAD  d_0 = 5:d_0
+--- LOAD  k_dynamics = 6:k_dynamics
+--- LOAD  lane_length = 8:lane_length
+--- LOAD  veh_dynamics = 14:veh_dynamics
+--- LOAD  gamma = 7:gamma
+--- LOAD  s_init = 11:s_init
+--- LOAD  wt_init = 12:wt_init
+--- LOAD  p_init = 13:p_init
+  27  *$gdxin
+  28   
+  29  variable
+  30           f 'cost function',
+  31           f_throughput 'throughput cost',
+  32           f_dist 'distance cost',
+  33           f_transit 'phase transition cost',
+  34           f_delay 'delay cost',
+  35           v(i,j,k) 'speed of vehicle i on lane j at time step k',
+  36           s(i,j,k) 'position of vehicle i on lane j at time step k';
+  37   
+  38  binary variable
+  39           g(i,j,k) 'whether vehicle i at lane j at time r passed the inters
+      eciton',
+  40           p(l,k) 'whether phase l at time step k is green',
+  41           p_c(l,k) 'whether phase l changed at time step k (e.g., from 0 to
+       1 or from 1 to 0)',
+  42           r(j,k) 'whether lane j has the right of way';
+  43   
+  44  equations
+  45           cost 'cost function',
+  46           cost_throughput 'throughput cost function',
+  47           cost_distance 'traveled distance cost function',
+  48           cost_transition 'lphase transition cost function',
+  49           cost_delay 'delay cost function',
+  50           vehicle_dynamics_1(i,j,k) 'vehicle dynamics',
+  51           vehicle_dynamics_2(i,j,k) 'vehicle dynamics',
+  52           car_following(i,j,k) 'car-following model',
+  53           vehicle_position_1(i,j,k) 'vehicle position indication',
+  54           vehicle_position_2(i,j,k) 'vehicle position indication',
+  55           traffic_rule(i,j,k) 'traffic rule',
+  56           signal_rule_1(l,k) 'signal rule',
+  57           signal_rule_2(k) 'signal rule',
+  58           signal_rule_3(k) 'signal rule',
+  59           phase_equal_1(k) 'signal phase constraint',
+  60           phase_equal_2(k) 'signal phase constraint',
+  61           phase_equal_3(k) 'signal phase constraint',
+  62           phase_equal_4(k) 'signal phase constraint',
+  63           phase_equal_5(k) 'signal phase constraint',
+  64           phase_equal_6(k) 'signal phase constraint',
+  65           phase_equal_7(k) 'signal phase constraint',
+  66           phase_equal_8(k) 'signal phase constraint',
+  67           phase_equal_9(k) 'signal phase constraint',
+  68           phase_equal_10(k) 'signal phase constraint',
+  69           phase_equal_11(k) 'signal phase constraint',
+  70           phase_equal_12(k) 'signal phase constraint';
+  71   
+      The cost function. Should be Equation (22). However, I found it hard for G
+      AMS to converge using Equation (22) only. Therefore, I added some extra co
+      st functions
+      to stablize the GAMS solving process. Equation (22) is essentially cost_th
+      roughput. cost_distance, cost_transition, and cost_delay are extra cost fu
+      nctions.
+      The weights are selected by trial and error.
+  77  cost..                                                                    
+             f =e= f_throughput + f_dist/100 + f_transit*5 + f_delay/50;
+  78  cost_throughput..                                                         
+             f_throughput =e= sum(vehicle_indi(i,j), sum(k, (1-g(i,j,k))));
+  79  cost_distance..                                                           
+             f_dist =e= -sum(vehicle_indi(i,j), sum(k, (s(i,j,k) - s_init(i,j))*
+      gamma(k))) / sum(i, sum(j, vehicle_indi(i,j)));
+  80  cost_transition..                                                         
+             f_transit =e= sum(l, sum(k, p_c(l,k)));
+  81  cost_delay..                                                              
+             f_delay =e= sum(vehicle_indi(i,j),  sum(k, wt_init(i,j)*(1-g(i,j,'7
+      '))*gamma(k))) / (sum(i, sum(j, vehicle_indi(i,j))));
+  82   
+  83  *A relaxed version of Equation (23a).
+  84  vehicle_dynamics_1(i,j,k)$(vehicle_indi(i,j) and k_dynamics(k) ne 0)..    
+             s(i,j,k) - s(i,j,k-1) =g= 0;
+  85  vehicle_dynamics_2(i,j,k)$(vehicle_indi(i,j) and k_dynamics(k) ne 0)..    
+             s(i,j,k) - s(i,j,k-1) =l= 13*h*(1-sum(l, p_c(l,k))) + 13*3*sum(l, p
+      _c(l,k));
+  86   
+  87  *A relaxed version of Equation (23b).
+  88  car_following(i,j,k)$(vehicle_indi(i,j) and veh_dynamics(i,j) ne 0)..     
+             s(i,j,k) - s(i+1,j,k) =g= d_0;
+  89   
+      Equation (23c). Note that the zero point of s(i,j,k) is set to be the inte
+      rsection point. Vehicles on incoming lanes have negative position values.
+      The following two equations can be derived if we divide Equation (23c) to 
+      two equations (left as one and right as the other one) and take negative o
+      n both sides.
+  94  vehicle_position_1(i,j,k)$vehicle_indi(i,j)..                             
+             700*g(i,j,k) =g= s(i,j,k);
+  95  vehicle_position_2(i,j,k)$vehicle_indi(i,j)..                             
+             s(i,j,k) =g= 700*(g(i,j,k) - 1);
+  96   
+  97  *Equation (23d).
+  98  traffic_rule(i,j,k)$(vehicle_indi(i,j) and k_dynamics(k) ne 0)..          
+             g(i,j,k) - g(i,j,k-1) - r(j,k) =l= 0;
+  99   
+      A more complex version of Equation (23f). Because we introduced p_c here. 
+      sum(l, p_c(l,k)) = 1 indicate there is a phase transition at time step k.
+      We need to add yellow time and all-red time during the transition.
+ 104  signal_rule_1(l,k)$(k_dynamics(k) ne 0)..                                 
+             p(l,k) - p(l,k-1) - p_c(l,k-1) =l= 0;
+ 105  signal_rule_2(k)$(k_dynamics(k) ne 0)..                                   
+             sum(l, p_c(l,k)) + sum(l, p_c(l,k - 1)) =l= 1;
+ 106  signal_rule_3(k)..                                                        
+             sum(l, p(l,k)) + sum(l, p_c(l,k)) =e= 1;
+ 107   
+ 108  * Equation (23e)
+ 109  phase_equal_1(k)..                                                        
+             p('6',k) + p('8',k) =e= r('1',k);
+ 110  phase_equal_2(k)..                                                        
+             p('5',k) + p('6',k) =e= r('2',k);
+ 111  phase_equal_3(k)..                                                        
+             p('5',k) + p('6',k) =e= r('3',k);
+ 112  phase_equal_4(k)..                                                        
+             p('3',k) + p('4',k) =e= r('4',k);
+ 113  phase_equal_5(k)..                                                        
+             p('1',k) + p('3',k) =e= r('5',k);
+ 114  phase_equal_6(k)..                                                        
+             p('1',k) + p('3',k) =e= r('6',k);
+ 115  phase_equal_7(k)..                                                        
+             p('7',k) + p('8',k) =e= r('7',k);
+ 116  phase_equal_8(k)..                                                        
+             p('5',k) + p('7',k) =e= r('8',k);
+ 117  phase_equal_9(k)..                                                        
+             p('5',k) + p('7',k) =e= r('9',k);
+ 118  phase_equal_10(k)..                                                       
+             p('2',k) + p('4',k) =e= r('10',k);
+ 119  phase_equal_11(k)..                                                       
+             p('1',k) + p('2',k) =e= r('11',k);
+ 120  phase_equal_12(k)..                                                       
+             p('1',k) + p('2',k) =e= r('12',k);
+ 121   
+ 122  *Equation (23h)
+ 123  s.up(i,j,k)$vehicle_indi(i,j)= 700;
+ 124  s.lo(i,j,k)$vehicle_indi(i,j) = -300;
+ 125  s.fx(i,j,k)$vehicle_indi(i,j) = s_init(i,j);
+ 126  p.fx(l,'1') = p_init(l);
+ 127   
+ 128  *model m /cost, dynamics_position, car_following, vehicle_position, vehicl
+      e_position_2, traffic_rule, traffic_rule_2, signal_phase_sum, phase_equal_
+      1, phase_equal_2, phase_equal_3, phase_equal_4, phase_equal_5, phase_equal
+      _6, phase_equal_7, phase_equal_8, phase_equal_9, phase_equal_10, phase_equ
+      al_11, phase_equal_12/;
+ 129  model m /cost, cost_throughput, cost_distance, cost_transition, cost_delay
+      , vehicle_dynamics_1, vehicle_dynamics_2, car_following, vehicle_position_
+      1, vehicle_position_2, traffic_rule, signal_rule_1, signal_rule_2, signal_
+      rule_3, phase_equal_1, phase_equal_2, phase_equal_3, phase_equal_4, phase_
+      equal_5, phase_equal_6, phase_equal_7, phase_equal_8, phase_equal_9, phase
+      _equal_10, phase_equal_11, phase_equal_12/;
+ 130   
+ 131  *option optcr=0;
+ 132  *option minlp=BONMIN;
+ 133  m.optfile = 1;
+ 134  solve m using minlp minimizing f;
+ 135  model_status = m.Modelstat;
+ 136  solver_status = m.solvestat;
+GAMS 24.9.1  r63795 Released Aug 30, 2017 WEX-WEI x86 64bit/MS Windows 02/14/24 20:27:57 Page 2
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Include File Summary
+
+
+   SEQ   GLOBAL TYPE      PARENT   LOCAL  FILENAME
+
+     1        1 INPUT          0       0  C:\Users\guoqq17\Desktop\Qiangqiang Gu
+                                          o\Multiscale-Traffic-Control\SourceCod
+                                          es\agent\gams_models\unified_four_legs
+                                          _three_lanes_slower.gms
+     2       23 GDXIN          1      23  C:\Users\guoqq17\Desktop\Qiangqiang Gu
+                                          o\Multiscale-Traffic-Control\SourceCod
+                                          es\agent\gams_models\_gams_py_gdb0.gdx
+
+
+COMPILATION TIME     =        0.000 SECONDS      3 MB  24.9.1 r63795 WEX-WEI
+GAMS 24.9.1  r63795 Released Aug 30, 2017 WEX-WEI x86 64bit/MS Windows 02/14/24 20:27:57 Page 3
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Equation Listing    SOLVE m Using MINLP From line 134
+
+
+---- cost  =E=  cost function
+
+cost..  f - f_throughput - 0.01*f_dist - 5*f_transit - 0.02*f_delay =E= 0 ;
+     
+      (LHS = 0)
+     
+
+---- cost_throughput  =E=  throughput cost function
+
+cost_throughput..  f_throughput + g(1,5,1) + g(1,5,2) + g(1,5,3) + g(1,5,4)
+     
+      + g(1,5,5) + g(1,5,6) + g(1,5,7) =E= 7 ; (LHS = 0, INFES = 7 ****)
+     
+
+---- cost_distance  =E=  traveled distance cost function
+
+cost_distance..  f_dist + 0.95*s(1,5,1) + 0.9025*s(1,5,2) + 0.857375*s(1,5,3)
+     
+      + 0.81450625*s(1,5,4) + 0.7737809375*s(1,5,5) + 0.735091890625*s(1,5,6)
+     
+      + 0.69833729609375*s(1,5,7) =E= -1042.57647097039 ;
+     
+      (LHS = -1042.57647097039)
+     
+
+---- cost_transition  =E=  lphase transition cost function
+
+cost_transition..  f_transit - p_c(1,1) - p_c(1,2) - p_c(1,3) - p_c(1,4)
+     
+      - p_c(1,5) - p_c(1,6) - p_c(1,7) - p_c(2,1) - p_c(2,2) - p_c(2,3)
+     
+      - p_c(2,4) - p_c(2,5) - p_c(2,6) - p_c(2,7) - p_c(3,1) - p_c(3,2)
+     
+      - p_c(3,3) - p_c(3,4) - p_c(3,5) - p_c(3,6) - p_c(3,7) - p_c(4,1)
+     
+      - p_c(4,2) - p_c(4,3) - p_c(4,4) - p_c(4,5) - p_c(4,6) - p_c(4,7)
+     
+      - p_c(5,1) - p_c(5,2) - p_c(5,3) - p_c(5,4) - p_c(5,5) - p_c(5,6)
+     
+      - p_c(5,7) - p_c(6,1) - p_c(6,2) - p_c(6,3) - p_c(6,4) - p_c(6,5)
+     
+      - p_c(6,6) - p_c(6,7) - p_c(7,1) - p_c(7,2) - p_c(7,3) - p_c(7,4)
+     
+      - p_c(7,5) - p_c(7,6) - p_c(7,7) - p_c(8,1) - p_c(8,2) - p_c(8,3)
+     
+      - p_c(8,4) - p_c(8,5) - p_c(8,6) - p_c(8,7) =E= 0 ; (LHS = 0)
+     
+
+---- cost_delay  =E=  delay cost function
+
+cost_delay..  f_delay =E= 0 ; (LHS = 0)
+     
+
+---- vehicle_dynamics_1  =G=  vehicle dynamics
+
+vehicle_dynamics_1(1,5,2)..  - s(1,5,1) + s(1,5,2) =G= 0 ; (LHS = 0)
+     
+vehicle_dynamics_1(1,5,3)..  - s(1,5,2) + s(1,5,3) =G= 0 ; (LHS = 0)
+     
+vehicle_dynamics_1(1,5,4)..  - s(1,5,3) + s(1,5,4) =G= 0 ; (LHS = 0)
+     
+REMAINING 3 ENTRIES SKIPPED
+
+
+---- vehicle_dynamics_2  =L=  vehicle dynamics
+
+vehicle_dynamics_2(1,5,2)..  - s(1,5,1) + s(1,5,2) + 26*p_c(1,2) + 26*p_c(2,2)
+     
+      + 26*p_c(3,2) + 26*p_c(4,2) + 26*p_c(5,2) + 26*p_c(6,2) + 26*p_c(7,2)
+     
+      + 26*p_c(8,2) =L= 65 ; (LHS = 0)
+     
+vehicle_dynamics_2(1,5,3)..  - s(1,5,2) + s(1,5,3) + 26*p_c(1,3) + 26*p_c(2,3)
+     
+      + 26*p_c(3,3) + 26*p_c(4,3) + 26*p_c(5,3) + 26*p_c(6,3) + 26*p_c(7,3)
+     
+      + 26*p_c(8,3) =L= 65 ; (LHS = 0)
+     
+vehicle_dynamics_2(1,5,4)..  - s(1,5,3) + s(1,5,4) + 26*p_c(1,4) + 26*p_c(2,4)
+     
+      + 26*p_c(3,4) + 26*p_c(4,4) + 26*p_c(5,4) + 26*p_c(6,4) + 26*p_c(7,4)
+     
+      + 26*p_c(8,4) =L= 65 ; (LHS = 0)
+     
+REMAINING 3 ENTRIES SKIPPED
+
+
+---- car_following  =G=  car-following model
+
+                NONE
+
+
+---- vehicle_position_1  =G=  vehicle position indication
+
+vehicle_position_1(1,5,1)..  - s(1,5,1) + 700*g(1,5,1) =G= 0 ; (LHS = 181.9)
+     
+vehicle_position_1(1,5,2)..  - s(1,5,2) + 700*g(1,5,2) =G= 0 ; (LHS = 181.9)
+     
+vehicle_position_1(1,5,3)..  - s(1,5,3) + 700*g(1,5,3) =G= 0 ; (LHS = 181.9)
+     
+REMAINING 4 ENTRIES SKIPPED
+
+
+---- vehicle_position_2  =G=  vehicle position indication
+
+vehicle_position_2(1,5,1)..  s(1,5,1) - 700*g(1,5,1) =G= -700 ; (LHS = -181.9)
+     
+vehicle_position_2(1,5,2)..  s(1,5,2) - 700*g(1,5,2) =G= -700 ; (LHS = -181.9)
+     
+vehicle_position_2(1,5,3)..  s(1,5,3) - 700*g(1,5,3) =G= -700 ; (LHS = -181.9)
+     
+REMAINING 4 ENTRIES SKIPPED
+
+
+---- traffic_rule  =L=  traffic rule
+
+traffic_rule(1,5,2)..  - g(1,5,1) + g(1,5,2) - r(5,2) =L= 0 ; (LHS = 0)
+     
+traffic_rule(1,5,3)..  - g(1,5,2) + g(1,5,3) - r(5,3) =L= 0 ; (LHS = 0)
+     
+traffic_rule(1,5,4)..  - g(1,5,3) + g(1,5,4) - r(5,4) =L= 0 ; (LHS = 0)
+     
+REMAINING 3 ENTRIES SKIPPED
+
+
+---- signal_rule_1  =L=  signal rule
+
+signal_rule_1(1,2)..  - p(1,1) + p(1,2) - p_c(1,1) =L= 0 ; (LHS = -1)
+     
+signal_rule_1(1,3)..  - p(1,2) + p(1,3) - p_c(1,2) =L= 0 ; (LHS = 0)
+     
+signal_rule_1(1,4)..  - p(1,3) + p(1,4) - p_c(1,3) =L= 0 ; (LHS = 0)
+     
+REMAINING 45 ENTRIES SKIPPED
+
+
+---- signal_rule_2  =L=  signal rule
+
+signal_rule_2(2)..  p_c(1,1) + p_c(1,2) + p_c(2,1) + p_c(2,2) + p_c(3,1)
+     
+      + p_c(3,2) + p_c(4,1) + p_c(4,2) + p_c(5,1) + p_c(5,2) + p_c(6,1)
+     
+      + p_c(6,2) + p_c(7,1) + p_c(7,2) + p_c(8,1) + p_c(8,2) =L= 1 ; (LHS = 0)
+     
+signal_rule_2(3)..  p_c(1,2) + p_c(1,3) + p_c(2,2) + p_c(2,3) + p_c(3,2)
+     
+      + p_c(3,3) + p_c(4,2) + p_c(4,3) + p_c(5,2) + p_c(5,3) + p_c(6,2)
+     
+      + p_c(6,3) + p_c(7,2) + p_c(7,3) + p_c(8,2) + p_c(8,3) =L= 1 ; (LHS = 0)
+     
+signal_rule_2(4)..  p_c(1,3) + p_c(1,4) + p_c(2,3) + p_c(2,4) + p_c(3,3)
+     
+      + p_c(3,4) + p_c(4,3) + p_c(4,4) + p_c(5,3) + p_c(5,4) + p_c(6,3)
+     
+      + p_c(6,4) + p_c(7,3) + p_c(7,4) + p_c(8,3) + p_c(8,4) =L= 1 ; (LHS = 0)
+     
+REMAINING 3 ENTRIES SKIPPED
+
+
+---- signal_rule_3  =E=  signal rule
+
+signal_rule_3(1)..  p(1,1) + p(2,1) + p(3,1) + p(4,1) + p(5,1) + p(6,1) + p(7,1)
+     
+      + p(8,1) + p_c(1,1) + p_c(2,1) + p_c(3,1) + p_c(4,1) + p_c(5,1) + p_c(6,1)
+     
+      + p_c(7,1) + p_c(8,1) =E= 1 ; (LHS = 1)
+     
+signal_rule_3(2)..  p(1,2) + p(2,2) + p(3,2) + p(4,2) + p(5,2) + p(6,2) + p(7,2)
+     
+      + p(8,2) + p_c(1,2) + p_c(2,2) + p_c(3,2) + p_c(4,2) + p_c(5,2) + p_c(6,2)
+     
+      + p_c(7,2) + p_c(8,2) =E= 1 ; (LHS = 0, INFES = 1 ****)
+     
+signal_rule_3(3)..  p(1,3) + p(2,3) + p(3,3) + p(4,3) + p(5,3) + p(6,3) + p(7,3)
+     
+      + p(8,3) + p_c(1,3) + p_c(2,3) + p_c(3,3) + p_c(4,3) + p_c(5,3) + p_c(6,3)
+     
+      + p_c(7,3) + p_c(8,3) =E= 1 ; (LHS = 0, INFES = 1 ****)
+     
+REMAINING 4 ENTRIES SKIPPED
+
+
+---- phase_equal_1  =E=  signal phase constraint
+
+phase_equal_1(1)..  p(6,1) + p(8,1) - r(1,1) =E= 0 ; (LHS = 0)
+     
+phase_equal_1(2)..  p(6,2) + p(8,2) - r(1,2) =E= 0 ; (LHS = 0)
+     
+phase_equal_1(3)..  p(6,3) + p(8,3) - r(1,3) =E= 0 ; (LHS = 0)
+     
+REMAINING 4 ENTRIES SKIPPED
+
+
+---- phase_equal_2  =E=  signal phase constraint
+
+phase_equal_2(1)..  p(5,1) + p(6,1) - r(2,1) =E= 0 ; (LHS = 0)
+     
+phase_equal_2(2)..  p(5,2) + p(6,2) - r(2,2) =E= 0 ; (LHS = 0)
+     
+phase_equal_2(3)..  p(5,3) + p(6,3) - r(2,3) =E= 0 ; (LHS = 0)
+     
+REMAINING 4 ENTRIES SKIPPED
+
+
+---- phase_equal_3  =E=  signal phase constraint
+
+phase_equal_3(1)..  p(5,1) + p(6,1) - r(3,1) =E= 0 ; (LHS = 0)
+     
+phase_equal_3(2)..  p(5,2) + p(6,2) - r(3,2) =E= 0 ; (LHS = 0)
+     
+phase_equal_3(3)..  p(5,3) + p(6,3) - r(3,3) =E= 0 ; (LHS = 0)
+     
+REMAINING 4 ENTRIES SKIPPED
+
+
+---- phase_equal_4  =E=  signal phase constraint
+
+phase_equal_4(1)..  p(3,1) + p(4,1) - r(4,1) =E= 0 ; (LHS = 0)
+     
+phase_equal_4(2)..  p(3,2) + p(4,2) - r(4,2) =E= 0 ; (LHS = 0)
+     
+phase_equal_4(3)..  p(3,3) + p(4,3) - r(4,3) =E= 0 ; (LHS = 0)
+     
+REMAINING 4 ENTRIES SKIPPED
+
+
+---- phase_equal_5  =E=  signal phase constraint
+
+phase_equal_5(1)..  p(1,1) + p(3,1) - r(5,1) =E= 0 ; (LHS = 1, INFES = 1 ****)
+     
+phase_equal_5(2)..  p(1,2) + p(3,2) - r(5,2) =E= 0 ; (LHS = 0)
+     
+phase_equal_5(3)..  p(1,3) + p(3,3) - r(5,3) =E= 0 ; (LHS = 0)
+     
+REMAINING 4 ENTRIES SKIPPED
+
+
+---- phase_equal_6  =E=  signal phase constraint
+
+phase_equal_6(1)..  p(1,1) + p(3,1) - r(6,1) =E= 0 ; (LHS = 1, INFES = 1 ****)
+     
+phase_equal_6(2)..  p(1,2) + p(3,2) - r(6,2) =E= 0 ; (LHS = 0)
+     
+phase_equal_6(3)..  p(1,3) + p(3,3) - r(6,3) =E= 0 ; (LHS = 0)
+     
+REMAINING 4 ENTRIES SKIPPED
+
+
+---- phase_equal_7  =E=  signal phase constraint
+
+phase_equal_7(1)..  p(7,1) + p(8,1) - r(7,1) =E= 0 ; (LHS = 0)
+     
+phase_equal_7(2)..  p(7,2) + p(8,2) - r(7,2) =E= 0 ; (LHS = 0)
+     
+phase_equal_7(3)..  p(7,3) + p(8,3) - r(7,3) =E= 0 ; (LHS = 0)
+     
+REMAINING 4 ENTRIES SKIPPED
+
+
+---- phase_equal_8  =E=  signal phase constraint
+
+phase_equal_8(1)..  p(5,1) + p(7,1) - r(8,1) =E= 0 ; (LHS = 0)
+     
+phase_equal_8(2)..  p(5,2) + p(7,2) - r(8,2) =E= 0 ; (LHS = 0)
+     
+phase_equal_8(3)..  p(5,3) + p(7,3) - r(8,3) =E= 0 ; (LHS = 0)
+     
+REMAINING 4 ENTRIES SKIPPED
+
+
+---- phase_equal_9  =E=  signal phase constraint
+
+phase_equal_9(1)..  p(5,1) + p(7,1) - r(9,1) =E= 0 ; (LHS = 0)
+     
+phase_equal_9(2)..  p(5,2) + p(7,2) - r(9,2) =E= 0 ; (LHS = 0)
+     
+phase_equal_9(3)..  p(5,3) + p(7,3) - r(9,3) =E= 0 ; (LHS = 0)
+     
+REMAINING 4 ENTRIES SKIPPED
+
+
+---- phase_equal_10  =E=  signal phase constraint
+
+phase_equal_10(1)..  p(2,1) + p(4,1) - r(10,1) =E= 0 ; (LHS = 0)
+     
+phase_equal_10(2)..  p(2,2) + p(4,2) - r(10,2) =E= 0 ; (LHS = 0)
+     
+phase_equal_10(3)..  p(2,3) + p(4,3) - r(10,3) =E= 0 ; (LHS = 0)
+     
+REMAINING 4 ENTRIES SKIPPED
+
+
+---- phase_equal_11  =E=  signal phase constraint
+
+phase_equal_11(1)..  p(1,1) + p(2,1) - r(11,1) =E= 0 ; (LHS = 1, INFES = 1 ****)
+     
+phase_equal_11(2)..  p(1,2) + p(2,2) - r(11,2) =E= 0 ; (LHS = 0)
+     
+phase_equal_11(3)..  p(1,3) + p(2,3) - r(11,3) =E= 0 ; (LHS = 0)
+     
+REMAINING 4 ENTRIES SKIPPED
+
+
+---- phase_equal_12  =E=  signal phase constraint
+
+phase_equal_12(1)..  p(1,1) + p(2,1) - r(12,1) =E= 0 ; (LHS = 1, INFES = 1 ****)
+     
+phase_equal_12(2)..  p(1,2) + p(2,2) - r(12,2) =E= 0 ; (LHS = 0)
+     
+phase_equal_12(3)..  p(1,3) + p(2,3) - r(12,3) =E= 0 ; (LHS = 0)
+     
+REMAINING 4 ENTRIES SKIPPED
+
+GAMS 24.9.1  r63795 Released Aug 30, 2017 WEX-WEI x86 64bit/MS Windows 02/14/24 20:27:57 Page 4
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Column Listing      SOLVE m Using MINLP From line 134
+
+
+---- f  cost function
+
+f
+                (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
+        1       cost
+
+
+---- f_throughput  throughput cost
+
+f_throughput
+                (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
+       -1       cost
+        1       cost_throughput
+
+
+---- f_dist  distance cost
+
+f_dist
+                (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
+       -0.01    cost
+        1       cost_distance
+
+
+---- f_transit  phase transition cost
+
+f_transit
+                (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
+       -5       cost
+        1       cost_transition
+
+
+---- f_delay  delay cost
+
+f_delay
+                (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
+       -0.02    cost
+        1       cost_delay
+
+
+---- s  position of vehicle i on lane j at time step k
+
+s(1,5,1)
+                (.LO, .L, .UP, .M = -181.9, -181.9, -181.9, 0)
+        0.95    cost_distance
+       -1       vehicle_dynamics_1(1,5,2)
+       -1       vehicle_dynamics_2(1,5,2)
+       -1       vehicle_position_1(1,5,1)
+        1       vehicle_position_2(1,5,1)
+
+s(1,5,2)
+                (.LO, .L, .UP, .M = -181.9, -181.9, -181.9, 0)
+        0.9025  cost_distance
+        1       vehicle_dynamics_1(1,5,2)
+       -1       vehicle_dynamics_1(1,5,3)
+        1       vehicle_dynamics_2(1,5,2)
+       -1       vehicle_dynamics_2(1,5,3)
+       -1       vehicle_position_1(1,5,2)
+        1       vehicle_position_2(1,5,2)
+
+s(1,5,3)
+                (.LO, .L, .UP, .M = -181.9, -181.9, -181.9, 0)
+        0.8574  cost_distance
+        1       vehicle_dynamics_1(1,5,3)
+       -1       vehicle_dynamics_1(1,5,4)
+        1       vehicle_dynamics_2(1,5,3)
+       -1       vehicle_dynamics_2(1,5,4)
+       -1       vehicle_position_1(1,5,3)
+        1       vehicle_position_2(1,5,3)
+
+REMAINING 4 ENTRIES SKIPPED
+
+---- g  whether vehicle i at lane j at time r passed the interseciton
+
+g(1,5,1)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+        1       cost_throughput
+      700       vehicle_position_1(1,5,1)
+     -700       vehicle_position_2(1,5,1)
+       -1       traffic_rule(1,5,2)
+
+g(1,5,2)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+        1       cost_throughput
+      700       vehicle_position_1(1,5,2)
+     -700       vehicle_position_2(1,5,2)
+        1       traffic_rule(1,5,2)
+       -1       traffic_rule(1,5,3)
+
+g(1,5,3)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+        1       cost_throughput
+      700       vehicle_position_1(1,5,3)
+     -700       vehicle_position_2(1,5,3)
+        1       traffic_rule(1,5,3)
+       -1       traffic_rule(1,5,4)
+
+REMAINING 4 ENTRIES SKIPPED
+
+---- p  whether phase l at time step k is green
+
+p(1,1)
+                (.LO, .L, .UP, .M = 1, 1, 1, 0)
+       -1       signal_rule_1(1,2)
+        1       signal_rule_3(1)
+        1       phase_equal_5(1)
+        1       phase_equal_6(1)
+        1       phase_equal_11(1)
+        1       phase_equal_12(1)
+
+p(1,2)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+        1       signal_rule_1(1,2)
+       -1       signal_rule_1(1,3)
+        1       signal_rule_3(2)
+        1       phase_equal_5(2)
+        1       phase_equal_6(2)
+        1       phase_equal_11(2)
+        1       phase_equal_12(2)
+
+p(1,3)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+        1       signal_rule_1(1,3)
+       -1       signal_rule_1(1,4)
+        1       signal_rule_3(3)
+        1       phase_equal_5(3)
+        1       phase_equal_6(3)
+        1       phase_equal_11(3)
+        1       phase_equal_12(3)
+
+REMAINING 53 ENTRIES SKIPPED
+
+---- p_c  whether phase l changed at time step k (e.g., from 0 to 1 or from 1 to
+          0)
+
+p_c(1,1)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+       -1       cost_transition
+       -1       signal_rule_1(1,2)
+        1       signal_rule_2(2)
+        1       signal_rule_3(1)
+
+p_c(1,2)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+       -1       cost_transition
+       26       vehicle_dynamics_2(1,5,2)
+       -1       signal_rule_1(1,3)
+        1       signal_rule_2(2)
+        1       signal_rule_2(3)
+        1       signal_rule_3(2)
+
+p_c(1,3)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+       -1       cost_transition
+       26       vehicle_dynamics_2(1,5,3)
+       -1       signal_rule_1(1,4)
+        1       signal_rule_2(3)
+        1       signal_rule_2(4)
+        1       signal_rule_3(3)
+
+REMAINING 53 ENTRIES SKIPPED
+
+---- r  whether lane j has the right of way
+
+r(1,1)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+       -1       phase_equal_1(1)
+
+r(1,2)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+       -1       phase_equal_1(2)
+
+r(1,3)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+       -1       phase_equal_1(3)
+
+REMAINING 81 ENTRIES SKIPPED
+GAMS 24.9.1  r63795 Released Aug 30, 2017 WEX-WEI x86 64bit/MS Windows 02/14/24 20:27:57 Page 5
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Model Statistics    SOLVE m Using MINLP From line 134
+
+
+MODEL STATISTICS
+
+BLOCKS OF EQUATIONS          26     SINGLE EQUATIONS          182
+BLOCKS OF VARIABLES          10     SINGLE VARIABLES          215
+NON ZERO ELEMENTS           801     NON LINEAR N-Z              0
+DERIVATIVE POOL              20     CONSTANT POOL              16
+CODE LENGTH                   0     DISCRETE VARIABLES        195
+
+
+GENERATION TIME      =        0.063 SECONDS      4 MB  24.9.1 r63795 WEX-WEI
+
+
+EXECUTION TIME       =        0.063 SECONDS      4 MB  24.9.1 r63795 WEX-WEI
+GAMS 24.9.1  r63795 Released Aug 30, 2017 WEX-WEI x86 64bit/MS Windows 02/14/24 20:27:57 Page 6
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Solution Report     SOLVE m Using MINLP From line 134
+
+
+               S O L V E      S U M M A R Y
+
+     MODEL   m                   OBJECTIVE  f
+     TYPE    MINLP               DIRECTION  MINIMIZE
+     SOLVER  SCIP                FROM LINE  134
+
+**** SOLVER STATUS     1 Normal Completion         
+**** MODEL STATUS      1 Optimal                   
+**** OBJECTIVE VALUE                7.0000
+
+ RESOURCE USAGE, LIMIT          1.000      1000.000
+ ITERATION COUNT, LIMIT         0    2000000000
+ EVALUATION ERRORS              0             0
+
+SCIP             24.9.1 r63795 Released Aug 30, 2017 WEI x86 64bit/MS Windows 
+
+                       LOWER     LEVEL     UPPER
+
+---- EQU cost            .         .         .         
+---- EQU cost_thro~     7.000     7.000     7.000      
+---- EQU cost_dist~ -1042.576 -1042.576 -1042.576      
+---- EQU cost_tran~      .         .         .         
+---- EQU cost_delay      .         .         .         
+
+  cost  cost function
+  cost_throughput  throughput cost function
+  cost_distance  traveled distance cost function
+  cost_transition  lphase transition cost function
+  cost_delay  delay cost function
+
+---- EQU vehicle_dynamics_1  vehicle dynamics
+
+         LOWER     LEVEL     UPPER
+
+1.5.2      .         .        +INF       
+1.5.3      .         .        +INF       
+1.5.4      .         .        +INF       
+1.5.5      .         .        +INF       
+1.5.6      .         .        +INF       
+1.5.7      .         .        +INF       
+
+---- EQU vehicle_dynamics_2  vehicle dynamics
+
+         LOWER     LEVEL     UPPER
+
+1.5.2     -INF       .       65.000      
+1.5.3     -INF       .       65.000      
+1.5.4     -INF       .       65.000      
+1.5.5     -INF       .       65.000      
+1.5.6     -INF       .       65.000      
+1.5.7     -INF       .       65.000      
+
+---- EQU car_following  car-following model
+
+                NONE
+
+
+---- EQU vehicle_position_1  vehicle position indication
+
+         LOWER     LEVEL     UPPER
+
+1.5.1      .      181.900     +INF       
+1.5.2      .      181.900     +INF       
+1.5.3      .      181.900     +INF       
+1.5.4      .      181.900     +INF       
+1.5.5      .      181.900     +INF       
+1.5.6      .      181.900     +INF       
+1.5.7      .      181.900     +INF       
+
+---- EQU vehicle_position_2  vehicle position indication
+
+         LOWER     LEVEL     UPPER
+
+1.5.1  -700.000  -181.900     +INF       
+1.5.2  -700.000  -181.900     +INF       
+1.5.3  -700.000  -181.900     +INF       
+1.5.4  -700.000  -181.900     +INF       
+1.5.5  -700.000  -181.900     +INF       
+1.5.6  -700.000  -181.900     +INF       
+1.5.7  -700.000  -181.900     +INF       
+
+---- EQU traffic_rule  traffic rule
+
+         LOWER     LEVEL     UPPER
+
+1.5.2     -INF     -1.000      .         
+1.5.3     -INF     -1.000      .         
+1.5.4     -INF     -1.000      .         
+1.5.5     -INF     -1.000      .         
+1.5.6     -INF     -1.000      .         
+1.5.7     -INF     -1.000      .         
+
+---- EQU signal_rule_1  signal rule
+
+       LOWER     LEVEL     UPPER
+
+1.2     -INF       .         .         
+1.3     -INF       .         .         
+1.4     -INF       .         .         
+1.5     -INF       .         .         
+1.6     -INF       .         .         
+1.7     -INF       .         .         
+2.2     -INF       .         .         
+2.3     -INF       .         .         
+2.4     -INF       .         .         
+2.5     -INF       .         .         
+2.6     -INF       .         .         
+2.7     -INF       .         .         
+3.2     -INF       .         .         
+3.3     -INF       .         .         
+3.4     -INF       .         .         
+3.5     -INF       .         .         
+3.6     -INF       .         .         
+3.7     -INF       .         .         
+4.2     -INF       .         .         
+4.3     -INF       .         .         
+4.4     -INF       .         .         
+4.5     -INF       .         .         
+4.6     -INF       .         .         
+4.7     -INF       .         .         
+5.2     -INF       .         .         
+5.3     -INF       .         .         
+5.4     -INF       .         .         
+5.5     -INF       .         .         
+5.6     -INF       .         .         
+5.7     -INF       .         .         
+6.2     -INF       .         .         
+6.3     -INF       .         .         
+6.4     -INF       .         .         
+6.5     -INF       .         .         
+6.6     -INF       .         .         
+6.7     -INF       .         .         
+7.2     -INF       .         .         
+7.3     -INF       .         .         
+7.4     -INF       .         .         
+7.5     -INF       .         .         
+7.6     -INF       .         .         
+7.7     -INF       .         .         
+8.2     -INF       .         .         
+8.3     -INF       .         .         
+8.4     -INF       .         .         
+8.5     -INF       .         .         
+8.6     -INF       .         .         
+8.7     -INF       .         .         
+
+---- EQU signal_rule_2  signal rule
+
+     LOWER     LEVEL     UPPER
+
+2     -INF       .        1.000      
+3     -INF       .        1.000      
+4     -INF       .        1.000      
+5     -INF       .        1.000      
+6     -INF       .        1.000      
+7     -INF       .        1.000      
+
+---- EQU signal_rule_3  signal rule
+
+     LOWER     LEVEL     UPPER
+
+1     1.000     1.000     1.000      
+2     1.000     1.000     1.000      
+3     1.000     1.000     1.000      
+4     1.000     1.000     1.000      
+5     1.000     1.000     1.000      
+6     1.000     1.000     1.000      
+7     1.000     1.000     1.000      
+
+---- EQU phase_equal_1  signal phase constraint
+
+     LOWER     LEVEL     UPPER
+
+1      .         .         .         
+2      .         .         .         
+3      .         .         .         
+4      .         .         .         
+5      .         .         .         
+6      .         .         .         
+7      .         .         .         
+
+---- EQU phase_equal_2  signal phase constraint
+
+     LOWER     LEVEL     UPPER
+
+1      .         .         .         
+2      .         .         .         
+3      .         .         .         
+4      .         .         .         
+5      .         .         .         
+6      .         .         .         
+7      .         .         .         
+
+---- EQU phase_equal_3  signal phase constraint
+
+     LOWER     LEVEL     UPPER
+
+1      .         .         .         
+2      .         .         .         
+3      .         .         .         
+4      .         .         .         
+5      .         .         .         
+6      .         .         .         
+7      .         .         .         
+
+---- EQU phase_equal_4  signal phase constraint
+
+     LOWER     LEVEL     UPPER
+
+1      .         .         .         
+2      .         .         .         
+3      .         .         .         
+4      .         .         .         
+5      .         .         .         
+6      .         .         .         
+7      .         .         .         
+
+---- EQU phase_equal_5  signal phase constraint
+
+     LOWER     LEVEL     UPPER
+
+1      .         .         .         
+2      .         .         .         
+3      .         .         .         
+4      .         .         .         
+5      .         .         .         
+6      .         .         .         
+7      .         .         .         
+
+---- EQU phase_equal_6  signal phase constraint
+
+     LOWER     LEVEL     UPPER
+
+1      .         .         .         
+2      .         .         .         
+3      .         .         .         
+4      .         .         .         
+5      .         .         .         
+6      .         .         .         
+7      .         .         .         
+
+---- EQU phase_equal_7  signal phase constraint
+
+     LOWER     LEVEL     UPPER
+
+1      .         .         .         
+2      .         .         .         
+3      .         .         .         
+4      .         .         .         
+5      .         .         .         
+6      .         .         .         
+7      .         .         .         
+
+---- EQU phase_equal_8  signal phase constraint
+
+     LOWER     LEVEL     UPPER
+
+1      .         .         .         
+2      .         .         .         
+3      .         .         .         
+4      .         .         .         
+5      .         .         .         
+6      .         .         .         
+7      .         .         .         
+
+---- EQU phase_equal_9  signal phase constraint
+
+     LOWER     LEVEL     UPPER
+
+1      .         .         .         
+2      .         .         .         
+3      .         .         .         
+4      .         .         .         
+5      .         .         .         
+6      .         .         .         
+7      .         .         .         
+
+---- EQU phase_equal_10  signal phase constraint
+
+     LOWER     LEVEL     UPPER
+
+1      .         .         .         
+2      .         .         .         
+3      .         .         .         
+4      .         .         .         
+5      .         .         .         
+6      .         .         .         
+7      .         .         .         
+
+---- EQU phase_equal_11  signal phase constraint
+
+     LOWER     LEVEL     UPPER
+
+1      .         .         .         
+2      .         .         .         
+3      .         .         .         
+4      .         .         .         
+5      .         .         .         
+6      .         .         .         
+7      .         .         .         
+
+---- EQU phase_equal_12  signal phase constraint
+
+     LOWER     LEVEL     UPPER
+
+1      .         .         .         
+2      .         .         .         
+3      .         .         .         
+4      .         .         .         
+5      .         .         .         
+6      .         .         .         
+7      .         .         .         
+
+                       LOWER     LEVEL     UPPER
+
+---- VAR f              -INF      7.000     +INF       
+---- VAR f_through~     -INF      7.000     +INF       
+---- VAR f_dist         -INF       .        +INF       
+---- VAR f_transit      -INF       .        +INF       
+---- VAR f_delay        -INF       .        +INF       
+
+  f  cost function
+  f_throughput  throughput cost
+  f_dist  distance cost
+  f_transit  phase transition cost
+  f_delay  delay cost
+
+---- VAR s  position of vehicle i on lane j at time step k
+
+         LOWER     LEVEL     UPPER
+
+1.5.1  -181.900  -181.900  -181.900      
+1.5.2  -181.900  -181.900  -181.900      
+1.5.3  -181.900  -181.900  -181.900      
+1.5.4  -181.900  -181.900  -181.900      
+1.5.5  -181.900  -181.900  -181.900      
+1.5.6  -181.900  -181.900  -181.900      
+1.5.7  -181.900  -181.900  -181.900      
+
+---- VAR g  whether vehicle i at lane j at time r passed the interseciton
+
+         LOWER     LEVEL     UPPER
+
+1.5.1      .         .        1.000      
+1.5.2      .         .        1.000      
+1.5.3      .         .        1.000      
+1.5.4      .         .        1.000      
+1.5.5      .         .        1.000      
+1.5.6      .         .        1.000      
+1.5.7      .         .        1.000      
+
+---- VAR p  whether phase l at time step k is green
+
+       LOWER     LEVEL     UPPER
+
+1.1     1.000     1.000     1.000      
+1.2      .        1.000     1.000      
+1.3      .        1.000     1.000      
+1.4      .        1.000     1.000      
+1.5      .        1.000     1.000      
+1.6      .        1.000     1.000      
+1.7      .        1.000     1.000      
+2.1      .         .         .         
+2.2      .         .        1.000      
+2.3      .         .        1.000      
+2.4      .         .        1.000      
+2.5      .         .        1.000      
+2.6      .         .        1.000      
+2.7      .         .        1.000      
+3.1      .         .         .         
+3.2      .         .        1.000      
+3.3      .         .        1.000      
+3.4      .         .        1.000      
+3.5      .         .        1.000      
+3.6      .         .        1.000      
+3.7      .         .        1.000      
+4.1      .         .         .         
+4.2      .         .        1.000      
+4.3      .         .        1.000      
+4.4      .         .        1.000      
+4.5      .         .        1.000      
+4.6      .         .        1.000      
+4.7      .         .        1.000      
+5.1      .         .         .         
+5.2      .         .        1.000      
+5.3      .         .        1.000      
+5.4      .         .        1.000      
+5.5      .         .        1.000      
+5.6      .         .        1.000      
+5.7      .         .        1.000      
+6.1      .         .         .         
+6.2      .         .        1.000      
+6.3      .         .        1.000      
+6.4      .         .        1.000      
+6.5      .         .        1.000      
+6.6      .         .        1.000      
+6.7      .         .        1.000      
+7.1      .         .         .         
+7.2      .         .        1.000      
+7.3      .         .        1.000      
+7.4      .         .        1.000      
+7.5      .         .        1.000      
+7.6      .         .        1.000      
+7.7      .         .        1.000      
+8.1      .         .         .         
+8.2      .         .        1.000      
+8.3      .         .        1.000      
+8.4      .         .        1.000      
+8.5      .         .        1.000      
+8.6      .         .        1.000      
+8.7      .         .        1.000      
+
+---- VAR p_c  whether phase l changed at time step k (e.g., from 0 to 1 or from 
+              1 to 0)
+
+       LOWER     LEVEL     UPPER
+
+1.1      .         .        1.000      
+1.2      .         .        1.000      
+1.3      .         .        1.000      
+1.4      .         .        1.000      
+1.5      .         .        1.000      
+1.6      .         .        1.000      
+1.7      .         .        1.000      
+2.1      .         .        1.000      
+2.2      .         .        1.000      
+2.3      .         .        1.000      
+2.4      .         .        1.000      
+2.5      .         .        1.000      
+2.6      .         .        1.000      
+2.7      .         .        1.000      
+3.1      .         .        1.000      
+3.2      .         .        1.000      
+3.3      .         .        1.000      
+3.4      .         .        1.000      
+3.5      .         .        1.000      
+3.6      .         .        1.000      
+3.7      .         .        1.000      
+4.1      .         .        1.000      
+4.2      .         .        1.000      
+4.3      .         .        1.000      
+4.4      .         .        1.000      
+4.5      .         .        1.000      
+4.6      .         .        1.000      
+4.7      .         .        1.000      
+5.1      .         .        1.000      
+5.2      .         .        1.000      
+5.3      .         .        1.000      
+5.4      .         .        1.000      
+5.5      .         .        1.000      
+5.6      .         .        1.000      
+5.7      .         .        1.000      
+6.1      .         .        1.000      
+6.2      .         .        1.000      
+6.3      .         .        1.000      
+6.4      .         .        1.000      
+6.5      .         .        1.000      
+6.6      .         .        1.000      
+6.7      .         .        1.000      
+7.1      .         .        1.000      
+7.2      .         .        1.000      
+7.3      .         .        1.000      
+7.4      .         .        1.000      
+7.5      .         .        1.000      
+7.6      .         .        1.000      
+7.7      .         .        1.000      
+8.1      .         .        1.000      
+8.2      .         .        1.000      
+8.3      .         .        1.000      
+8.4      .         .        1.000      
+8.5      .         .        1.000      
+8.6      .         .        1.000      
+8.7      .         .        1.000      
+
+---- VAR r  whether lane j has the right of way
+
+        LOWER     LEVEL     UPPER
+
+1 .1      .         .        1.000      
+1 .2      .         .        1.000      
+1 .3      .         .        1.000      
+1 .4      .         .        1.000      
+1 .5      .         .        1.000      
+1 .6      .         .        1.000      
+1 .7      .         .        1.000      
+2 .1      .         .        1.000      
+2 .2      .         .        1.000      
+2 .3      .         .        1.000      
+2 .4      .         .        1.000      
+2 .5      .         .        1.000      
+2 .6      .         .        1.000      
+2 .7      .         .        1.000      
+3 .1      .         .        1.000      
+3 .2      .         .        1.000      
+3 .3      .         .        1.000      
+3 .4      .         .        1.000      
+3 .5      .         .        1.000      
+3 .6      .         .        1.000      
+3 .7      .         .        1.000      
+4 .1      .         .        1.000      
+4 .2      .         .        1.000      
+4 .3      .         .        1.000      
+4 .4      .         .        1.000      
+4 .5      .         .        1.000      
+4 .6      .         .        1.000      
+4 .7      .         .        1.000      
+5 .1      .        1.000     1.000      
+5 .2      .        1.000     1.000      
+5 .3      .        1.000     1.000      
+5 .4      .        1.000     1.000      
+5 .5      .        1.000     1.000      
+5 .6      .        1.000     1.000      
+5 .7      .        1.000     1.000      
+6 .1      .        1.000     1.000      
+6 .2      .        1.000     1.000      
+6 .3      .        1.000     1.000      
+6 .4      .        1.000     1.000      
+6 .5      .        1.000     1.000      
+6 .6      .        1.000     1.000      
+6 .7      .        1.000     1.000      
+7 .1      .         .        1.000      
+7 .2      .         .        1.000      
+7 .3      .         .        1.000      
+7 .4      .         .        1.000      
+7 .5      .         .        1.000      
+7 .6      .         .        1.000      
+7 .7      .         .        1.000      
+8 .1      .         .        1.000      
+8 .2      .         .        1.000      
+8 .3      .         .        1.000      
+8 .4      .         .        1.000      
+8 .5      .         .        1.000      
+8 .6      .         .        1.000      
+8 .7      .         .        1.000      
+9 .1      .         .        1.000      
+9 .2      .         .        1.000      
+9 .3      .         .        1.000      
+9 .4      .         .        1.000      
+9 .5      .         .        1.000      
+9 .6      .         .        1.000      
+9 .7      .         .        1.000      
+10.1      .         .        1.000      
+10.2      .         .        1.000      
+10.3      .         .        1.000      
+10.4      .         .        1.000      
+10.5      .         .        1.000      
+10.6      .         .        1.000      
+10.7      .         .        1.000      
+11.1      .        1.000     1.000      
+11.2      .        1.000     1.000      
+11.3      .        1.000     1.000      
+11.4      .        1.000     1.000      
+11.5      .        1.000     1.000      
+11.6      .        1.000     1.000      
+11.7      .        1.000     1.000      
+12.1      .        1.000     1.000      
+12.2      .        1.000     1.000      
+12.3      .        1.000     1.000      
+12.4      .        1.000     1.000      
+12.5      .        1.000     1.000      
+12.6      .        1.000     1.000      
+12.7      .        1.000     1.000      
+
+
+**** REPORT SUMMARY :        0     NONOPT
+                             0 INFEASIBLE
+                             0  UNBOUNDED
+                             0     ERRORS
+GAMS 24.9.1  r63795 Released Aug 30, 2017 WEX-WEI x86 64bit/MS Windows 02/14/24 20:27:57 Page 7
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+E x e c u t i o n
+
+
+EXECUTION TIME       =        0.062 SECONDS      3 MB  24.9.1 r63795 WEX-WEI
+
+
+USER: Small MUD - 5 User License                     G161020:1349AO-WIN
+      University of Washington, Seattle, Civil and EnvironmentalDC12815
+      License for teaching and research at degree granting institutions
+
+
+**** FILE SUMMARY
+
+Input      C:\Users\guoqq17\Desktop\Qiangqiang Guo\Multiscale-Traffic-Control\So
+           urceCodes\agent\gams_models\unified_four_legs_three_lanes_slower.gms
+Output     C:\Users\guoqq17\Desktop\Qiangqiang Guo\Multiscale-Traffic-Control\So
+           urceCodes\agent\gams_models\unified_four_legs_three_lanes_slower.lst
