@@ -17,10 +17,10 @@ matplotlib
 Please follow this link https://www.gams.com/latest/docs/API_PY_GETTING_STARTED.html to install the GAMS dependencies. 
 
 ## Structure
-- `agent`: Contains the MPC Agent Class which includes the Input, Output Interfaces (communication with SUMO), and Optimization functions.  
+- `agent`: Contains the MPC Agent Class which includes the MPC Optimization process.  
     - gams_models: Contains GAMS files solving the A2, A3 Optimization problems (refer to the paper [Guo and Ban (2023)](https://www.sciencedirect.com/science/article/abs/pii/S0191261523001121))  
-- `config`: contains functions for setting up the model parameters.
-- `environment`: Contains SUMO files of the Unified 4-leg intersection.
+- `config`: Contains functions for setting up the model parameters.
+- `environment`: Contains SUMO files and configurations as well as single_intersection class which covers the route builder and network generator of simulation as well as the Input, Output Interfaces (communication with SUMO) for the Unified 4-leg intersection.
 
 The whole process is summarized in the diagram below:  
 
