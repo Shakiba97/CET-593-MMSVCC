@@ -5,8 +5,8 @@ This project involves the implementation of an MPC-based Signal-Vehicle Coupled 
 
 ## Requirements
 Python 3.12   
-GAMS 46.5 (Download: https://www.gams.com/download/)  
-SUMO 1.20.0  (Download: https://eclipse.dev/sumo/)  
+GAMS 46.5 ([Download](https://www.gams.com/download/))  
+SUMO 1.20.0  ([Download](https://eclipse.dev/sumo/))
 traci  
 sumolib  
 numpy  
@@ -14,7 +14,7 @@ gamsapi
 matplotlib  
 
 ### Installation
-Please follow this link https://www.gams.com/latest/docs/API_PY_GETTING_STARTED.html to install the GAMS dependencies and troubleshooting the GAMS installation if needed. 
+Please follow [this link](https://www.gams.com/latest/docs/API_PY_GETTING_STARTED.html) to install the GAMS dependencies and troubleshooting the GAMS installation if needed. 
 
 ## Structure
 - `agent`: Contains the MPC Agent Class which includes the MPC Optimization process.  
