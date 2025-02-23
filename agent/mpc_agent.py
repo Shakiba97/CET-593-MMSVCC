@@ -33,7 +33,9 @@ class MpcAgent:
         sys.path.append(gams_dir)
         if not os.path.exists(self.models_dir):
             os.mkdir(self.models_dir)
+        gams_dir = "/Library/Frameworks/GAMS.framework/Versions/49/Resources/"
         self.ws = GamsWorkspace(self.models_dir, system_directory=gams_dir, debug=1)
+        #self.ws = GamsWorkspace(self.models_dir, debug=1)
         self.gams_file_slower = (
             self.models_dir + "/" + intersection_type + "_slower_Pedestrians (with extension).gms"
         )
