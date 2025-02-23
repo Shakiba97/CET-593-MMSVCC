@@ -14,7 +14,7 @@ gamsapi
 matplotlib  
 
 ### Installation
-Please follow this link https://www.gams.com/latest/docs/API_PY_GETTING_STARTED.html to install the GAMS dependencies. 
+Please follow this link https://www.gams.com/latest/docs/API_PY_GETTING_STARTED.html to install the GAMS dependencies and troubleshooting the GAMS installation if needed. 
 
 ## Structure
 - `agent`: Contains the MPC Agent Class which includes the MPC Optimization process.  
