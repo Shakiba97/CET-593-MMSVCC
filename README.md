@@ -6,7 +6,7 @@ This project involves the implementation of an MPC-based Signal-Vehicle Coupled 
 ## Requirements
 Python 3.12   
 GAMS 46.5 ([Download](https://www.gams.com/download/))  
-SUMO 1.20.0  ([Download](https://eclipse.dev/sumo/))
+SUMO 1.20.0  ([Download](https://eclipse.dev/sumo/))  
 traci  
 sumolib  
 numpy  
