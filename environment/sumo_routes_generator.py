@@ -39,7 +39,7 @@ class SumoRoutesGenerator:
             os.mkdir(model_dir)
         file_name = model_dir + "/single_intersection.rou.xml"
         poisson_gamma=0.04 #average number of pedestrian at each second
-        # high:0.08 medium=0.08*0.5 low=0.01
+        # high:0.04 medium=0.02 low=0.01
         scenario = "Asymmetric" # Asymmetric or Symmetric
         if scenario == "Asymmetric":
             division=[6,3,2,1]
@@ -83,28 +83,28 @@ class SumoRoutesGenerator:
             <route id="NE_ped_diag" edges="5_1 :1_w0 :1_c3 :1_w2 1_4" />
 
             
-            <personFlow id="person_WE_s" begin="0" end="900" period="exp({poisson_gamma*division[1]/2})" departPos="100">
+            <personFlow id="person_WE_s" begin="0" end="450" period="exp({poisson_gamma*division[1]/2})" departPos="100">
                 <walk route="WE_ped"/>
              </personFlow>
-            <personFlow id="person_EW_n" begin="0" end="900" period="exp({poisson_gamma*division[3]/2})" departPos="100">
+            <personFlow id="person_EW_n" begin="0" end="450" period="exp({poisson_gamma*division[3]/2})" departPos="100">
                 <walk route="EW_ped"/>
             </personFlow>
-            <personFlow id="person_NS_w" begin="0" end="900" period="exp({poisson_gamma*division[0]/2})" departPos="100">
+            <personFlow id="person_NS_w" begin="0" end="450" period="exp({poisson_gamma*division[0]/2})" departPos="100">
                 <walk route="NS_ped"/>
             </personFlow>
-            <personFlow id="person_SN_e" begin="0" end="900" period="exp({poisson_gamma*division[2]/2})" departPos="100">
+            <personFlow id="person_SN_e" begin="0" end="450" period="exp({poisson_gamma*division[2]/2})" departPos="100">
                 <walk route="SN_ped"/>
             </personFlow>   
-            <personFlow id="person_WN_diag" begin="0" end="900" period="exp({poisson_gamma*1.5})" departPos="100">
+            <personFlow id="person_WN_diag" begin="0" end="450" period="exp({poisson_gamma*1.5})" departPos="100">
                 <walk from="2_1" to="1_5"/>
             </personFlow>
-            <personFlow id="person_SW_diag" begin="0" end="900" period="exp({poisson_gamma*1.5})" departPos="100">
+            <personFlow id="person_SW_diag" begin="0" end="450" period="exp({poisson_gamma*1.5})" departPos="100">
                 <walk from="3_1" to="1_2"/>
             </personFlow>   
-            <personFlow id="person_ES_diag" begin="0" end="900" period="exp({poisson_gamma*1.5})" departPos="100">
+            <personFlow id="person_ES_diag" begin="0" end="450" period="exp({poisson_gamma*1.5})" departPos="100">
                 <walk from="4_1" to="1_3"/>
             </personFlow>       
-            <personFlow id="person_NE_diag" begin="0" end="900" period="exp({poisson_gamma*1.5})" departPos="100">
+            <personFlow id="person_NE_diag" begin="0" end="450" period="exp({poisson_gamma*1.5})" departPos="100">
                 <walk from="5_1" to="1_4"/>
             </personFlow>      
    

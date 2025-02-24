@@ -36,7 +36,7 @@ def set_common_paras(paras):
     # Random seed used to generate the volume.
     paras["random_seed"] = 1
     # Simulation steps.
-    paras["simulation_steps"] = 900 // paras["delta_T"]
+    paras["simulation_steps"] = 450 // paras["delta_T"]
     # Signal yellow time added between conflicting phases.
     paras["yellow_time"] = 5
     paras["all_red_time"] = 2
@@ -57,11 +57,11 @@ def set_common_paras(paras):
     # Number of signal phases.
     paras["num_phases"] = 9
     # The lowest volume, in veh/h.
-    paras["low_volume"] = 400
+    paras["low_volume"] = 200
     # The highest volume, in veh/h.
-    paras["high_volume"] = 600
+    paras["high_volume"] = 400
     # We simulate the volumes in a wave feature. This parameter represents the half-period of such waves. In seconds.
-    paras["time_interval_seconds"] = 150
+    paras["time_interval_seconds"] = 75
 
 
     ## pedestrian:
