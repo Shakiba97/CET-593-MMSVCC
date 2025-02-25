@@ -171,16 +171,8 @@ class SingleIntersection:
                     sidewalk_id.append("%i_%i" % (node, inter_id))
             sidewalk_id.extend(self.walking_areas)
 
-            ## Get pedestrian info:
+            ## Get pedestrian info (Pedestrian Demand at current step):
             for i in range(len(sidewalk_id)):
-                ## note that you are not taking account of the
-                # second crossing demand yet and they would only
-                # immediately be added to the current demand of the
-                # second crossing but not include in the 10s, 20s,
-                # 30s, 40s analysis of that second crossing
-                # and I don't tink we can consider that because we don't
-                # know if the signal for the first crossing gonna be green or not
-                # but unfortunately this would make the optimization not be as accurate as we want
                 pos_peds.append([])
                 speed_peds.append([])
                 wt_peds.append([])
@@ -191,20 +183,14 @@ class SingleIntersection:
                 for j in range(len(peds_lane)):
                     pos=traci.person.getLanePosition(peds_lane[j])
                     speed=traci.person.getSpeed(peds_lane[j])
-
                     waiting_time=traci.person.getWaitingTime(peds_lane[j])
                     route=traci.person.getEdges(peds_lane[j],)
                     next_edge=traci.person.getNextEdge(peds_lane[j])
                     current_edge=traci.person.getLaneID(peds_lane[j])[0:5]
-                    #print("pedestrian: ", peds_lane[j])
-                    #print("route: ",route)
-                    #print("next_edge: ",next_edge)
-
                     pos_peds[i%4].append(pos)
                     speed_peds[i%4].append(speed)
                     wt_peds[i%4].append(waiting_time)
                     ped_id[i%4].append(peds_lane[j])
-
                     if next_edge in self.cross_map.keys():
                         if "diag" in peds_lane[j]:
                             for cross in map_diag[current_edge]:
@@ -213,13 +199,6 @@ class SingleIntersection:
                         else:
                             cross_demand[next_edge].add(peds_lane[j])
                             cross_demand_all[another_map[next_edge]][1].append(peds_lane[j])
-                        #print("cross_demand[West]: ",cross_demand[':1_c5'])
-                        #print("cross_demand[East]: ", cross_demand[':1_c2'])
-                        #print("cross_demand[North]: ", cross_demand[':1_c0'])
-                        #print("cross_demand[South]: ", cross_demand[':1_c4'])
-                        #print("cross_demand[NESW]: ", cross_demand[':1_c1'])
-                        #print("cross_demand[NWSE]: ", cross_demand[':1_c3'])
-                        # traci.person.setColor(peds_lane[j], (255, 0, 0, 255))
                     elif next_edge in self.walking_areas and speed!=0:
                         if "diag" in peds_lane[j]:
                             for cross in map_diag[next_edge]:
@@ -234,43 +213,23 @@ class SingleIntersection:
                                     cross_demand_all[another_map[crossing]][step].append(peds_lane[j])
                                     traci.person.setColor(peds_lane[j], (255, 0, 0, 255))
 
-
-                        # if (186.4-pos)/speed <10:
-                        #     cross_demand_10s[crossing].add(peds_lane[j])
-                        # elif (186.4-pos)/speed <20:
-                        #     cross_demand_20s[crossing].add(peds_lane[j])
-                        #     traci.person.setColor(peds_lane[j], (255, 0, 0, 255))
-                        # elif (186.4-pos)/speed <30:
-                        #     cross_demand_30s[crossing].add(peds_lane[j])
-                        #     traci.person.setColor(peds_lane[j], (255, 0, 0, 255))
-                        # elif (186.4-pos)/speed <40:
-                        #     cross_demand_40s[crossing].add(peds_lane[j])
-                        #     traci.person.setColor(peds_lane[j], (255, 0, 0, 255))
-
-                    # for cross in self.cross_map.keys():
-                    #     cross_demand_next5s.setdefault(self.cross_map[cross], set())
-                    #     if cross in route:
-                    #         d=self.cross_map[cross]
-                    #         cross_demand.setdefault(d,set())
-                    #         cross_demand[d].add(peds_lane[j])
-                    #         if (speed!=0 and (186.4-pos)/speed <5 or pos<5) : ## could be adjusted for predicting the next 5, 10 or 20 seconds demand
-                    #             cross_demand_next5s[d].add(peds_lane[j])
-                    #             traci.person.setColor(peds_lane[j], (255, 0, 0, 255))
-
-                ## Count the Conflicts between right turning vehicles and pedestrians:
-                all_cars=traci.vehicle.getIDList()
-                all_peds=traci.person.getIDList()
-                for car in all_cars:
-                    for ped in all_peds:
-                        for dir in right_turning_vehs:
-                            if (car.startswith(dir) and traci.vehicle.getLaneID(car).startswith(":") and traci.person.getLaneID(ped) in [key + "_0" for key in self.cross_map.keys()]):
-                                self.right_turn_conflicts.setdefault(car,set())
+            ## Count the Conflicts between right turning vehicles and pedestrians passing on the crossings:
+            all_cars=traci.vehicle.getIDList()
+            all_peds=traci.person.getIDList()
+            for car in all_cars:
+                for dir in right_turning_vehs:
+                    if car.startswith(dir) and traci.vehicle.getLaneID(car).startswith(":"):
+                        for ped in all_peds:
+                            if traci.person.getLaneID(ped) in [key + "_0" for key in self.cross_map.keys()]:
                                 position_car=traci.vehicle.getPosition(car)
                                 position_ped=traci.person.getPosition(ped)
-                                if math.dist(position_car, position_ped) < 2:
+                                speed_car=traci.vehicle.getSpeed(car)
+                                speed_ped=traci.person.getSpeed(ped)
+                                if math.dist(position_car, position_ped) < 7 and math.dist(position_car, position_ped)/max(1,(speed_car+speed_ped))<2: ## if TTC less than 2 seconds
+                                    self.right_turn_conflicts.setdefault(car, set())
+                                    # print("Car: ", car)
+                                    # print("Ped: ", ped)
                                     self.right_turn_conflicts[car].add(ped)
-                                    #print(self.right_turn_conflicts)
-
 
 
             ## Get dynamic information. Use linear interpolation to estimate HDV's state.
@@ -480,10 +439,6 @@ class SingleIntersection:
                 self.yellow_duration = 0
         elif next_signal_phase == -1:
             self.yellow_duration += self.paras["delta_T_faster"]
-
-        # print("simulation time: ",traci.simulation.getTime())
-        # print("current phase: ", cur_phase)
-        # print("yellow duration: ", self.yellow_duration)
         if self.yellow_duration == self.paras['yellow_time']:
             traci.trafficlight.setPhase("1", 17)
         ## Vehicles control

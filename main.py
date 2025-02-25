@@ -24,31 +24,16 @@ def main(network_type, volume_type, control_type):
     step = 0
     while env_single_intersection.is_active():
 
-        # print("----Get network state")
+        print(f"----Get network state at step {step}")
         network_state = env_single_intersection.get_state_cur_intersection(step)
 
         if control_type == "multi_scale":
-
-
-            # print("position of vehicles: ", network_state[1]['pos_vehicles'])
-            # print("speed of vehicles: ", network_state[1]['speed_vehicles'])
-            # print("arrival times: ", network_state[1]['arrival_times'])
-            # print("signal phase: ", network_state[1]['signal_phase'])
-            # print("pedestrian demand: ", network_state[1]['pedestrian_demand'])
-
             # print("----Get control commands from the agent")
             (next_global_step_to_re_solve_the_network, phase_list_multi, duration_list_multi, should_update_signal, next_signal_phase, speed_commands) = (
                 agent_unified_four_legs_three_lanes.get_control_commands(
                     paras, network_state, step
                 )
             )
-
-            # print("should_update_signal: ", should_update_signal)
-            # print("next_signal_phase: ", next_signal_phase)
-            # print("speed_commands: ", speed_commands)
-            #print("time (s): ", step*0.5)
-
-            # print("----Apply the control commands to the environment")
             env_single_intersection.apply_control_commands(
                 should_update_signal, next_signal_phase, speed_commands
             )
@@ -56,14 +41,11 @@ def main(network_type, volume_type, control_type):
         elif control_type == "actuated":
              env_single_intersection.pedestrian_actuation()
 
-
-
             #env_single_intersection.pedestrian_movement_control()
-        #print("----Calculate extra metrics")
         env_single_intersection.calculate_extra_metrics()
-        #print("----Move one step forward")
         env_single_intersection.move_one_step_forward()
         step += 1
+        print(f"-------------------------------")
 
     env_single_intersection.close_sumo_simulation()
     env_single_intersection.performance_results(phase_list_multi, duration_list_multi, network_type, volume_type, control_type, step)

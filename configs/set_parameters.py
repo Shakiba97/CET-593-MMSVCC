@@ -8,7 +8,7 @@ def set_common_paras(paras):
     # Prediction horizon of the MPC problem, i.e., T^{s}.
     paras["num_predict_steps"] = 6
     # Number of slower steps used to construct the faster scale problem, i.e., h in Equation (24).
-    paras["faster_steps_from_slower"] = 6
+    paras["faster_steps_from_slower"] = 3
     # Length of each slower step, i.e., \Delta T_{s}.
     paras["delta_T"] = 5
     # Length of each faster step, i.e., \Delta T_{f}.
@@ -32,11 +32,13 @@ def set_common_paras(paras):
 
     ## Simulation parameters.
     # Peneration rate of CAVs.
-    paras["penetration"] = 1
+    paras["penetration"] = 0.25
     # Random seed used to generate the volume.
     paras["random_seed"] = 1
+    # simulation duration.
+    paras["simulation_duration"] = 600
     # Simulation steps.
-    paras["simulation_steps"] = 450 // paras["delta_T"]
+    paras["simulation_steps"] = paras["simulation_duration"] // paras["delta_T"]
     # Signal yellow time added between conflicting phases.
     paras["yellow_time"] = 5
     paras["all_red_time"] = 2
@@ -61,10 +63,10 @@ def set_common_paras(paras):
     # The highest volume, in veh/h.
     paras["high_volume"] = 400
     # We simulate the volumes in a wave feature. This parameter represents the half-period of such waves. In seconds.
-    paras["time_interval_seconds"] = 75
+    paras["time_interval_seconds"] = int(paras["simulation_duration"]/6)
 
 
-    ## pedestrian:
+    ## pedestrian parameters:
     paras['crossing_length']=3.2*5 #m
     paras['X_crossing_length']=3.2*5*math.sqrt(2)
     paras["crossing_width"]=3.5 #m
@@ -543,7 +545,7 @@ def set_parameters(network_type, volume_type):
     set_network_topology_paras(paras)
 
     # Signal actions
-    set_signal_phases_paras(paras)
+    #set_signal_phases_paras(paras)
 
     # Volume
     set_volume_paras(paras)
