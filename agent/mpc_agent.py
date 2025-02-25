@@ -15,8 +15,6 @@ class MpcAgent:
             intersection_type: Currently, we manually build one GAMS model for one intersection type
                 because the geometry and signal settings are different. This intersection_type
                 is used to grab the corresponding GMAS model.
-
-        TODO: Automatically build GAMS models based on different intersection geometry and signal settings.
         """
         self.phase_list_multi=[]
         self.duration_list_multi=[]
@@ -37,7 +35,7 @@ class MpcAgent:
         #self.ws = GamsWorkspace(self.models_dir, system_directory=gams_dir, debug=1)
         self.ws = GamsWorkspace(self.models_dir, debug=1)
         self.gams_file_slower = (
-            self.models_dir + "/" + intersection_type + "_slower_Pedestrians (with extension).gms"
+            self.models_dir + "/" + intersection_type + "_slower_Pedestrians.gms"
         )
         self.gams_file_faster = (
             self.models_dir + "/" + intersection_type + "_faster.gms"
@@ -91,7 +89,7 @@ class MpcAgent:
         """Gather static parameters that used for constructing the GAMS model
 
         Args:
-            paras: The parameters defined all the way here. For the MCity case, we can hard code this part.
+            paras: The parameters defined all the way here.
         """
         self.num_phases = paras["num_phases"]
         self.num_lanes = paras["num_lanes_intersection"]
@@ -163,8 +161,8 @@ class MpcAgent:
         for ind in range(self.num_lanes):
             lane_length.add_record(str(ind + 1)).value = self.len_lane
 
-    def set_slower_scale_dynamic_paras_single_intersection(self, intersection_state):
-        """Set the dynmaic parameters of the slower scale model
+    def set_slower_scale_dynamic_paras_single_intersection(self, paras, intersection_state):
+        """Set the dynamic parameters of the slower scale model
 
         Args that we will get from intersection_state:
             pos_vehicles: Positions of each vehicle, 1 * m list where m is the number of lanes,
@@ -185,8 +183,7 @@ class MpcAgent:
         cur_phase = intersection_state["signal_phase"]
         num_vehicles_max = intersection_state["num_vehicles_max"]
         pedestrian_demand=intersection_state["pedestrian_demand"]
-        print("pedestrian_demand variable initially: ", pedestrian_demand)
-
+        weights= paras["weight(Vehicles/Pedestrians)"]
 
         i = self.db_slower.add_set("i", 1, "vehicles")
         for ind in range(1, num_vehicles_max + 1):
@@ -216,16 +213,12 @@ class MpcAgent:
         )
         extension_steps.add_record().value = self.extension_steps
 
-        EWpara = self.db_slower.add_parameter(
-            "EW", 0, "initial value to help GAMS for EW"
+        veh_weight = self.db_slower.add_parameter(
+            "Wv", 0, "Weighting factor for Vehicles"
         )
-        NSpara = self.db_slower.add_parameter(
-            "NS", 0, "initial value to help GAMS for NS"
+        ped_weight = self.db_slower.add_parameter(
+            "Wp", 0, "Weighting factor for Pedestrians"
         )
-
-        print("simulation time: ", traci.simulation.getTime())
-        print("extension steps: ", self.extension_steps)
-        a=2
 
         for ind_lane in range(len(pos_vehicles)):
             for ind_vehicle in range(len(pos_vehicles[ind_lane])):
@@ -247,31 +240,16 @@ class MpcAgent:
             else:
                 p_init.add_record((str(ind_signal + 1))).value = 0
 
-
-        # for ind_cross in range(self.num_cross):
-        #     for ind_step in range(1, self.num_steps + 2):
-        #         if ind_step in [1,2]:
-        #             ped_Demand.add_record((str(ind_cross + 1), str(ind_step))).value = 0
-        #         else:
-        #             ped_Demand.add_record((str(ind_cross+1),str(ind_step))).value = len(pedestrian_demand[ind_cross+1][ind_step-2])  ## the current demand should be considered for the q(m, 3) which is the phase after the current phase
         for ind_cross in range(self.num_cross):
             cum=0
             for ind_step in range(1, self.num_steps + 2):
                 cum+=len(pedestrian_demand[ind_cross+1][ind_step])
                 ped_Demand.add_record((str(ind_cross+1),str(ind_step))).value = cum ## the current demand should be considered for the q(m, 3) which is the phase after the current phase
-            #print(f"pedestrian demand fot crossing{ind_cross+1}: ", pedestrian_demand[ind_cross+1])
 
-        if len(pedestrian_demand[4][1])+len(pedestrian_demand[2][1])>len(pedestrian_demand[3][1])+len(pedestrian_demand[1][1]):
-            EW=0
-            NS=1
-        else:
-            EW=1
-            NS=0
-
-        EWpara.add_record().value = EW
-        NSpara.add_record().value = NS
-        print('EW',EW)
-        print('NS',NS)
+        veh_weight.add_record().value = weights[0]
+        ped_weight.add_record().value = weights[1]
+        print('veh_weight',weights[0])
+        print('ped_weight',weights[1])
 
     def run_gams_to_solve_slower_scale_problem_single_intersection(self):
         """Run the corresponding GAMS model to solve the slower scale problem"""
@@ -461,7 +439,7 @@ class MpcAgent:
         speed_vehicles_init,
         steps_faster,
     ):
-        """Set the dynmaic parameters of the faster scale model
+        """Set the dynamic parameters of the faster scale model
 
         Args:
             critical_points: The critical points in the faster scale.
@@ -556,7 +534,7 @@ class MpcAgent:
         """Solve one slwoer scale problem"""
         self.db_slower = self.ws.add_database()
         self.set_slower_scale_constant_paras_single_intersection()
-        self.set_slower_scale_dynamic_paras_single_intersection(intersection_state)
+        self.set_slower_scale_dynamic_paras_single_intersection(paras, intersection_state)
         self.run_gams_to_solve_slower_scale_problem_single_intersection()
         self.collect_solution_from_slower_scale_problem_single_intersection(
             paras, intersection_state
@@ -732,7 +710,6 @@ class MpcAgent:
                     print("--------Solve intersection: ", inter_id)
                     self.solve_single_intersection(paras, network_state[inter_id])
                     should_update_signal = True
-                    #print(self.slower_scale_solution["following_phases"])
         else:
             self.current_step_in_faster_scale_solution += 1
 

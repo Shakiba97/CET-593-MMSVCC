@@ -1,18 +1,16 @@
 {
-    "file": "unified_four_legs_three_lanes_slower_Pedestrians.gms",
-    "name": "unified_four_legs_three_lanes_slower_Pedestrians",
+    "file": "unified_four_legs_three_lanes_slower_Pedestrians (with extension).gms",
+    "name": "unified_four_legs_three_lanes_slower_Pedestrians (with extension)",
     "nodes": [
         {
             "codecMib": 106,
-            "file": "unified_four_legs_three_lanes_slower_Pedestrians.gms",
-            "name": "unified_four_legs_three_lanes_slower_Pedestrians.gms",
+            "file": "unified_four_legs_three_lanes_slower_Pedestrians (with extension).gms",
+            "name": "unified_four_legs_three_lanes_slower_Pedestrians (with extension).gms",
             "type": "gms"
         }
     ],
     "options": [
-        ""
     ],
     "path": ".",
-    "pf": "",
     "workDir": "."
 }

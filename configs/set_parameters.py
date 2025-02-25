@@ -72,6 +72,8 @@ def set_common_paras(paras):
     paras["crossing_width"]=3.5 #m
     paras['ped_speed']=1 #m/s
     paras['num_cross']=6
+    # weighting factor for each mode (for the slower scale problem optimization)
+    paras["weight(Vehicles/Pedestrians)"] = (0.5, 0.5)
 
 
 def set_network_topology_paras(paras):
