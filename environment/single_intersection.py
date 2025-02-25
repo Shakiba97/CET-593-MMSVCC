@@ -225,7 +225,7 @@ class SingleIntersection:
                                 position_ped=traci.person.getPosition(ped)
                                 speed_car=traci.vehicle.getSpeed(car)
                                 speed_ped=traci.person.getSpeed(ped)
-                                if math.dist(position_car, position_ped) < 7 and math.dist(position_car, position_ped)/max(1,(speed_car+speed_ped))<2: ## if TTC less than 2 seconds
+                                if math.dist(position_car, position_ped) < 5 and math.dist(position_car, position_ped)/max(1,(speed_car+speed_ped))<2: ## if TTC less than 2 seconds
                                     self.right_turn_conflicts.setdefault(car, set())
                                     # print("Car: ", car)
                                     # print("Ped: ", ped)

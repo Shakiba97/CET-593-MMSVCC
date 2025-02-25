@@ -32,7 +32,7 @@ def set_common_paras(paras):
 
     ## Simulation parameters.
     # Peneration rate of CAVs.
-    paras["penetration"] = 0.25
+    paras["penetration"] = 1
     # Random seed used to generate the volume.
     paras["random_seed"] = 1
     # simulation duration.

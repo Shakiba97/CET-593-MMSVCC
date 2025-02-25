@@ -58,278 +58,278 @@
             </personFlow>      
    
             
-    <vehicle id="SN_0" type="cars" route="SN" depart="0" departLane="2" />
-    <vehicle id="WE_0" type="cars" route="WE" depart="1" departLane="2"/>
-    <vehicle id="NS_1" type="cars" route="NS" depart="1" departLane="2" />
-    <vehicle id="SN_2" type="cars" route="SN" depart="5" departLane="2" />
-    <vehicle id="WS_3" type="cars" route="WS" depart="7" departLane="1" />
-    <vehicle id="WE_1" type="cars" route="WE" depart="10" departLane="2"/>
+    <vehicle id="SN_0" type="cars" route="SN" depart="0" departLane="2" color="0,1,0"/>
+    <vehicle id="WE_0" type="cars" route="WE" depart="1" departLane="2" color="0,1,0"/>
+    <vehicle id="NS_1" type="cars" route="NS" depart="1" departLane="2" color="0,1,0"/>
+    <vehicle id="SN_2" type="cars" route="SN" depart="5" departLane="2" color="0,1,0"/>
+    <vehicle id="WS_3" type="cars" route="WS" depart="7" departLane="1" color="0,1,0"/>
+    <vehicle id="WE_1" type="cars" route="WE" depart="10" departLane="2" color="0,1,0"/>
     <vehicle id="WE_2" type="cars" route="WE" depart="12" departLane="2" color="0,1,0"/>
-    <vehicle id="ES_4" type="cars" route="ES" depart="14" departLane="3" />
+    <vehicle id="ES_4" type="cars" route="ES" depart="14" departLane="3" color="0,1,0"/>
     <vehicle id="EW_0" type="cars" route="EW" depart="19" departLane="2" color="0,1,0"/>
     <vehicle id="EW_1" type="cars" route="EW" depart="21" departLane="2" color="0,1,0"/>
     <vehicle id="NS_5" type="cars" route="NS" depart="22" departLane="2" color="0,1,0"/>
-    <vehicle id="ES_6" type="cars" route="ES" depart="31" departLane="3" />
+    <vehicle id="ES_6" type="cars" route="ES" depart="31" departLane="3" color="0,1,0"/>
     <vehicle id="NW_7" type="cars" route="NW" depart="37" departLane="1" color="0,1,0"/>
-    <vehicle id="SW_8" type="cars" route="SW" depart="40" departLane="3" />
-    <vehicle id="NW_9" type="cars" route="NW" depart="41" departLane="1" />
-    <vehicle id="WE_3" type="cars" route="WE" depart="43" departLane="2"/>
-    <vehicle id="EW_2" type="cars" route="EW" depart="46" departLane="2" />
-    <vehicle id="SN_10" type="cars" route="SN" depart="48" departLane="2" />
+    <vehicle id="SW_8" type="cars" route="SW" depart="40" departLane="3" color="0,1,0"/>
+    <vehicle id="NW_9" type="cars" route="NW" depart="41" departLane="1" color="0,1,0"/>
+    <vehicle id="WE_3" type="cars" route="WE" depart="43" departLane="2" color="0,1,0"/>
+    <vehicle id="EW_2" type="cars" route="EW" depart="46" departLane="2" color="0,1,0"/>
+    <vehicle id="SN_10" type="cars" route="SN" depart="48" departLane="2" color="0,1,0"/>
     <vehicle id="WE_4" type="cars" route="WE" depart="67" departLane="2" color="0,1,0"/>
-    <vehicle id="EW_3" type="cars" route="EW" depart="68" departLane="2" />
+    <vehicle id="EW_3" type="cars" route="EW" depart="68" departLane="2" color="0,1,0"/>
     <vehicle id="SN_11" type="cars" route="SN" depart="70" departLane="2" color="0,1,0"/>
-    <vehicle id="NS_12" type="cars" route="NS" depart="80" departLane="2" />
+    <vehicle id="NS_12" type="cars" route="NS" depart="80" departLane="2" color="0,1,0"/>
     <vehicle id="WN_13" type="cars" route="WN" depart="85" departLane="3" color="0,1,0"/>
-    <vehicle id="WE_5" type="cars" route="WE" depart="86" departLane="2"/>
+    <vehicle id="WE_5" type="cars" route="WE" depart="86" departLane="2" color="0,1,0"/>
     <vehicle id="WE_6" type="cars" route="WE" depart="87" departLane="2" color="0,1,0"/>
-    <vehicle id="SN_14" type="cars" route="SN" depart="90" departLane="2" />
-    <vehicle id="NS_15" type="cars" route="NS" depart="92" departLane="2" />
-    <vehicle id="SN_16" type="cars" route="SN" depart="93" departLane="2" />
+    <vehicle id="SN_14" type="cars" route="SN" depart="90" departLane="2" color="0,1,0"/>
+    <vehicle id="NS_15" type="cars" route="NS" depart="92" departLane="2" color="0,1,0"/>
+    <vehicle id="SN_16" type="cars" route="SN" depart="93" departLane="2" color="0,1,0"/>
     <vehicle id="SW_17" type="cars" route="SW" depart="93" departLane="3" color="0,1,0"/>
     <vehicle id="NS_18" type="cars" route="NS" depart="99" departLane="2" color="0,1,0"/>
-    <vehicle id="SE_19" type="cars" route="SE" depart="100" departLane="1" />
-    <vehicle id="SN_20" type="cars" route="SN" depart="109" departLane="2" />
+    <vehicle id="SE_19" type="cars" route="SE" depart="100" departLane="1" color="0,1,0"/>
+    <vehicle id="SN_20" type="cars" route="SN" depart="109" departLane="2" color="0,1,0"/>
     <vehicle id="EN_21" type="cars" route="EN" depart="111" departLane="1" color="0,1,0"/>
     <vehicle id="ES_22" type="cars" route="ES" depart="119" departLane="3" color="0,1,0"/>
-    <vehicle id="EW_4" type="cars" route="EW" depart="123" departLane="2" />
-    <vehicle id="WE_7" type="cars" route="WE" depart="125" departLane="2"/>
-    <vehicle id="EW_5" type="cars" route="EW" depart="125" departLane="2" />
-    <vehicle id="WS_23" type="cars" route="WS" depart="125" departLane="1" />
-    <vehicle id="NS_24" type="cars" route="NS" depart="125" departLane="2" />
+    <vehicle id="EW_4" type="cars" route="EW" depart="123" departLane="2" color="0,1,0"/>
+    <vehicle id="WE_7" type="cars" route="WE" depart="125" departLane="2" color="0,1,0"/>
+    <vehicle id="EW_5" type="cars" route="EW" depart="125" departLane="2" color="0,1,0"/>
+    <vehicle id="WS_23" type="cars" route="WS" depart="125" departLane="1" color="0,1,0"/>
+    <vehicle id="NS_24" type="cars" route="NS" depart="125" departLane="2" color="0,1,0"/>
     <vehicle id="SN_25" type="cars" route="SN" depart="126" departLane="2" color="0,1,0"/>
-    <vehicle id="NS_26" type="cars" route="NS" depart="130" departLane="2" />
-    <vehicle id="SN_27" type="cars" route="SN" depart="130" departLane="2" />
-    <vehicle id="WE_8" type="cars" route="WE" depart="134" departLane="2"/>
+    <vehicle id="NS_26" type="cars" route="NS" depart="130" departLane="2" color="0,1,0"/>
+    <vehicle id="SN_27" type="cars" route="SN" depart="130" departLane="2" color="0,1,0"/>
+    <vehicle id="WE_8" type="cars" route="WE" depart="134" departLane="2" color="0,1,0"/>
     <vehicle id="SW_28" type="cars" route="SW" depart="136" departLane="3" color="0,1,0"/>
     <vehicle id="EW_6" type="cars" route="EW" depart="137" departLane="2" color="0,1,0"/>
     <vehicle id="EN_29" type="cars" route="EN" depart="137" departLane="1" color="0,1,0"/>
     <vehicle id="NS_30" type="cars" route="NS" depart="138" departLane="2" color="0,1,0"/>
-    <vehicle id="NS_31" type="cars" route="NS" depart="139" departLane="2" />
-    <vehicle id="NS_32" type="cars" route="NS" depart="147" departLane="2" />
+    <vehicle id="NS_31" type="cars" route="NS" depart="139" departLane="2" color="0,1,0"/>
+    <vehicle id="NS_32" type="cars" route="NS" depart="147" departLane="2" color="0,1,0"/>
     <vehicle id="NW_33" type="cars" route="NW" depart="147" departLane="1" color="0,1,0"/>
-    <vehicle id="NS_34" type="cars" route="NS" depart="152" departLane="2" />
-    <vehicle id="SN_35" type="cars" route="SN" depart="156" departLane="2" />
+    <vehicle id="NS_34" type="cars" route="NS" depart="152" departLane="2" color="0,1,0"/>
+    <vehicle id="SN_35" type="cars" route="SN" depart="156" departLane="2" color="0,1,0"/>
     <vehicle id="WN_36" type="cars" route="WN" depart="158" departLane="3" color="0,1,0"/>
-    <vehicle id="ES_37" type="cars" route="ES" depart="160" departLane="3" />
-    <vehicle id="NS_38" type="cars" route="NS" depart="163" departLane="2" />
-    <vehicle id="WE_9" type="cars" route="WE" depart="175" departLane="2"/>
-    <vehicle id="EW_7" type="cars" route="EW" depart="175" departLane="2" />
-    <vehicle id="WE_10" type="cars" route="WE" depart="177" departLane="2"/>
-    <vehicle id="NE_39" type="cars" route="NE" depart="177" departLane="3" />
-    <vehicle id="WE_11" type="cars" route="WE" depart="187" departLane="2"/>
-    <vehicle id="NS_40" type="cars" route="NS" depart="188" departLane="2" />
-    <vehicle id="NE_41" type="cars" route="NE" depart="192" departLane="3" />
-    <vehicle id="SN_42" type="cars" route="SN" depart="196" departLane="2" />
-    <vehicle id="NS_43" type="cars" route="NS" depart="197" departLane="2" />
-    <vehicle id="EW_8" type="cars" route="EW" depart="198" departLane="2" />
+    <vehicle id="ES_37" type="cars" route="ES" depart="160" departLane="3" color="0,1,0"/>
+    <vehicle id="NS_38" type="cars" route="NS" depart="163" departLane="2" color="0,1,0"/>
+    <vehicle id="WE_9" type="cars" route="WE" depart="175" departLane="2" color="0,1,0"/>
+    <vehicle id="EW_7" type="cars" route="EW" depart="175" departLane="2" color="0,1,0"/>
+    <vehicle id="WE_10" type="cars" route="WE" depart="177" departLane="2" color="0,1,0"/>
+    <vehicle id="NE_39" type="cars" route="NE" depart="177" departLane="3" color="0,1,0"/>
+    <vehicle id="WE_11" type="cars" route="WE" depart="187" departLane="2" color="0,1,0"/>
+    <vehicle id="NS_40" type="cars" route="NS" depart="188" departLane="2" color="0,1,0"/>
+    <vehicle id="NE_41" type="cars" route="NE" depart="192" departLane="3" color="0,1,0"/>
+    <vehicle id="SN_42" type="cars" route="SN" depart="196" departLane="2" color="0,1,0"/>
+    <vehicle id="NS_43" type="cars" route="NS" depart="197" departLane="2" color="0,1,0"/>
+    <vehicle id="EW_8" type="cars" route="EW" depart="198" departLane="2" color="0,1,0"/>
     <vehicle id="SN_44" type="cars" route="SN" depart="198" departLane="2" color="0,1,0"/>
-    <vehicle id="NS_45" type="cars" route="NS" depart="200" departLane="2" />
+    <vehicle id="NS_45" type="cars" route="NS" depart="200" departLane="2" color="0,1,0"/>
     <vehicle id="SN_46" type="cars" route="SN" depart="202" departLane="2" color="0,1,0"/>
-    <vehicle id="EW_9" type="cars" route="EW" depart="203" departLane="2" />
+    <vehicle id="EW_9" type="cars" route="EW" depart="203" departLane="2" color="0,1,0"/>
     <vehicle id="WE_12" type="cars" route="WE" depart="204" departLane="2" color="0,1,0"/>
     <vehicle id="SW_47" type="cars" route="SW" depart="205" departLane="3" color="0,1,0"/>
-    <vehicle id="EN_48" type="cars" route="EN" depart="206" departLane="1" />
-    <vehicle id="NS_49" type="cars" route="NS" depart="207" departLane="2" />
-    <vehicle id="EW_10" type="cars" route="EW" depart="209" departLane="2" />
-    <vehicle id="EW_11" type="cars" route="EW" depart="211" departLane="2" />
-    <vehicle id="NS_50" type="cars" route="NS" depart="216" departLane="2" />
-    <vehicle id="WE_13" type="cars" route="WE" depart="218" departLane="2"/>
-    <vehicle id="WE_14" type="cars" route="WE" depart="222" departLane="2"/>
+    <vehicle id="EN_48" type="cars" route="EN" depart="206" departLane="1" color="0,1,0"/>
+    <vehicle id="NS_49" type="cars" route="NS" depart="207" departLane="2" color="0,1,0"/>
+    <vehicle id="EW_10" type="cars" route="EW" depart="209" departLane="2" color="0,1,0"/>
+    <vehicle id="EW_11" type="cars" route="EW" depart="211" departLane="2" color="0,1,0"/>
+    <vehicle id="NS_50" type="cars" route="NS" depart="216" departLane="2" color="0,1,0"/>
+    <vehicle id="WE_13" type="cars" route="WE" depart="218" departLane="2" color="0,1,0"/>
+    <vehicle id="WE_14" type="cars" route="WE" depart="222" departLane="2" color="0,1,0"/>
     <vehicle id="SN_51" type="cars" route="SN" depart="222" departLane="2" color="0,1,0"/>
     <vehicle id="NS_52" type="cars" route="NS" depart="226" departLane="2" color="0,1,0"/>
     <vehicle id="SE_53" type="cars" route="SE" depart="227" departLane="1" color="0,1,0"/>
     <vehicle id="EW_12" type="cars" route="EW" depart="235" departLane="2" color="0,1,0"/>
-    <vehicle id="WE_15" type="cars" route="WE" depart="236" departLane="2"/>
-    <vehicle id="EW_13" type="cars" route="EW" depart="236" departLane="2" />
-    <vehicle id="WE_16" type="cars" route="WE" depart="238" departLane="2"/>
-    <vehicle id="SN_54" type="cars" route="SN" depart="244" departLane="2" />
-    <vehicle id="SN_55" type="cars" route="SN" depart="246" departLane="2" />
+    <vehicle id="WE_15" type="cars" route="WE" depart="236" departLane="2" color="0,1,0"/>
+    <vehicle id="EW_13" type="cars" route="EW" depart="236" departLane="2" color="0,1,0"/>
+    <vehicle id="WE_16" type="cars" route="WE" depart="238" departLane="2" color="0,1,0"/>
+    <vehicle id="SN_54" type="cars" route="SN" depart="244" departLane="2" color="0,1,0"/>
+    <vehicle id="SN_55" type="cars" route="SN" depart="246" departLane="2" color="0,1,0"/>
     <vehicle id="NS_56" type="cars" route="NS" depart="247" departLane="2" color="0,1,0"/>
     <vehicle id="SN_57" type="cars" route="SN" depart="251" departLane="2" color="0,1,0"/>
-    <vehicle id="EW_14" type="cars" route="EW" depart="255" departLane="2" />
+    <vehicle id="EW_14" type="cars" route="EW" depart="255" departLane="2" color="0,1,0"/>
     <vehicle id="EW_15" type="cars" route="EW" depart="256" departLane="2" color="0,1,0"/>
-    <vehicle id="NS_58" type="cars" route="NS" depart="256" departLane="2" />
-    <vehicle id="NE_59" type="cars" route="NE" depart="256" departLane="3" />
-    <vehicle id="NW_60" type="cars" route="NW" depart="257" departLane="1" />
-    <vehicle id="WE_17" type="cars" route="WE" depart="258" departLane="2"/>
+    <vehicle id="NS_58" type="cars" route="NS" depart="256" departLane="2" color="0,1,0"/>
+    <vehicle id="NE_59" type="cars" route="NE" depart="256" departLane="3" color="0,1,0"/>
+    <vehicle id="NW_60" type="cars" route="NW" depart="257" departLane="1" color="0,1,0"/>
+    <vehicle id="WE_17" type="cars" route="WE" depart="258" departLane="2" color="0,1,0"/>
     <vehicle id="WE_18" type="cars" route="WE" depart="260" departLane="2" color="0,1,0"/>
-    <vehicle id="SN_61" type="cars" route="SN" depart="262" departLane="2" />
-    <vehicle id="NS_62" type="cars" route="NS" depart="264" departLane="2" />
-    <vehicle id="ES_63" type="cars" route="ES" depart="266" departLane="3" />
-    <vehicle id="NS_64" type="cars" route="NS" depart="266" departLane="2" />
+    <vehicle id="SN_61" type="cars" route="SN" depart="262" departLane="2" color="0,1,0"/>
+    <vehicle id="NS_62" type="cars" route="NS" depart="264" departLane="2" color="0,1,0"/>
+    <vehicle id="ES_63" type="cars" route="ES" depart="266" departLane="3" color="0,1,0"/>
+    <vehicle id="NS_64" type="cars" route="NS" depart="266" departLane="2" color="0,1,0"/>
     <vehicle id="EW_16" type="cars" route="EW" depart="267" departLane="2" color="0,1,0"/>
-    <vehicle id="SN_65" type="cars" route="SN" depart="272" departLane="2" />
-    <vehicle id="WS_66" type="cars" route="WS" depart="274" departLane="1" />
-    <vehicle id="NS_67" type="cars" route="NS" depart="275" departLane="2" />
-    <vehicle id="SN_68" type="cars" route="SN" depart="275" departLane="2" />
+    <vehicle id="SN_65" type="cars" route="SN" depart="272" departLane="2" color="0,1,0"/>
+    <vehicle id="WS_66" type="cars" route="WS" depart="274" departLane="1" color="0,1,0"/>
+    <vehicle id="NS_67" type="cars" route="NS" depart="275" departLane="2" color="0,1,0"/>
+    <vehicle id="SN_68" type="cars" route="SN" depart="275" departLane="2" color="0,1,0"/>
     <vehicle id="EW_17" type="cars" route="EW" depart="279" departLane="2" color="0,1,0"/>
-    <vehicle id="SN_69" type="cars" route="SN" depart="280" departLane="2" />
-    <vehicle id="ES_70" type="cars" route="ES" depart="281" departLane="3" />
+    <vehicle id="SN_69" type="cars" route="SN" depart="280" departLane="2" color="0,1,0"/>
+    <vehicle id="ES_70" type="cars" route="ES" depart="281" departLane="3" color="0,1,0"/>
     <vehicle id="ES_71" type="cars" route="ES" depart="282" departLane="3" color="0,1,0"/>
     <vehicle id="NS_72" type="cars" route="NS" depart="284" departLane="2" color="0,1,0"/>
     <vehicle id="NW_73" type="cars" route="NW" depart="285" departLane="1" color="0,1,0"/>
-    <vehicle id="WN_74" type="cars" route="WN" depart="286" departLane="3" />
-    <vehicle id="WE_19" type="cars" route="WE" depart="289" departLane="2"/>
-    <vehicle id="SN_75" type="cars" route="SN" depart="291" departLane="2" />
+    <vehicle id="WN_74" type="cars" route="WN" depart="286" departLane="3" color="0,1,0"/>
+    <vehicle id="WE_19" type="cars" route="WE" depart="289" departLane="2" color="0,1,0"/>
+    <vehicle id="SN_75" type="cars" route="SN" depart="291" departLane="2" color="0,1,0"/>
     <vehicle id="WE_20" type="cars" route="WE" depart="295" departLane="2" color="0,1,0"/>
-    <vehicle id="WE_21" type="cars" route="WE" depart="306" departLane="2"/>
-    <vehicle id="SN_76" type="cars" route="SN" depart="307" departLane="2" />
-    <vehicle id="NE_77" type="cars" route="NE" depart="309" departLane="3" />
-    <vehicle id="SN_78" type="cars" route="SN" depart="310" departLane="2" />
-    <vehicle id="NS_79" type="cars" route="NS" depart="311" departLane="2" />
-    <vehicle id="SN_80" type="cars" route="SN" depart="311" departLane="2" />
-    <vehicle id="NE_81" type="cars" route="NE" depart="312" departLane="3" />
+    <vehicle id="WE_21" type="cars" route="WE" depart="306" departLane="2" color="0,1,0"/>
+    <vehicle id="SN_76" type="cars" route="SN" depart="307" departLane="2" color="0,1,0"/>
+    <vehicle id="NE_77" type="cars" route="NE" depart="309" departLane="3" color="0,1,0"/>
+    <vehicle id="SN_78" type="cars" route="SN" depart="310" departLane="2" color="0,1,0"/>
+    <vehicle id="NS_79" type="cars" route="NS" depart="311" departLane="2" color="0,1,0"/>
+    <vehicle id="SN_80" type="cars" route="SN" depart="311" departLane="2" color="0,1,0"/>
+    <vehicle id="NE_81" type="cars" route="NE" depart="312" departLane="3" color="0,1,0"/>
     <vehicle id="ES_82" type="cars" route="ES" depart="316" departLane="3" color="0,1,0"/>
-    <vehicle id="NS_83" type="cars" route="NS" depart="316" departLane="2" />
-    <vehicle id="SW_84" type="cars" route="SW" depart="317" departLane="3" />
+    <vehicle id="NS_83" type="cars" route="NS" depart="316" departLane="2" color="0,1,0"/>
+    <vehicle id="SW_84" type="cars" route="SW" depart="317" departLane="3" color="0,1,0"/>
     <vehicle id="NS_85" type="cars" route="NS" depart="319" departLane="2" color="0,1,0"/>
-    <vehicle id="SE_86" type="cars" route="SE" depart="322" departLane="1" />
-    <vehicle id="NS_87" type="cars" route="NS" depart="324" departLane="2" />
-    <vehicle id="EW_18" type="cars" route="EW" depart="330" departLane="2" />
-    <vehicle id="NS_88" type="cars" route="NS" depart="332" departLane="2" />
-    <vehicle id="WE_22" type="cars" route="WE" depart="334" departLane="2"/>
-    <vehicle id="SN_89" type="cars" route="SN" depart="340" departLane="2" />
-    <vehicle id="WE_23" type="cars" route="WE" depart="342" departLane="2"/>
-    <vehicle id="NS_90" type="cars" route="NS" depart="342" departLane="2" />
-    <vehicle id="NS_91" type="cars" route="NS" depart="344" departLane="2" />
-    <vehicle id="SN_92" type="cars" route="SN" depart="344" departLane="2" />
-    <vehicle id="EW_19" type="cars" route="EW" depart="351" departLane="2" />
-    <vehicle id="ES_93" type="cars" route="ES" depart="351" departLane="3" />
+    <vehicle id="SE_86" type="cars" route="SE" depart="322" departLane="1" color="0,1,0"/>
+    <vehicle id="NS_87" type="cars" route="NS" depart="324" departLane="2" color="0,1,0"/>
+    <vehicle id="EW_18" type="cars" route="EW" depart="330" departLane="2" color="0,1,0"/>
+    <vehicle id="NS_88" type="cars" route="NS" depart="332" departLane="2" color="0,1,0"/>
+    <vehicle id="WE_22" type="cars" route="WE" depart="334" departLane="2" color="0,1,0"/>
+    <vehicle id="SN_89" type="cars" route="SN" depart="340" departLane="2" color="0,1,0"/>
+    <vehicle id="WE_23" type="cars" route="WE" depart="342" departLane="2" color="0,1,0"/>
+    <vehicle id="NS_90" type="cars" route="NS" depart="342" departLane="2" color="0,1,0"/>
+    <vehicle id="NS_91" type="cars" route="NS" depart="344" departLane="2" color="0,1,0"/>
+    <vehicle id="SN_92" type="cars" route="SN" depart="344" departLane="2" color="0,1,0"/>
+    <vehicle id="EW_19" type="cars" route="EW" depart="351" departLane="2" color="0,1,0"/>
+    <vehicle id="ES_93" type="cars" route="ES" depart="351" departLane="3" color="0,1,0"/>
     <vehicle id="EW_20" type="cars" route="EW" depart="352" departLane="2" color="0,1,0"/>
-    <vehicle id="SW_94" type="cars" route="SW" depart="353" departLane="3" />
-    <vehicle id="NS_95" type="cars" route="NS" depart="356" departLane="2" />
+    <vehicle id="SW_94" type="cars" route="SW" depart="353" departLane="3" color="0,1,0"/>
+    <vehicle id="NS_95" type="cars" route="NS" depart="356" departLane="2" color="0,1,0"/>
     <vehicle id="SN_96" type="cars" route="SN" depart="356" departLane="2" color="0,1,0"/>
-    <vehicle id="SN_97" type="cars" route="SN" depart="357" departLane="2" />
-    <vehicle id="WN_98" type="cars" route="WN" depart="358" departLane="3" />
-    <vehicle id="NW_99" type="cars" route="NW" depart="359" departLane="1" />
+    <vehicle id="SN_97" type="cars" route="SN" depart="357" departLane="2" color="0,1,0"/>
+    <vehicle id="WN_98" type="cars" route="WN" depart="358" departLane="3" color="0,1,0"/>
+    <vehicle id="NW_99" type="cars" route="NW" depart="359" departLane="1" color="0,1,0"/>
     <vehicle id="EN_100" type="cars" route="EN" depart="360" departLane="1" color="0,1,0"/>
-    <vehicle id="NW_101" type="cars" route="NW" depart="360" departLane="1" />
-    <vehicle id="NS_102" type="cars" route="NS" depart="363" departLane="2" />
+    <vehicle id="NW_101" type="cars" route="NW" depart="360" departLane="1" color="0,1,0"/>
+    <vehicle id="NS_102" type="cars" route="NS" depart="363" departLane="2" color="0,1,0"/>
     <vehicle id="SN_103" type="cars" route="SN" depart="363" departLane="2" color="0,1,0"/>
-    <vehicle id="NS_104" type="cars" route="NS" depart="373" departLane="2" />
-    <vehicle id="WS_105" type="cars" route="WS" depart="378" departLane="1" />
-    <vehicle id="EW_21" type="cars" route="EW" depart="379" departLane="2" />
-    <vehicle id="SN_106" type="cars" route="SN" depart="383" departLane="2" />
-    <vehicle id="WE_24" type="cars" route="WE" depart="384" departLane="2"/>
-    <vehicle id="WE_25" type="cars" route="WE" depart="386" departLane="2"/>
-    <vehicle id="WN_107" type="cars" route="WN" depart="387" departLane="3" />
+    <vehicle id="NS_104" type="cars" route="NS" depart="373" departLane="2" color="0,1,0"/>
+    <vehicle id="WS_105" type="cars" route="WS" depart="378" departLane="1" color="0,1,0"/>
+    <vehicle id="EW_21" type="cars" route="EW" depart="379" departLane="2" color="0,1,0"/>
+    <vehicle id="SN_106" type="cars" route="SN" depart="383" departLane="2" color="0,1,0"/>
+    <vehicle id="WE_24" type="cars" route="WE" depart="384" departLane="2" color="0,1,0"/>
+    <vehicle id="WE_25" type="cars" route="WE" depart="386" departLane="2" color="0,1,0"/>
+    <vehicle id="WN_107" type="cars" route="WN" depart="387" departLane="3" color="0,1,0"/>
     <vehicle id="WE_26" type="cars" route="WE" depart="389" departLane="2" color="0,1,0"/>
-    <vehicle id="WS_108" type="cars" route="WS" depart="390" departLane="1" />
+    <vehicle id="WS_108" type="cars" route="WS" depart="390" departLane="1" color="0,1,0"/>
     <vehicle id="NS_109" type="cars" route="NS" depart="390" departLane="2" color="0,1,0"/>
     <vehicle id="SN_110" type="cars" route="SN" depart="391" departLane="2" color="0,1,0"/>
-    <vehicle id="SN_111" type="cars" route="SN" depart="397" departLane="2" />
-    <vehicle id="EW_22" type="cars" route="EW" depart="398" departLane="2" />
+    <vehicle id="SN_111" type="cars" route="SN" depart="397" departLane="2" color="0,1,0"/>
+    <vehicle id="EW_22" type="cars" route="EW" depart="398" departLane="2" color="0,1,0"/>
     <vehicle id="NS_112" type="cars" route="NS" depart="403" departLane="2" color="0,1,0"/>
-    <vehicle id="WN_113" type="cars" route="WN" depart="404" departLane="3" />
-    <vehicle id="NS_114" type="cars" route="NS" depart="405" departLane="2" />
-    <vehicle id="EW_23" type="cars" route="EW" depart="409" departLane="2" />
-    <vehicle id="ES_115" type="cars" route="ES" depart="412" departLane="3" />
-    <vehicle id="EW_24" type="cars" route="EW" depart="415" departLane="2" />
-    <vehicle id="NW_116" type="cars" route="NW" depart="419" departLane="1" />
+    <vehicle id="WN_113" type="cars" route="WN" depart="404" departLane="3" color="0,1,0"/>
+    <vehicle id="NS_114" type="cars" route="NS" depart="405" departLane="2" color="0,1,0"/>
+    <vehicle id="EW_23" type="cars" route="EW" depart="409" departLane="2" color="0,1,0"/>
+    <vehicle id="ES_115" type="cars" route="ES" depart="412" departLane="3" color="0,1,0"/>
+    <vehicle id="EW_24" type="cars" route="EW" depart="415" departLane="2" color="0,1,0"/>
+    <vehicle id="NW_116" type="cars" route="NW" depart="419" departLane="1" color="0,1,0"/>
     <vehicle id="WE_27" type="cars" route="WE" depart="423" departLane="2" color="0,1,0"/>
     <vehicle id="SW_117" type="cars" route="SW" depart="429" departLane="3" color="0,1,0"/>
-    <vehicle id="EW_25" type="cars" route="EW" depart="430" departLane="2" />
+    <vehicle id="EW_25" type="cars" route="EW" depart="430" departLane="2" color="0,1,0"/>
     <vehicle id="SN_118" type="cars" route="SN" depart="430" departLane="2" color="0,1,0"/>
-    <vehicle id="SN_119" type="cars" route="SN" depart="433" departLane="2" />
-    <vehicle id="WE_28" type="cars" route="WE" depart="437" departLane="2"/>
-    <vehicle id="SN_120" type="cars" route="SN" depart="439" departLane="2" />
-    <vehicle id="SW_121" type="cars" route="SW" depart="442" departLane="3" />
-    <vehicle id="WE_29" type="cars" route="WE" depart="443" departLane="2"/>
+    <vehicle id="SN_119" type="cars" route="SN" depart="433" departLane="2" color="0,1,0"/>
+    <vehicle id="WE_28" type="cars" route="WE" depart="437" departLane="2" color="0,1,0"/>
+    <vehicle id="SN_120" type="cars" route="SN" depart="439" departLane="2" color="0,1,0"/>
+    <vehicle id="SW_121" type="cars" route="SW" depart="442" departLane="3" color="0,1,0"/>
+    <vehicle id="WE_29" type="cars" route="WE" depart="443" departLane="2" color="0,1,0"/>
     <vehicle id="WE_30" type="cars" route="WE" depart="447" departLane="2" color="0,1,0"/>
-    <vehicle id="WN_122" type="cars" route="WN" depart="448" departLane="3" />
-    <vehicle id="WE_31" type="cars" route="WE" depart="450" departLane="2"/>
-    <vehicle id="EW_26" type="cars" route="EW" depart="451" departLane="2" />
+    <vehicle id="WN_122" type="cars" route="WN" depart="448" departLane="3" color="0,1,0"/>
+    <vehicle id="WE_31" type="cars" route="WE" depart="450" departLane="2" color="0,1,0"/>
+    <vehicle id="EW_26" type="cars" route="EW" depart="451" departLane="2" color="0,1,0"/>
     <vehicle id="SN_123" type="cars" route="SN" depart="453" departLane="2" color="0,1,0"/>
     <vehicle id="SW_124" type="cars" route="SW" depart="453" departLane="3" color="0,1,0"/>
-    <vehicle id="WE_32" type="cars" route="WE" depart="455" departLane="2"/>
-    <vehicle id="NS_125" type="cars" route="NS" depart="455" departLane="2" />
-    <vehicle id="NE_126" type="cars" route="NE" depart="455" departLane="3" />
-    <vehicle id="NW_127" type="cars" route="NW" depart="455" departLane="1" />
+    <vehicle id="WE_32" type="cars" route="WE" depart="455" departLane="2" color="0,1,0"/>
+    <vehicle id="NS_125" type="cars" route="NS" depart="455" departLane="2" color="0,1,0"/>
+    <vehicle id="NE_126" type="cars" route="NE" depart="455" departLane="3" color="0,1,0"/>
+    <vehicle id="NW_127" type="cars" route="NW" depart="455" departLane="1" color="0,1,0"/>
     <vehicle id="EW_27" type="cars" route="EW" depart="457" departLane="2" color="0,1,0"/>
-    <vehicle id="WE_33" type="cars" route="WE" depart="458" departLane="2"/>
-    <vehicle id="SW_128" type="cars" route="SW" depart="461" departLane="3" />
-    <vehicle id="SW_129" type="cars" route="SW" depart="467" departLane="3" />
-    <vehicle id="NE_130" type="cars" route="NE" depart="469" departLane="3" />
-    <vehicle id="NS_131" type="cars" route="NS" depart="473" departLane="2" />
+    <vehicle id="WE_33" type="cars" route="WE" depart="458" departLane="2" color="0,1,0"/>
+    <vehicle id="SW_128" type="cars" route="SW" depart="461" departLane="3" color="0,1,0"/>
+    <vehicle id="SW_129" type="cars" route="SW" depart="467" departLane="3" color="0,1,0"/>
+    <vehicle id="NE_130" type="cars" route="NE" depart="469" departLane="3" color="0,1,0"/>
+    <vehicle id="NS_131" type="cars" route="NS" depart="473" departLane="2" color="0,1,0"/>
     <vehicle id="SN_132" type="cars" route="SN" depart="477" departLane="2" color="0,1,0"/>
-    <vehicle id="NS_133" type="cars" route="NS" depart="480" departLane="2" />
-    <vehicle id="SN_134" type="cars" route="SN" depart="484" departLane="2" />
-    <vehicle id="SW_135" type="cars" route="SW" depart="484" departLane="3" />
+    <vehicle id="NS_133" type="cars" route="NS" depart="480" departLane="2" color="0,1,0"/>
+    <vehicle id="SN_134" type="cars" route="SN" depart="484" departLane="2" color="0,1,0"/>
+    <vehicle id="SW_135" type="cars" route="SW" depart="484" departLane="3" color="0,1,0"/>
     <vehicle id="WE_34" type="cars" route="WE" depart="487" departLane="2" color="0,1,0"/>
     <vehicle id="WS_136" type="cars" route="WS" depart="487" departLane="1" color="0,1,0"/>
-    <vehicle id="WE_35" type="cars" route="WE" depart="489" departLane="2"/>
-    <vehicle id="EW_28" type="cars" route="EW" depart="490" departLane="2" />
+    <vehicle id="WE_35" type="cars" route="WE" depart="489" departLane="2" color="0,1,0"/>
+    <vehicle id="EW_28" type="cars" route="EW" depart="490" departLane="2" color="0,1,0"/>
     <vehicle id="EW_29" type="cars" route="EW" depart="491" departLane="2" color="0,1,0"/>
-    <vehicle id="WE_36" type="cars" route="WE" depart="492" departLane="2"/>
-    <vehicle id="EW_30" type="cars" route="EW" depart="499" departLane="2" />
+    <vehicle id="WE_36" type="cars" route="WE" depart="492" departLane="2" color="0,1,0"/>
+    <vehicle id="EW_30" type="cars" route="EW" depart="499" departLane="2" color="0,1,0"/>
     <vehicle id="NS_137" type="cars" route="NS" depart="500" departLane="2" color="0,1,0"/>
     <vehicle id="SN_138" type="cars" route="SN" depart="500" departLane="2" color="0,1,0"/>
-    <vehicle id="WE_37" type="cars" route="WE" depart="501" departLane="2"/>
+    <vehicle id="WE_37" type="cars" route="WE" depart="501" departLane="2" color="0,1,0"/>
     <vehicle id="EW_31" type="cars" route="EW" depart="502" departLane="2" color="0,1,0"/>
-    <vehicle id="SW_139" type="cars" route="SW" depart="504" departLane="3" />
-    <vehicle id="WN_140" type="cars" route="WN" depart="505" departLane="3" />
-    <vehicle id="SN_141" type="cars" route="SN" depart="506" departLane="2" />
-    <vehicle id="NS_142" type="cars" route="NS" depart="510" departLane="2" />
+    <vehicle id="SW_139" type="cars" route="SW" depart="504" departLane="3" color="0,1,0"/>
+    <vehicle id="WN_140" type="cars" route="WN" depart="505" departLane="3" color="0,1,0"/>
+    <vehicle id="SN_141" type="cars" route="SN" depart="506" departLane="2" color="0,1,0"/>
+    <vehicle id="NS_142" type="cars" route="NS" depart="510" departLane="2" color="0,1,0"/>
     <vehicle id="WE_38" type="cars" route="WE" depart="511" departLane="2" color="0,1,0"/>
-    <vehicle id="EW_32" type="cars" route="EW" depart="511" departLane="2" />
-    <vehicle id="NS_143" type="cars" route="NS" depart="511" departLane="2" />
-    <vehicle id="WE_39" type="cars" route="WE" depart="512" departLane="2"/>
-    <vehicle id="SN_144" type="cars" route="SN" depart="513" departLane="2" />
-    <vehicle id="EW_33" type="cars" route="EW" depart="514" departLane="2" />
-    <vehicle id="WE_40" type="cars" route="WE" depart="516" departLane="2"/>
-    <vehicle id="EW_34" type="cars" route="EW" depart="517" departLane="2" />
-    <vehicle id="EW_35" type="cars" route="EW" depart="518" departLane="2" />
-    <vehicle id="SN_145" type="cars" route="SN" depart="518" departLane="2" />
-    <vehicle id="WE_41" type="cars" route="WE" depart="519" departLane="2"/>
-    <vehicle id="NS_146" type="cars" route="NS" depart="522" departLane="2" />
-    <vehicle id="NW_147" type="cars" route="NW" depart="523" departLane="1" />
-    <vehicle id="SN_148" type="cars" route="SN" depart="523" departLane="2" />
+    <vehicle id="EW_32" type="cars" route="EW" depart="511" departLane="2" color="0,1,0"/>
+    <vehicle id="NS_143" type="cars" route="NS" depart="511" departLane="2" color="0,1,0"/>
+    <vehicle id="WE_39" type="cars" route="WE" depart="512" departLane="2" color="0,1,0"/>
+    <vehicle id="SN_144" type="cars" route="SN" depart="513" departLane="2" color="0,1,0"/>
+    <vehicle id="EW_33" type="cars" route="EW" depart="514" departLane="2" color="0,1,0"/>
+    <vehicle id="WE_40" type="cars" route="WE" depart="516" departLane="2" color="0,1,0"/>
+    <vehicle id="EW_34" type="cars" route="EW" depart="517" departLane="2" color="0,1,0"/>
+    <vehicle id="EW_35" type="cars" route="EW" depart="518" departLane="2" color="0,1,0"/>
+    <vehicle id="SN_145" type="cars" route="SN" depart="518" departLane="2" color="0,1,0"/>
+    <vehicle id="WE_41" type="cars" route="WE" depart="519" departLane="2" color="0,1,0"/>
+    <vehicle id="NS_146" type="cars" route="NS" depart="522" departLane="2" color="0,1,0"/>
+    <vehicle id="NW_147" type="cars" route="NW" depart="523" departLane="1" color="0,1,0"/>
+    <vehicle id="SN_148" type="cars" route="SN" depart="523" departLane="2" color="0,1,0"/>
     <vehicle id="EW_36" type="cars" route="EW" depart="524" departLane="2" color="0,1,0"/>
-    <vehicle id="EN_149" type="cars" route="EN" depart="524" departLane="1" />
+    <vehicle id="EN_149" type="cars" route="EN" depart="524" departLane="1" color="0,1,0"/>
     <vehicle id="EW_37" type="cars" route="EW" depart="526" departLane="2" color="0,1,0"/>
     <vehicle id="NS_150" type="cars" route="NS" depart="532" departLane="2" color="0,1,0"/>
-    <vehicle id="SN_151" type="cars" route="SN" depart="532" departLane="2" />
-    <vehicle id="SN_152" type="cars" route="SN" depart="533" departLane="2" />
-    <vehicle id="WE_42" type="cars" route="WE" depart="537" departLane="2"/>
+    <vehicle id="SN_151" type="cars" route="SN" depart="532" departLane="2" color="0,1,0"/>
+    <vehicle id="SN_152" type="cars" route="SN" depart="533" departLane="2" color="0,1,0"/>
+    <vehicle id="WE_42" type="cars" route="WE" depart="537" departLane="2" color="0,1,0"/>
     <vehicle id="WE_43" type="cars" route="WE" depart="538" departLane="2" color="0,1,0"/>
-    <vehicle id="WN_153" type="cars" route="WN" depart="538" departLane="3" />
-    <vehicle id="NS_154" type="cars" route="NS" depart="538" departLane="2" />
-    <vehicle id="SN_155" type="cars" route="SN" depart="539" departLane="2" />
-    <vehicle id="SW_156" type="cars" route="SW" depart="539" departLane="3" />
-    <vehicle id="WE_44" type="cars" route="WE" depart="541" departLane="2"/>
-    <vehicle id="EW_38" type="cars" route="EW" depart="541" departLane="2" />
+    <vehicle id="WN_153" type="cars" route="WN" depart="538" departLane="3" color="0,1,0"/>
+    <vehicle id="NS_154" type="cars" route="NS" depart="538" departLane="2" color="0,1,0"/>
+    <vehicle id="SN_155" type="cars" route="SN" depart="539" departLane="2" color="0,1,0"/>
+    <vehicle id="SW_156" type="cars" route="SW" depart="539" departLane="3" color="0,1,0"/>
+    <vehicle id="WE_44" type="cars" route="WE" depart="541" departLane="2" color="0,1,0"/>
+    <vehicle id="EW_38" type="cars" route="EW" depart="541" departLane="2" color="0,1,0"/>
     <vehicle id="NS_157" type="cars" route="NS" depart="541" departLane="2" color="0,1,0"/>
-    <vehicle id="NE_158" type="cars" route="NE" depart="541" departLane="3" />
+    <vehicle id="NE_158" type="cars" route="NE" depart="541" departLane="3" color="0,1,0"/>
     <vehicle id="WS_159" type="cars" route="WS" depart="542" departLane="1" color="0,1,0"/>
-    <vehicle id="NS_160" type="cars" route="NS" depart="547" departLane="2" />
+    <vehicle id="NS_160" type="cars" route="NS" depart="547" departLane="2" color="0,1,0"/>
     <vehicle id="NW_161" type="cars" route="NW" depart="547" departLane="1" color="0,1,0"/>
-    <vehicle id="WE_45" type="cars" route="WE" depart="549" departLane="2"/>
-    <vehicle id="EW_39" type="cars" route="EW" depart="551" departLane="2" />
+    <vehicle id="WE_45" type="cars" route="WE" depart="549" departLane="2" color="0,1,0"/>
+    <vehicle id="EW_39" type="cars" route="EW" depart="551" departLane="2" color="0,1,0"/>
     <vehicle id="EW_40" type="cars" route="EW" depart="552" departLane="2" color="0,1,0"/>
-    <vehicle id="SN_162" type="cars" route="SN" depart="556" departLane="2" />
-    <vehicle id="SN_163" type="cars" route="SN" depart="564" departLane="2" />
-    <vehicle id="NE_164" type="cars" route="NE" depart="565" departLane="3" />
+    <vehicle id="SN_162" type="cars" route="SN" depart="556" departLane="2" color="0,1,0"/>
+    <vehicle id="SN_163" type="cars" route="SN" depart="564" departLane="2" color="0,1,0"/>
+    <vehicle id="NE_164" type="cars" route="NE" depart="565" departLane="3" color="0,1,0"/>
     <vehicle id="WE_46" type="cars" route="WE" depart="568" departLane="2" color="0,1,0"/>
-    <vehicle id="NS_165" type="cars" route="NS" depart="569" departLane="2" />
-    <vehicle id="WS_166" type="cars" route="WS" depart="570" departLane="1" />
-    <vehicle id="SN_167" type="cars" route="SN" depart="570" departLane="2" />
-    <vehicle id="WS_168" type="cars" route="WS" depart="571" departLane="1" />
-    <vehicle id="WN_169" type="cars" route="WN" depart="572" departLane="3" />
-    <vehicle id="SN_170" type="cars" route="SN" depart="574" departLane="2" />
-    <vehicle id="NE_171" type="cars" route="NE" depart="576" departLane="3" />
+    <vehicle id="NS_165" type="cars" route="NS" depart="569" departLane="2" color="0,1,0"/>
+    <vehicle id="WS_166" type="cars" route="WS" depart="570" departLane="1" color="0,1,0"/>
+    <vehicle id="SN_167" type="cars" route="SN" depart="570" departLane="2" color="0,1,0"/>
+    <vehicle id="WS_168" type="cars" route="WS" depart="571" departLane="1" color="0,1,0"/>
+    <vehicle id="WN_169" type="cars" route="WN" depart="572" departLane="3" color="0,1,0"/>
+    <vehicle id="SN_170" type="cars" route="SN" depart="574" departLane="2" color="0,1,0"/>
+    <vehicle id="NE_171" type="cars" route="NE" depart="576" departLane="3" color="0,1,0"/>
     <vehicle id="NS_172" type="cars" route="NS" depart="577" departLane="2" color="0,1,0"/>
-    <vehicle id="WE_47" type="cars" route="WE" depart="579" departLane="2"/>
+    <vehicle id="WE_47" type="cars" route="WE" depart="579" departLane="2" color="0,1,0"/>
     <vehicle id="EW_41" type="cars" route="EW" depart="580" departLane="2" color="0,1,0"/>
     <vehicle id="SN_173" type="cars" route="SN" depart="582" departLane="2" color="0,1,0"/>
     <vehicle id="WE_48" type="cars" route="WE" depart="585" departLane="2" color="0,1,0"/>
-    <vehicle id="ES_174" type="cars" route="ES" depart="585" departLane="3" />
-    <vehicle id="SN_175" type="cars" route="SN" depart="586" departLane="2" />
-    <vehicle id="NE_176" type="cars" route="NE" depart="589" departLane="3" />
+    <vehicle id="ES_174" type="cars" route="ES" depart="585" departLane="3" color="0,1,0"/>
+    <vehicle id="SN_175" type="cars" route="SN" depart="586" departLane="2" color="0,1,0"/>
+    <vehicle id="NE_176" type="cars" route="NE" depart="589" departLane="3" color="0,1,0"/>
     <vehicle id="SN_177" type="cars" route="SN" depart="593" departLane="2" color="0,1,0"/>
     <vehicle id="WE_49" type="cars" route="WE" depart="595" departLane="2" color="0,1,0"/>
-    <vehicle id="ES_178" type="cars" route="ES" depart="595" departLane="3" />
-    <vehicle id="WE_50" type="cars" route="WE" depart="597" departLane="2"/>
-    <vehicle id="EN_179" type="cars" route="EN" depart="598" departLane="1" />
-    <vehicle id="NE_180" type="cars" route="NE" depart="598" departLane="3" />
+    <vehicle id="ES_178" type="cars" route="ES" depart="595" departLane="3" color="0,1,0"/>
+    <vehicle id="WE_50" type="cars" route="WE" depart="597" departLane="2" color="0,1,0"/>
+    <vehicle id="EN_179" type="cars" route="EN" depart="598" departLane="1" color="0,1,0"/>
+    <vehicle id="NE_180" type="cars" route="NE" depart="598" departLane="3" color="0,1,0"/>
 </routes>
