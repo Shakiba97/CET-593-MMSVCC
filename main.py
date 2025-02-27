@@ -17,7 +17,7 @@ def main(network_type, volume_type, control_type):
 
     print("----Initializing the agent...")
     agent_unified_four_legs_three_lanes = MpcAgent("unified_four_legs_three_lanes")
-    agent_unified_four_legs_three_lanes.clear_redundant_gams_files()
+    # agent_unified_four_legs_three_lanes.clear_redundant_gams_files()
 
     phase_list_multi=[]
     duration_list_multi=[]
@@ -34,6 +34,10 @@ def main(network_type, volume_type, control_type):
                     paras, network_state, step
                 )
             )
+            print("step: ", step)
+            print("should_update_signal: ", should_update_signal)
+            print("next_signal_phase: ", next_signal_phase)
+            print("speed_commands: ", speed_commands)
             env_single_intersection.apply_control_commands(
                 should_update_signal, next_signal_phase, speed_commands
             )
@@ -53,5 +57,5 @@ def main(network_type, volume_type, control_type):
 
 
 if __name__ == "__main__":
-    main("single_intersection", "symmetric", "fixed_time")
+    main("single_intersection", "symmetric", "multi_scale")
     # control_type: "multi_scale", "actuated", "fixed_time"
