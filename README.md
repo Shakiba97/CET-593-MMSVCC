@@ -24,7 +24,7 @@ Please follow the instruction on [this link](https://www.gams.com/latest/docs/AP
 
 The whole process is summarized in the diagram below:  
 
-![MPC Agent Diagram](Slides/MultiScale%20Traffic%20Control%20Diagram.png)
+![MPC Agent Diagram](Slides/MultiScale/Diagram2.png)
 
  
 Detailed documentiations of the algorithm can be found in /Slides/documentation.docx.  
