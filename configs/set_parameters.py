@@ -478,8 +478,8 @@ def set_signal_phases_paras(paras):
 
 
 def set_volume_paras(paras):
-    low_volume = paras["low_volume"]
-    high_volume = paras["high_volume"]
+    low_volume = paras["low_volume_veh"]
+    high_volume = paras["high_volume_veh"]
     time_interval_seconds = paras["time_interval_seconds"]
     num_interval = (
         paras["simulation_steps"] * paras["delta_T"] // paras["time_interval_seconds"]
