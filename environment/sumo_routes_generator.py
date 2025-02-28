@@ -39,9 +39,9 @@ class SumoRoutesGenerator:
         if not os.path.exists(model_dir):
             os.mkdir(model_dir)
         file_name = model_dir + "/single_intersection.rou.xml"
-        poisson_gamma=0.04 #average number of pedestrian at each second
+        poisson_gamma= self.paras["poisson_gamma_pedestrian"] #average number of pedestrian at each second
         # high:0.04 medium=0.02 low=0.01
-        scenario = "Asymmetric" # Asymmetric or Symmetric pedestrian demand
+        scenario = self.paras["ped_demand_symmetry"] # Asymmetric or Symmetric pedestrian demand
         if scenario == "Asymmetric":
             division=[6,3,2,1]
         else:

@@ -4,7 +4,7 @@ import math
 
 
 def set_common_paras(paras):
-    ## Model parameters
+    ## Optimization Model parameters
     # Prediction horizon of the MPC problem, i.e., T^{s}.
     paras["num_predict_steps"] = 6
     # Number of slower steps used to construct the faster scale problem, i.e., h in Equation (24).
@@ -19,6 +19,8 @@ def set_common_paras(paras):
     paras["d_0_cf"] = 7
     # Discount ratio used to stabalize the MPC problem.
     paras["discount_ratio"] = 0.95
+    # weighting factor for each mode (for the slower scale problem optimization)
+    paras["weight(Vehicles/Pedestrians)"] = (0.5, 0.5)
 
     ## IDM model parameters, see Equation (11) in the second paper.
     # Maximum acceleration that the vechiles can reach, in m/s^{2}.
@@ -33,6 +35,15 @@ def set_common_paras(paras):
     ## Simulation parameters.
     # Peneration rate of CAVs.
     paras["penetration"] = 1
+    # The lowest volume, in veh/h.
+    paras["low_volume_veh"] = 200
+    # The highest volume, in veh/h.
+    paras["high_volume_veh"] = 400
+    # Poisson gamma for pedestrian demand
+    paras["poisson_gamma_pedestrian"] = 0.04  # high:0.04 medium=0.02 low=0.01
+    paras["ped_demand_symmetry"] = "Asymmetric" # Asymmetric or Symmetric pedestrian demand
+    # Concurrent or Exclusive Pedestrian phasing
+    paras["ped_phasing"] = "Concurrent" # "Concurrent" or "Exclusive"
     # Random seed used to generate the volume.
     paras["random_seed"] = 1
     # simulation duration.
@@ -58,10 +69,6 @@ def set_common_paras(paras):
     paras["distance_from_upstream_intersections"] = 200
     # Number of signal phases.
     paras["num_phases"] = 9
-    # The lowest volume, in veh/h.
-    paras["low_volume"] = 200
-    # The highest volume, in veh/h.
-    paras["high_volume"] = 400
     # We simulate the volumes in a wave feature. This parameter represents the half-period of such waves. In seconds.
     paras["time_interval_seconds"] = int(paras["simulation_duration"]/6)
 
@@ -72,8 +79,6 @@ def set_common_paras(paras):
     paras["crossing_width"]=3.5 #m
     paras['ped_speed']=1 #m/s
     paras['num_cross']=6
-    # weighting factor for each mode (for the slower scale problem optimization)
-    paras["weight(Vehicles/Pedestrians)"] = (0.5, 0.5)
 
 
 def set_network_topology_paras(paras):
