@@ -1,5 +1,4 @@
 average fuel consumption for fixed_time scenario (external model) (in mg): 90.61005390358558
-average fuel consumption for fixed_time scenario (SUMO output) (in mg): 97171.44913361616
 average waiting time for fixed_time scenario (in s): 29.19890510948905
 average time loss for fixed_time scenario (in s): 42.565547445255504
 average queue length for fixed_time scenario (in m): 12.404500397862712

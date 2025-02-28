@@ -1,5 +1,4 @@
 average fuel consumption for actuated scenario (external model) (in mg): 89.05399582731994
-average fuel consumption for actuated scenario (SUMO output) (in mg): 94713.82452424694
 average waiting time for actuated scenario (in s): 27.830291970802918
 average time loss for actuated scenario (in s): 40.902518248175205
 average queue length for actuated scenario (in m): 12.129180851063625

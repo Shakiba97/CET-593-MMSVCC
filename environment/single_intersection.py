@@ -227,8 +227,6 @@ class SingleIntersection:
                                 speed_ped=traci.person.getSpeed(ped)
                                 if math.dist(position_car, position_ped) < 5 and math.dist(position_car, position_ped)/max(1,(speed_car+speed_ped))<2: ## if TTC less than 2 seconds
                                     self.right_turn_conflicts.setdefault(car, set())
-                                    # print("Car: ", car)
-                                    # print("Ped: ", ped)
                                     self.right_turn_conflicts[car].add(ped)
 
 
@@ -461,8 +459,8 @@ class SingleIntersection:
         right_conflicts=self.right_turn_conflicts_measure()
         print(f"average fuel consumption (external model) for {control_type} (in mg): ",
               self.fuel_total_cav_external_model / len(self.paras["cav_ids"]["all"]))
-        print(f"average fuel consumption (SUMO output) for {control_type} (in mg): ",
-              self.fuel_total_cav_sumo / len(self.paras["cav_ids"]["all"]))
+        # print(f"average fuel consumption (SUMO output) for {control_type} (in mg): ",
+        #       self.fuel_total_cav_sumo / len(self.paras["cav_ids"]["all"]))
         print(f"average waiting time for {control_type} (in s): ",
               self.waiting_time_avg)
         print(f"average time loss for {control_type} (in s): ",
@@ -477,9 +475,9 @@ class SingleIntersection:
         print(f"number of pedestrians passing through the specific intersection for {control_type}: ",
               len(self.paras["ped_ids"]))
         print(f"The time of simulation termination in {control_type} scenario:",step/2 )
-        with open(f"Metrics_Results_{control_type}_scenario.txt", 'w') as file:
+        with open(f"Results/Metrics_Results_{control_type}_scenario.txt", 'w') as file:
             file.write(f"average fuel consumption for {control_type} scenario (external model) (in mg): {self.fuel_total_cav_external_model / len(self.paras['cav_ids']['all'])}\n")
-            file.write(f"average fuel consumption for {control_type} scenario (SUMO output) (in mg): {self.fuel_total_cav_sumo / len(self.paras['cav_ids']['all'])}\n")
+            #file.write(f"average fuel consumption for {control_type} scenario (SUMO output) (in mg): {self.fuel_total_cav_sumo / len(self.paras['cav_ids']['all'])}\n")
             file.write(f"average waiting time for {control_type} scenario (in s): {self.waiting_time_avg}\n")
             file.write(f"average time loss for {control_type} scenario (in s): {self.lost_time_avg}\n")
             file.write(f"average queue length for {control_type} scenario (in m): {self.queue_avg}\n")
@@ -510,13 +508,6 @@ class SingleIntersection:
             widths = np.diff(np.concatenate(([0], x)))
             plt.figure(figsize=(15, 7))
             phase_list_fix_act_1 = [phase + 1 for phase in self.phase_list_fix_act]
-            plt.bar(x - widths, phase_list_fix_act_1, width=widths, align='edge')
-            plt.gca().xaxis.set_minor_locator(plt.MultipleLocator(100))
-            plt.xlabel('Time Duration')
-            plt.ylabel('Phase Number')
-            plt.title('Phases over Duration')
-            plt.savefig("Phases_Over_Duration.png")
-            plt.show()
 
             self.phase_avg={}
             self.phase_ntimes={}
@@ -535,20 +526,6 @@ class SingleIntersection:
                     phase_dict.setdefault(phase, [])
                     phase_dict[phase].append(sum(duration_list_multi[change_index:i+1]))
                     change_index = i+1
-            x = np.cumsum(duration_list_multi)
-            widths = np.diff(np.concatenate(([0], x)))
-            plt.figure(figsize=(15, 7))
-            phase_list_multi_1 = [phase + 1 for phase in phase_list_multi]
-            plt.bar(x - widths, phase_list_multi_1, width=widths, align='edge')
-            plt.xlabel('Time Duration')
-            plt.ylabel('Phase Number')
-            plt.title('Phases over Duration (Multi-scale)')
-            plt.savefig("Phases_Over_Duration.png")
-            plt.show()
-
-            with open('output_phase.txt', 'w') as file:
-                for item1, item2 in zip(phase_list_multi, duration_list_multi):
-                    file.write(f"{item1}\t{item2}\n")
 
             self.phase_avg={}
             self.phase_ntimes={}
