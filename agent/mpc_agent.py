@@ -8,7 +8,7 @@ from gams import *
 
 
 class MpcAgent:
-    def __init__(self, intersection_type):
+    def __init__(self, paras, intersection_type):
         """Initialize the MPC agent.
 
         Args:
@@ -25,18 +25,15 @@ class MpcAgent:
 
         ## Set up the GAMS workspace
         self.models_dir = os.path.dirname(os.path.realpath(__file__)) + "/gams_models"
-        #gams_dir = r"C:\GAMS\win64\24.9"
-        #gams_dir = r"C:\GAMS\46"
-        #gams_dir="/home/naderian/Downloads/gams46.5_linux_x64_64_sfx"
-        #sys.path.append(gams_dir)
         if not os.path.exists(self.models_dir):
             os.mkdir(self.models_dir)
-        gams_dir = "/Library/Frameworks/GAMS.framework/Versions/49/Resources/"
+        #gams_dir = "/Library/Frameworks/GAMS.framework/Versions/49/Resources/"
         #self.ws = GamsWorkspace(self.models_dir, system_directory=gams_dir, debug=1)
         self.ws = GamsWorkspace(self.models_dir, debug=1)
-        self.gams_file_slower = (
-            self.models_dir + "/" + intersection_type + "_slower_Pedestrians.gms"
-        )
+        if paras["ped_phasing"] == "Concurrent":
+            self.gams_file_slower = (self.models_dir + "/" + intersection_type + "_slower_Pedestrians.gms")
+        elif paras["ped_phasing"] == "Exclusive":
+            self.gams_file_slower = (self.models_dir + "/" + intersection_type + "_slower_Pedestrians (Exclusive).gms")
         self.gams_file_faster = (
             self.models_dir + "/" + intersection_type + "_faster.gms"
         )
@@ -248,8 +245,7 @@ class MpcAgent:
 
         veh_weight.add_record().value = weights[0]
         ped_weight.add_record().value = weights[1]
-        print('veh_weight',weights[0])
-        print('ped_weight',weights[1])
+
 
     def run_gams_to_solve_slower_scale_problem_single_intersection(self):
         """Run the corresponding GAMS model to solve the slower scale problem"""
@@ -280,11 +276,6 @@ class MpcAgent:
 
         for item in self.model_slower.out_db["f"]:
             self.f.append(item.level)
-        print("f: ",sum(self.f)/len(self.f))
-        # for rec in self.model_slower.out_db["q"]:
-        #     print(rec)
-        # for rec in self.model_slower.out_db["p"]:
-        #     print(rec)
         for item in self.model_slower.out_db["f_throughput"]:
             self.f_throughput.append(item.level)
         # print("f_throughput: ",sum(self.f_throughput)/len(self.f_throughput))
@@ -311,9 +302,9 @@ class MpcAgent:
         #                         sum(self.f_delay)/len(self.f_delay)/50)
         # print("pedestrian Cost: ",  sum(self.f_ped_throughput)/len(self.f_ped_throughput)*5)
         # print("Mean of ped times veh values: ", sum(self.ped_times_veh)/len(self.ped_times_veh))
-        print("Vehicle cost at this point: ", self.f_throughput[-1]+self.f_dist[-1]/100+self.f_transit[-1]*5+self.f_delay[-1]/50)
-        print("Pedestrian cost at this point: ", self.f_ped_throughput[-1]*5/5)
-        print("objective function at this point:", self.f[-1])
+        # print("Vehicle cost at this point: ", self.f_throughput[-1]+self.f_dist[-1]/100+self.f_transit[-1]*5+self.f_delay[-1]/50)
+        # print("Pedestrian cost at this point: ", self.f_ped_throughput[-1]*5/5)
+        # print("objective function at this point:", self.f[-1])
 
         for rec in self.model_slower.out_db["p"]:
             p_gams[int(rec.key(0)) - 1].append(round(rec.level))
@@ -333,15 +324,15 @@ class MpcAgent:
 
         ped_phase_map={0:['E', "W"], 1:['W'], 2:['E'], 3:[], 4:['N', 'S'], 5:['S'], 6:['N'], 7:[], 8:['N', 'S', 'E', 'W', 'NWSE', 'NESW']}
         ## Update the next timestamp that we need to rerun the MPC.
-        print("current step: ", traci.simulation.getTime())
-        print("following phases from previous problem: ", following_phases)
+        # print("current step: ", traci.simulation.getTime())
+        # print("following phases from previous problem: ", following_phases)
         current_phase=traci.trafficlight.getPhase("1")
         if following_phases[0] == -1:
             if current_phase == 8:
                 prv_step = self.next_global_step_to_re_solve_the_netwok
                 all_red_clearance= int(paras['X_crossing_length']/paras['ped_speed'])
-                print("all_red_clearance: ", all_red_clearance)
-                #all_red_clearance=15
+                # print("all_red_clearance: ", all_red_clearance)
+                all_red_clearance=15
                 self.next_global_step_to_re_solve_the_netwok += int(
                     all_red_clearance / self.delta_T_faster
                 )
@@ -364,25 +355,23 @@ class MpcAgent:
             self.extension_steps = max(1, self.extension_steps-1)
             if self.extension_steps > 1:
                 self.is_extended = True
-            print("is previously extended: ", self.is_extended)
-            if next != after_next and self.is_extended==False:
-            # if (next != after_next or current_phase==8) and self.is_extended==False:
-                for dir in ped_phase_map[next]:
-                    #print(f"pedestrian demand for {dir} direction is:", ped_demand[dir])
-                    if ped_demand[dir] > 0:
-                        #print(f"pedestrian demand for {dir} direction is:", ped_demand[dir])
-                        minimum_green = 3.2 + paras['crossing_length']/paras['ped_speed']+2.7*ped_demand[dir]/(paras['crossing_width']*3.28)
-                        Gp = max(Gp, minimum_green)
-
-                print("Gp: ", Gp)
-                self.extension_steps = max(int(Gp / self.delta_T)+1, 1)
-                print("extension steps just calculated: ", self.extension_steps)
+            #print("is previously extended: ", self.is_extended)
+            if next == 8:
+                if self.is_extended==False:
+                    for dir in ped_phase_map[next]:
+                        if ped_demand[dir] > 0:
+                            minimum_green = 3.2 + paras['crossing_length']/paras['ped_speed']+2.7*ped_demand[dir]/(paras['crossing_width']*3.28)
+                            Gp = max(Gp, minimum_green)
+                    #print("Gp: ", Gp)
+                    self.extension_steps = max(int(Gp / self.delta_T) + 1, 1)
+                    #print("extension steps just calculated: ", self.extension_steps)
+            else:
                 Gp=0
                 # Gp = min(Gp, 20)
                 # print("ultimate Gp: ", Gp)
             prv_step=self.next_global_step_to_re_solve_the_netwok
             self.next_global_step_to_re_solve_the_netwok += int(
-                max(self.delta_T, Gp) / self.delta_T_faster
+                self.delta_T / self.delta_T_faster
             )
         self.phase_list_multi.append(following_phases[0])
         self.duration_list_multi.append((self.next_global_step_to_re_solve_the_netwok-prv_step)*0.5)

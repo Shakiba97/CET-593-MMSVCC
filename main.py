@@ -16,7 +16,7 @@ def main(network_type, volume_type, control_type):
     env_single_intersection.start_sumo(True, control_type, network_type, volume_type)
 
     print("----Initializing the agent...")
-    agent_unified_four_legs_three_lanes = MpcAgent("unified_four_legs_three_lanes")
+    agent_unified_four_legs_three_lanes = MpcAgent(paras, "unified_four_legs_three_lanes")
     agent_unified_four_legs_three_lanes.clear_redundant_gams_files()
 
     phase_list_multi=[]

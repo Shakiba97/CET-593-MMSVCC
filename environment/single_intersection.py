@@ -149,8 +149,7 @@ class SingleIntersection:
             num_predict_steps=self.paras["num_predict_steps"]
             another_map= {':1_c0': 4, ':1_c2': 3, ':1_c4': 2, ':1_c5': 1, ':1_c1': 5, ':1_c3': 6} #CounterClockwise starting from the Westbound
 
-            Xcrossing = False  # True or False
-            if Xcrossing:
+            if self.paras["ped_phasing"] == "Exclusive":
                 map_diag= {':1_w0':[':1_c3'], ':1_w1': [':1_c1'], ':1_w2': [':1_c3'], ':1_w3':[':1_c1']}
             else:
                 map_diag= {':1_w0':[':1_c0', ':1_c5'], ':1_w1': [':1_c0', ':1_c2'], ':1_w2': [':1_c2',':1_c4'], ':1_w3':[':1_c4', ':1_c5']}

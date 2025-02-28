@@ -51,8 +51,12 @@ def set_common_paras(paras):
     # Simulation steps.
     paras["simulation_steps"] = paras["simulation_duration"] // paras["delta_T"]
     # Signal yellow time added between conflicting phases.
-    paras["yellow_time"] = 5
-    paras["all_red_time"] = 2
+    if paras["ped_phasing"] == "Concurrent":
+        paras["yellow_time"] = 5
+        paras["all_red_time"] = 2
+    else:
+        paras["yellow_time"] = 3
+        paras["all_red_time"] = 0
     # Left turn and right turn ratios. We only explicitly set the main road, i,e, through traffic, volumes. The volume of other movements are set as ratios to their main movements.
     paras["left_right_ratio"] = 1 / 6
     # Speed limit of all roads, in m/s.

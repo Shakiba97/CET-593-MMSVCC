@@ -1,4 +1,4 @@
-average fuel consumption for multi_scale scenario (external model) (in mg): 53.421776390328915
+average fuel consumption for multi_scale scenario (external model) (in mg): 53.42177639029114
 average waiting time for multi_scale scenario (in s): 12.454379562043796
 average time loss for multi_scale scenario (in s): 24.30850364963506
 average queue length for multi_scale scenario (in m): 7.2937443305895915
