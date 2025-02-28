@@ -21,6 +21,8 @@ Please follow the instruction on [this link](https://www.gams.com/latest/docs/AP
     - gams_models: Contains GAMS files solving the Slower-Scale (A2), and Faster-Scale (A3) Optimization problems (refer to the paper [Guo and Ban (2023)](https://www.sciencedirect.com/science/article/abs/pii/S0191261523001121))  
 - `config`: Contains functions for setting up the model parameters.
 - `environment`: Contains SUMO files and configurations as well as single_intersection class which covers the route builder and network generator of simulation as well as the Input, Output Interfaces (communication with SUMO) for the Unified 4-leg intersection.
+- `Results`: Contains Output files generated at the end of simulation provide the following metrics to compare the MMSVCC project performance with other signal timing scenarios (e.g., fixed-time and actuated)
+- `Slides`: Contains detailed diagram and documentation on the algorithm.
 
 The whole process is summarized in the diagram below:  
 
