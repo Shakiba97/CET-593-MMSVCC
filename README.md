@@ -36,11 +36,11 @@ Detailed documentiations of the algorithm can be found in /Slides/documentation.
 ### 1- Changing the network:
 for those interested in changing the study network the following adjustments should be made to the simulation inputs located at /environment/network_model:  
   
-1- single_intersection_pedestrian_X.net.xml:  
+#### 1- single_intersection_pedestrian_X.net.xml:  
     this includes the infrastructure information (edges, nodes, etc.,) of the network you want to work on. This file can be created using netedit software included in SUMO package. You can also upload the current network file and modify it using netedit. [netedit documentation](https://sumo.dlr.de/docs/Netedit/index.html).  
-2- single_intersection.rou.xml:  
+#### 2- single_intersection.rou.xml:  
     This file includes the information of the routes and demand of different modes (pedestrians and vehicles). You can find useful information to create or modify this file [here](https://sumo.dlr.de/docs/Definition_of_Vehicles%2C_Vehicle_Types%2C_and_Routes.html). You can also model the demand using [netedit](https://sumo.dlr.de/docs/Netedit/elementsDemand.html).  
-3- Additional files (single_intersection.add_fixed_time.xml, single_intersection.add_actuated.xml, single_intersection.add.xml):   
+#### 3- Additional files (single_intersection.add_fixed_time.xml, single_intersection.add_actuated.xml, single_intersection.add.xml):   
     these files take account of signal phasing for the fixed time, actuated and multiscale scenario respectively. These additional files can be extracted from netedit after you define your desired signal phasing plan. You can find the instructions [here](https://sumo.dlr.de/docs/Simulation/Traffic_Lights.html). It should also be convenient to just manually adjust the add.xml files according to your new signal timing plan.
   
 **important: after you finished changing these files accordingly, make sure to adjust the sumo configuration file inputs in `.sumocfg` files (for all three scenarions).  
