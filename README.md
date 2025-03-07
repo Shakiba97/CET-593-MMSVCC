@@ -43,6 +43,6 @@ for those interested in changing the study network the following adjustments sho
 3- Additional files (single_intersection.add_fixed_time.xml, single_intersection.add_actuated.xml, single_intersection.add.xml):   
     these files take account of signal phasing for the fixed time, actuated and multiscale scenario respectively. These additional files can be extracted from netedit after you define your desired signal phasing plan. You can find the instructions [here](https://sumo.dlr.de/docs/Netedit/elementsAdditional.html).  
   
-**important: after you finished changing these files accordingly, be sure to adjust the sumo configuration file inputs in `.sumocfg` files (for all three scenarions).  
+**important: after you finished changing these files accordingly, make sure to adjust the sumo configuration file inputs in `.sumocfg` files (for all three scenarions).  
 
-feel free to ask your questions (naderian@uw.edu). I'll be pushing updates to the code (.py files) by tonight (March 7th). be sure to run the new code after you changed the above files accordingly. 
+Feel free to ask your questions (naderian@uw.edu). I'll be pushing updates to the code (.py files) by tonight (March 7th). Make sure to run the new code after you changed the above files accordingly. 
