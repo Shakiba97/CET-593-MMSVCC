@@ -45,4 +45,4 @@ for those interested in changing the study network the following adjustments sho
   
 **important: after you finished changing these files accordingly, be sure to adjust the sumo configuration file inputs in `.sumocfg` files (for all three scenarions).  
 
-feel free to ask your questions (naderian@uw.edu). I'll be pushing updates to the code by tonight (March 7th). be sure to run the new code after you changed the above files accordingly. 
+feel free to ask your questions (naderian@uw.edu). I'll be pushing updates to the code (.py files) by tonight (March 7th). be sure to run the new code after you changed the above files accordingly. 
