@@ -139,32 +139,32 @@ class SumoRoutesGenerator:
                 pNW = pWE * left_right_ratio
                 if random.uniform(0, 1) < pWE:
                     if random.uniform(0, 1) < penetration:
-                        cav_WEid.add("WE_%i" % vehNr_WE)
+                        cav_WEid.add("CAV_WE_%i" % vehNr_WE)
                         print(
-                            '    <vehicle id="WE_%i" type="cars" route="WE" depart="%i" departLane="2" color="0,1,0"/>'
+                            '    <vehicle id="CAV_WE_%i" type="cars" route="WE" depart="%i" departLane="2" color="0,1,0"/>'
                             % (vehNr_WE, i),
                             file=routes,
                         )
                     else:
-                        hdv_WEid.add("WE_%i" % vehNr_WE)
+                        hdv_WEid.add("HDV_WE_%i" % vehNr_WE)
                         print(
-                            '    <vehicle id="WE_%i" type="cars" route="WE" depart="%i" departLane="2"/>'
+                            '    <vehicle id="HDV_WE_%i" type="cars" route="WE" depart="%i" departLane="2"/>'
                             % (vehNr_WE, i),
                             file=routes,
                         )
                     vehNr_WE += 1
                 if random.uniform(0, 1) < pEW:
                     if random.uniform(0, 1) < penetration:
-                        cav_EWid.add("EW_%i" % vehNr_EW)
+                        cav_EWid.add("CAV_EW_%i" % vehNr_EW)
                         print(
-                            '    <vehicle id="EW_%i" type="cars" route="EW" depart="%i" departLane="2" color="0,1,0"/>'
+                            '    <vehicle id="CAV_EW_%i" type="cars" route="EW" depart="%i" departLane="2" color="0,1,0"/>'
                             % (vehNr_EW, i),
                             file=routes,
                         )
                     else:
-                        hdv_EWid.add("EW_%i" % vehNr_EW)
+                        hdv_EWid.add("HDV_EW_%i" % vehNr_EW)
                         print(
-                            '    <vehicle id="EW_%i" type="cars" route="EW" depart="%i" departLane="2" />'
+                            '    <vehicle id="HDV_EW_%i" type="cars" route="EW" depart="%i" departLane="2" />'
                             % (vehNr_EW, i),
                             file=routes,
                         )
@@ -172,160 +172,160 @@ class SumoRoutesGenerator:
 
                 if random.uniform(0, 1) < pWN:
                     if random.uniform(0, 1) < penetration:
-                        cav_others.add("WN_%i" % vehNr_others)
+                        cav_others.add("CAV_WN_%i" % vehNr_others)
                         print(
-                            '    <vehicle id="WN_%i" type="cars" route="WN" depart="%i" departLane="3" color="0,1,0"/>'
+                            '    <vehicle id="CAV_WN_%i" type="cars" route="WN" depart="%i" departLane="3" color="0,1,0"/>'
                             % (vehNr_others, i),
                             file=routes,
                         )
                     else:
-                        hdv_others.add("WN_%i" % vehNr_others)
+                        hdv_others.add("HDV_WN_%i" % vehNr_others)
                         print(
-                            '    <vehicle id="WN_%i" type="cars" route="WN" depart="%i" departLane="3" />'
+                            '    <vehicle id="HDV_WN_%i" type="cars" route="WN" depart="%i" departLane="3" />'
                             % (vehNr_others, i),
                             file=routes,
                         )
                     vehNr_others += 1
                 if random.uniform(0, 1) < pWS:
                     if random.uniform(0, 1) < penetration:
-                        cav_others.add("WS_%i" % vehNr_others)
+                        cav_others.add("CAV_WS_%i" % vehNr_others)
                         print(
-                            '    <vehicle id="WS_%i" type="cars" route="WS" depart="%i" departLane="1" color="0,1,0"/>'
+                            '    <vehicle id="CAV_WS_%i" type="cars" route="WS" depart="%i" departLane="1" color="0,1,0"/>'
                             % (vehNr_others, i),
                             file=routes,
                         )
                     else:
-                        hdv_others.add("WS_%i" % vehNr_others)
+                        hdv_others.add("HDV_WS_%i" % vehNr_others)
                         print(
-                            '    <vehicle id="WS_%i" type="cars" route="WS" depart="%i" departLane="1" />'
+                            '    <vehicle id="HDV_WS_%i" type="cars" route="WS" depart="%i" departLane="1" />'
                             % (vehNr_others, i),
                             file=routes,
                         )
                     vehNr_others += 1
                 if random.uniform(0, 1) < pES:
                     if random.uniform(0, 1) < penetration:
-                        cav_others.add("ES_%i" % vehNr_others)
+                        cav_others.add("CAV_ES_%i" % vehNr_others)
                         print(
-                            '    <vehicle id="ES_%i" type="cars" route="ES" depart="%i" departLane="3" color="0,1,0"/>'
+                            '    <vehicle id="CAV_ES_%i" type="cars" route="ES" depart="%i" departLane="3" color="0,1,0"/>'
                             % (vehNr_others, i),
                             file=routes,
                         )
                     else:
-                        hdv_others.add("ES_%i" % vehNr_others)
+                        hdv_others.add("HDV_ES_%i" % vehNr_others)
                         print(
-                            '    <vehicle id="ES_%i" type="cars" route="ES" depart="%i" departLane="3" />'
+                            '    <vehicle id="HDV_ES_%i" type="cars" route="ES" depart="%i" departLane="3" />'
                             % (vehNr_others, i),
                             file=routes,
                         )
                     vehNr_others += 1
                 if random.uniform(0, 1) < pEN:
                     if random.uniform(0, 1) < penetration:
-                        cav_others.add("EN_%i" % vehNr_others)
+                        cav_others.add("CAV_EN_%i" % vehNr_others)
                         print(
-                            '    <vehicle id="EN_%i" type="cars" route="EN" depart="%i" departLane="1" color="0,1,0"/>'
+                            '    <vehicle id="CAV_EN_%i" type="cars" route="EN" depart="%i" departLane="1" color="0,1,0"/>'
                             % (vehNr_others, i),
                             file=routes,
                         )
                     else:
-                        hdv_others.add("EN_%i" % vehNr_others)
+                        hdv_others.add("HDV_EN_%i" % vehNr_others)
                         print(
-                            '    <vehicle id="EN_%i" type="cars" route="EN" depart="%i" departLane="1" />'
+                            '    <vehicle id="HDV_EN_%i" type="cars" route="EN" depart="%i" departLane="1" />'
                             % (vehNr_others, i),
                             file=routes,
                         )
                     vehNr_others += 1
                 if random.uniform(0, 1) < pNS:
                     if random.uniform(0, 1) < penetration:
-                        cav_others.add("NS_%i" % vehNr_others)
+                        cav_others.add("CAV_NS_%i" % vehNr_others)
                         print(
-                            '    <vehicle id="NS_%i" type="cars" route="NS" depart="%i" departLane="2" color="0,1,0"/>'
+                            '    <vehicle id="CAV_NS_%i" type="cars" route="NS" depart="%i" departLane="2" color="0,1,0"/>'
                             % (vehNr_others, i),
                             file=routes,
                         )
                     else:
-                        hdv_others.add("NS_%i" % vehNr_others)
+                        hdv_others.add("HDV_NS_%i" % vehNr_others)
                         print(
-                            '    <vehicle id="NS_%i" type="cars" route="NS" depart="%i" departLane="2" />'
+                            '    <vehicle id="HDV_NS_%i" type="cars" route="NS" depart="%i" departLane="2" />'
                             % (vehNr_others, i),
                             file=routes,
                         )
                     vehNr_others += 1
                 if random.uniform(0, 1) < pNE:
                     if random.uniform(0, 1) < penetration:
-                        cav_others.add("NE_%i" % vehNr_others)
+                        cav_others.add("CAV_NE_%i" % vehNr_others)
                         print(
-                            '    <vehicle id="NE_%i" type="cars" route="NE" depart="%i" departLane="3" color="0,1,0"/>'
+                            '    <vehicle id="CAV_NE_%i" type="cars" route="NE" depart="%i" departLane="3" color="0,1,0"/>'
                             % (vehNr_others, i),
                             file=routes,
                         )
                     else:
-                        hdv_others.add("NE_%i" % vehNr_others)
+                        hdv_others.add("HDV_NE_%i" % vehNr_others)
                         print(
-                            '    <vehicle id="NE_%i" type="cars" route="NE" depart="%i" departLane="3" />'
+                            '    <vehicle id="HDV_NE_%i" type="cars" route="NE" depart="%i" departLane="3" />'
                             % (vehNr_others, i),
                             file=routes,
                         )
                     vehNr_others += 1
                 if random.uniform(0, 1) < pNW:
                     if random.uniform(0, 1) < penetration:
-                        cav_others.add("NW_%i" % vehNr_others)
+                        cav_others.add("CAV_NW_%i" % vehNr_others)
                         print(
-                            '    <vehicle id="NW_%i" type="cars" route="NW" depart="%i" departLane="1" color="0,1,0"/>'
+                            '    <vehicle id="CAV_NW_%i" type="cars" route="NW" depart="%i" departLane="1" color="0,1,0"/>'
                             % (vehNr_others, i),
                             file=routes,
                         )
                     else:
-                        hdv_others.add("NW_%i" % vehNr_others)
+                        hdv_others.add("HDV_NW_%i" % vehNr_others)
                         print(
-                            '    <vehicle id="NW_%i" type="cars" route="NW" depart="%i" departLane="1" />'
+                            '    <vehicle id="HDV_NW_%i" type="cars" route="NW" depart="%i" departLane="1" />'
                             % (vehNr_others, i),
                             file=routes,
                         )
                     vehNr_others += 1
                 if random.uniform(0, 1) < pSN:
                     if random.uniform(0, 1) < penetration:
-                        cav_others.add("SN_%i" % vehNr_others)
+                        cav_others.add("CAV_SN_%i" % vehNr_others)
                         print(
-                            '    <vehicle id="SN_%i" type="cars" route="SN" depart="%i" departLane="2" color="0,1,0"/>'
+                            '    <vehicle id="CAV_SN_%i" type="cars" route="SN" depart="%i" departLane="2" color="0,1,0"/>'
                             % (vehNr_others, i),
                             file=routes,
                         )
                     else:
-                        hdv_others.add("SN_%i" % vehNr_others)
+                        hdv_others.add("HDV_SN_%i" % vehNr_others)
                         print(
-                            '    <vehicle id="SN_%i" type="cars" route="SN" depart="%i" departLane="2" />'
+                            '    <vehicle id="HDV_SN_%i" type="cars" route="SN" depart="%i" departLane="2" />'
                             % (vehNr_others, i),
                             file=routes,
                         )
                     vehNr_others += 1
                 if random.uniform(0, 1) < pSW:
                     if random.uniform(0, 1) < penetration:
-                        cav_others.add("SW_%i" % vehNr_others)
+                        cav_others.add("CAV_SW_%i" % vehNr_others)
                         print(
-                            '    <vehicle id="SW_%i" type="cars" route="SW" depart="%i" departLane="3" color="0,1,0"/>'
+                            '    <vehicle id="CAV_SW_%i" type="cars" route="SW" depart="%i" departLane="3" color="0,1,0"/>'
                             % (vehNr_others, i),
                             file=routes,
                         )
                     else:
-                        hdv_others.add("SW_%i" % vehNr_others)
+                        hdv_others.add("HDV_SW_%i" % vehNr_others)
                         print(
-                            '    <vehicle id="SW_%i" type="cars" route="SW" depart="%i" departLane="3" />'
+                            '    <vehicle id="HDV_SW_%i" type="cars" route="SW" depart="%i" departLane="3" />'
                             % (vehNr_others, i),
                             file=routes,
                         )
                     vehNr_others += 1
                 if random.uniform(0, 1) < pSE:
                     if random.uniform(0, 1) < penetration:
-                        cav_others.add("SE_%i" % vehNr_others)
+                        cav_others.add("CAV_SE_%i" % vehNr_others)
                         print(
-                            '    <vehicle id="SE_%i" type="cars" route="SE" depart="%i" departLane="1" color="0,1,0"/>'
+                            '    <vehicle id="CAV_SE_%i" type="cars" route="SE" depart="%i" departLane="1" color="0,1,0"/>'
                             % (vehNr_others, i),
                             file=routes,
                         )
                     else:
-                        hdv_others.add("SE_%i" % vehNr_others)
+                        hdv_others.add("HDV_SE_%i" % vehNr_others)
                         print(
-                            '    <vehicle id="SE_%i" type="cars" route="SE" depart="%i" departLane="1" />'
+                            '    <vehicle id="HDV_SE_%i" type="cars" route="SE" depart="%i" departLane="1" />'
                             % (vehNr_others, i),
                             file=routes,
                         )

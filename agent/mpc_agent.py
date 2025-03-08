@@ -18,6 +18,10 @@ class MpcAgent:
         """
         self.phase_list_multi=[]
         self.duration_list_multi=[]
+        self.ped_phase_map={}
+        self.veh_phase_map={}
+        self.paras=paras
+        self.extract_signal_info()
 
         ## Check if the intersection type is supported.
         if intersection_type not in ["unified_four_legs_three_lanes"]:
@@ -70,6 +74,38 @@ class MpcAgent:
         self.is_extended = False
         self.ped_times_veh=[]
 
+
+    def extract_signal_info(self):
+        for inter_id in self.paras["network_graph"]:
+            for logic in traci.trafficlight.getAllProgramLogics(inter_id):
+                if logic.programID == "my_program":
+                    for index, phase in enumerate(logic.phases):
+                        all_red = True
+                        signal_state = phase.state
+                        controlled_links = traci.trafficlight.getControlledLinks(inter_id)
+                        green_lanes = []
+                        green_crossings = []
+                        # Iterate over signal states and match with controlled links
+                        for i, state in enumerate(signal_state[:-1]):
+                            if state == 'G' and i < len(controlled_links):  # Ensure index is valid
+                                all_red = False
+                                for link_tuple in controlled_links[i]:  # Each entry is (incoming_lane, outgoing_lane, crossing)
+                                    incoming_lane = link_tuple[0]
+                                    crossing = traci.lane.getEdgeID(link_tuple[1])
+                                    # Store vehicle lanes and pedestrian crossings
+                                    if crossing in self.paras["network_graph"][inter_id][
+                                        "crossing"].keys():  # SUMO crossings start with ":"
+                                        green_crossings.append(crossing)
+                                    if incoming_lane in self.paras["network_graph"][inter_id]["incoming_veh"].keys():
+                                        green_lanes.append(incoming_lane)
+                        if all_red:
+                            self.paras["all_red_index"] = index
+                        if self.paras["ped_phasing"]=="Exclusive" and len(green_crossings) == len(self.paras["network_graph"][inter_id]["crossing"].keys()):
+                            self.exclusive_phase_ind=index
+                        self.ped_phase_map[index] = green_crossings
+                        self.veh_phase_map[index] = green_lanes
+
+
     def reset_solutions(self):
         self.slower_scale_solution = {
             "s_vehicles_slower": [],
@@ -82,15 +118,17 @@ class MpcAgent:
         }
         self.vehicle_ids = []
 
-    def gather_static_paras_single_intersection(self, paras):
+    def gather_static_paras_single_intersection(self, inter_id, paras):
         """Gather static parameters that used for constructing the GAMS model
 
         Args:
             paras: The parameters defined all the way here.
         """
-        self.num_phases = paras["num_phases"]
-        self.num_lanes = paras["num_lanes_intersection"]
-        self.len_lane = paras["distance_from_upstream_intersections"]
+        self.num_phases = paras["network_graph"][inter_id]["num_phases"]
+        self.num_lanes = len(paras["network_graph"][inter_id]["incoming_veh"].keys())
+        self.len_lane = []
+        for dict in paras["network_graph"][inter_id]["incoming_veh"].values():
+            self.len_lane.append(dict['length'])
         self.num_steps = paras["num_predict_steps"]
         self.delta_T = paras["delta_T"]
         self.delta_T_faster = paras["delta_T_faster"]
@@ -101,16 +139,15 @@ class MpcAgent:
         self.yellow_time = paras["yellow_time"]
         self.all_red_time = paras['all_red_time']
         ## Parameters used for the idm
-        self.network_cav_ids = paras["cav_ids"]["all"]
+        self.network_cav_ids = paras["cav_ids"]
         self.network_speed_limit = paras["speed_limit"]
         self.max_acc = paras["max_acc"]
         self.comf_acc = paras["comf_acc"]
         self.delta_idm = paras["delta_idm"]
         self.vehicle_length = paras["vehicle_length"]
 
-        self.cross_map = {':1_c0': 'N', ':1_c2': 'E', ':1_c4': 'S', ':1_c5': 'W', ':1_c3': 'NWSE', ':1_c1': 'NESW'}
-        self.walking_areas = [':1_w3', ':1_w2', ':1_w1', ':1_w0']
-        self.num_cross=paras["num_cross"]
+        #self.cross_map = {':1_c0': 'N', ':1_c2': 'E', ':1_c4': 'S', ':1_c5': 'W', ':1_c3': 'NWSE', ':1_c1': 'NESW'}
+        self.num_cross=len(paras["network_graph"][inter_id]["crossing"].keys())
 
     def set_slower_scale_constant_paras_single_intersection(self):
         """Set the constant parameters of the slower scale model"""
@@ -156,9 +193,9 @@ class MpcAgent:
             "lane_length", [j], "length of lane j"
         )
         for ind in range(self.num_lanes):
-            lane_length.add_record(str(ind + 1)).value = self.len_lane
+            lane_length.add_record(str(ind + 1)).value = self.len_lane[ind]
 
-    def set_slower_scale_dynamic_paras_single_intersection(self, paras, intersection_state):
+    def set_slower_scale_dynamic_paras_single_intersection(self, intersection_state):
         """Set the dynamic parameters of the slower scale model
 
         Args that we will get from intersection_state:
@@ -180,7 +217,7 @@ class MpcAgent:
         cur_phase = intersection_state["signal_phase"]
         num_vehicles_max = intersection_state["num_vehicles_max"]
         pedestrian_demand=intersection_state["pedestrian_demand"]
-        weights= paras["weight(Vehicles/Pedestrians)"]
+        weights= self.paras["weight(Vehicles/Pedestrians)"]
 
         i = self.db_slower.add_set("i", 1, "vehicles")
         for ind in range(1, num_vehicles_max + 1):
@@ -252,12 +289,13 @@ class MpcAgent:
         self.model_slower = self.ws.add_job_from_file(self.gams_file_slower)
         opt_slower = self.ws.add_options()
         opt_slower.defines["gdxincname"] = self.db_slower.name
+        print(self.db_slower.name)
         self.model_slower.run(opt_slower, databases=self.db_slower)
         if self.model_slower.out_db["model_status"][()].value not in [1, 2, 8]:
             raise RuntimeError("Fail to solve the slower scale problem.")
 
     def collect_solution_from_slower_scale_problem_single_intersection(
-        self, paras, intersection_state
+        self, inter_id, intersection_state
     ):
         """Collect solutions from the solower scale problem"""
         num_vehicles_max = intersection_state["num_vehicles_max"]
@@ -269,11 +307,10 @@ class MpcAgent:
         following_phases = []
         ped_demand={}
         ped_demand_all={}
-        for d in self.cross_map.keys():
-            ped_demand[self.cross_map[d]] = len(intersection_state['pedestrian_demand_current'][d])
+        for d in intersection_state['pedestrian_demand_current'].keys():
+            ped_demand[d] = len(intersection_state['pedestrian_demand_current'][d])
 
         ## Collect solutions
-
         for item in self.model_slower.out_db["f"]:
             self.f.append(item.level)
         for item in self.model_slower.out_db["f_throughput"]:
@@ -322,16 +359,14 @@ class MpcAgent:
             if is_yellow:
                 following_phases.append(-1)
 
-        ped_phase_map={0:['E', "W"], 1:['W'], 2:['E'], 3:[], 4:['N', 'S'], 5:['S'], 6:['N'], 7:[], 8:['N', 'S', 'E', 'W', 'NWSE', 'NESW']}
-        ## Update the next timestamp that we need to rerun the MPC.
-        # print("current step: ", traci.simulation.getTime())
-        # print("following phases from previous problem: ", following_phases)
-        current_phase=traci.trafficlight.getPhase("1")
+        current_phase=traci.trafficlight.getPhase(inter_id)
         if following_phases[0] == -1:
-            if current_phase == 8:
+            if self.paras["ped_phasing"]=="Exclusive" and current_phase == self.exclusive_phase_ind:
                 prv_step = self.next_global_step_to_re_solve_the_netwok
-                all_red_clearance= int(paras['X_crossing_length']/paras['ped_speed'])
-                # print("all_red_clearance: ", all_red_clearance)
+                for cross in self.paras["network_graph"][inter_id]["crossing"]:
+                    if self.paras["network_graph"][inter_id]["crossing"][cross]["phasing"]=="Diagonal":
+                        crossing_length = self.paras["network_graph"][inter_id]["crossing"][cross]["length"]
+                        all_red_clearance= int(crossing_length/self.paras['ped_speed'])
                 all_red_clearance=15
                 self.next_global_step_to_re_solve_the_netwok += int(
                     all_red_clearance / self.delta_T_faster
@@ -346,33 +381,67 @@ class MpcAgent:
                 self.is_extended = False
                 self.extension_steps = 1
         else:
-        # check for pedestrian extension:
-            Gp = 0
-            next = following_phases[0]
-            after_next = following_phases[1]
-            two_after_next = following_phases[2]
+            # check for pedestrian extension:
+            if self.paras["ped_phasing"]=="Exclusive":
+                Gp = 0
+                next = following_phases[0]
 
-            self.extension_steps = max(1, self.extension_steps-1)
-            if self.extension_steps > 1:
-                self.is_extended = True
-            #print("is previously extended: ", self.is_extended)
-            if next == 8:
-                if self.is_extended==False:
-                    for dir in ped_phase_map[next]:
-                        if ped_demand[dir] > 0:
-                            minimum_green = 3.2 + paras['crossing_length']/paras['ped_speed']+2.7*ped_demand[dir]/(paras['crossing_width']*3.28)
+                self.extension_steps = max(1, self.extension_steps - 1)
+                if self.extension_steps > 1:
+                    self.is_extended = True
+                # print("is previously extended: ", self.is_extended)
+                if next == self.exclusive_phase_ind:
+                    if self.is_extended == False:
+                        for cross in self.ped_phase_map[next]:
+                            if ped_demand[cross] > 0:
+                                crossing_length = self.paras["network_graph"][inter_id]["crossing"][cross]["length"]
+                                crossing_width = self.paras["network_graph"][inter_id]["crossing"][cross]["width"]
+                                minimum_green = 3.2 + crossing_length / self.paras['ped_speed'] + 2.7 * ped_demand[cross] / (crossing_width * 3.28)
+                                Gp = max(Gp, minimum_green)
+                        # print("Gp: ", Gp)
+                        self.extension_steps = max(int(Gp / self.delta_T) + 1, 1)
+                        # print("extension steps just calculated: ", self.extension_steps)
+                else:
+                    Gp = 0
+                    # Gp = min(Gp, 20)
+                    # print("ultimate Gp: ", Gp)
+                prv_step = self.next_global_step_to_re_solve_the_netwok
+                self.next_global_step_to_re_solve_the_netwok += int(
+                    self.delta_T / self.delta_T_faster
+                )
+            elif self.paras["ped_phasing"]=="Concurrent":
+                # check for pedestrian extension:
+                Gp = 0
+                next = following_phases[0]
+                after_next = following_phases[1]
+                two_after_next = following_phases[2]
+
+                self.extension_steps = max(1, self.extension_steps - 1)
+                if self.extension_steps > 1:
+                    self.is_extended = True
+                print("is previously extended: ", self.is_extended)
+                if next != after_next and self.is_extended == False:
+                    # if (next != after_next or current_phase==8) and self.is_extended==False:
+                    for cross in self.ped_phase_map[next]:
+                        # print(f"pedestrian demand for {dir} direction is:", ped_demand[dir])
+                        if ped_demand[cross] > 0:
+                            # print(f"pedestrian demand for {dir} direction is:", ped_demand[dir])
+                            crossing_length = self.paras["network_graph"][inter_id]["crossing"][cross]["length"]
+                            crossing_width = self.paras["network_graph"][inter_id]["crossing"][cross]["width"]
+                            minimum_green = 3.2 + crossing_length / self.paras['ped_speed'] + 2.7 * ped_demand[cross] / (crossing_width * 3.28)
                             Gp = max(Gp, minimum_green)
-                    #print("Gp: ", Gp)
+
+                    print("Gp: ", Gp)
+                    Gp= 0
                     self.extension_steps = max(int(Gp / self.delta_T) + 1, 1)
-                    #print("extension steps just calculated: ", self.extension_steps)
-            else:
-                Gp=0
-                # Gp = min(Gp, 20)
-                # print("ultimate Gp: ", Gp)
-            prv_step=self.next_global_step_to_re_solve_the_netwok
-            self.next_global_step_to_re_solve_the_netwok += int(
-                self.delta_T / self.delta_T_faster
-            )
+                    print("extension steps just calculated: ", self.extension_steps)
+                    Gp = 0
+                    # Gp = min(Gp, 20)
+                    # print("ultimate Gp: ", Gp)
+                prv_step = self.next_global_step_to_re_solve_the_netwok
+                self.next_global_step_to_re_solve_the_netwok += int(
+                    max(self.delta_T, Gp) / self.delta_T_faster
+                )
         self.phase_list_multi.append(following_phases[0])
         self.duration_list_multi.append((self.next_global_step_to_re_solve_the_netwok-prv_step)*0.5)
         # if ((self.next_global_step_to_re_solve_the_netwok-prv_step)*0.5)>30:
@@ -519,14 +588,13 @@ class MpcAgent:
         for rec in self.model_faster.out_db["s"]:
             s_vehicles_faster[int(rec.key(1)) - 1][ind_lane].append(rec.level)
 
-    def solve_slower_scale_problem_single_intersection(self, paras, intersection_state):
+    def solve_slower_scale_problem_single_intersection(self, inter_id, intersection_state):
         """Solve one slwoer scale problem"""
         self.db_slower = self.ws.add_database()
         self.set_slower_scale_constant_paras_single_intersection()
-        self.set_slower_scale_dynamic_paras_single_intersection(paras, intersection_state)
+        self.set_slower_scale_dynamic_paras_single_intersection(intersection_state)
         self.run_gams_to_solve_slower_scale_problem_single_intersection()
-        self.collect_solution_from_slower_scale_problem_single_intersection(
-            paras, intersection_state
+        self.collect_solution_from_slower_scale_problem_single_intersection(inter_id, intersection_state
         )
 
     def solve_faster_scale_problem_single_intersection(
@@ -577,10 +645,10 @@ class MpcAgent:
                 except PermissionError as e:
                     print(f"Failed to delete {file}: {e}")
 
-    def solve_single_intersection(self, paras, intersection_state):
+    def solve_single_intersection(self, inter_id, paras, intersection_state):
         self.vehicle_ids = intersection_state["vehicle_id"]
-        self.gather_static_paras_single_intersection(paras)
-        self.solve_slower_scale_problem_single_intersection(paras, intersection_state)
+        self.gather_static_paras_single_intersection(inter_id, paras)
+        self.solve_slower_scale_problem_single_intersection(inter_id, intersection_state)
         (
             critical_points,
             s_vehicles_point,
@@ -596,7 +664,8 @@ class MpcAgent:
         """Adjust the speeds generated by the faster scale problem based on the intelligent driver model
         so that the commands satisfy safety guarantees."""
 
-
+        print(len(self.faster_scale_solution["v_vehicles_faster"]))
+        print(self.current_step_in_faster_scale_solution)
         v_vehicles_faster = self.faster_scale_solution["v_vehicles_faster"][
             self.current_step_in_faster_scale_solution
         ]
@@ -672,7 +741,7 @@ class MpcAgent:
                             speed_commands[veh_id] = v_command
         return speed_commands
 
-    def get_control_commands(self, paras, network_state, cur_step):
+    def get_control_commands(self, network_state, cur_step):
         """Get control commands from the agent.
 
         Args:
@@ -688,7 +757,7 @@ class MpcAgent:
                 with keys as the vehicles ids and values as the adjusted speed commands.
         """
 
-        if len(paras["traffic_graph"]) != 1:
+        if len(self.paras["network_graph"]) != 1:
             raise TypeError("The MPC agent only supports single_intersection scenario.")
         should_update_signal = False
         if cur_step >= self.next_global_step_to_re_solve_the_netwok:
@@ -697,7 +766,7 @@ class MpcAgent:
             for inter_id in network_state:
                 if network_state[inter_id]["num_vehicles_max"] > 0:
                     print("--------Solve intersection: ", inter_id)
-                    self.solve_single_intersection(paras, network_state[inter_id])
+                    self.solve_single_intersection(inter_id, self.paras, network_state[inter_id])
                     should_update_signal = True
         else:
             self.current_step_in_faster_scale_solution += 1

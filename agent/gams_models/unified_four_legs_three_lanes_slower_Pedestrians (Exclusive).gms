@@ -146,18 +146,18 @@ signal_rule_4(l)..                                                              
 
 
 * Equation (23e)
-phase_equal_1(k)..                                                               p('6',k) + p('8',k) =e= r('1',k);
+phase_equal_1(k)..                                                               p('6',k) + p('8',k) =e= r('3',k);
 phase_equal_2(k)..                                                               p('5',k) + p('6',k) =e= r('2',k);
-phase_equal_3(k)..                                                               p('5',k) + p('6',k) =e= r('3',k);
-phase_equal_4(k)..                                                               p('3',k) + p('4',k) =e= r('4',k);
+phase_equal_3(k)..                                                               p('5',k) + p('6',k) =e= r('1',k);
+phase_equal_4(k)..                                                               p('3',k) + p('4',k) =e= r('6',k);
 phase_equal_5(k)..                                                               p('1',k) + p('3',k) =e= r('5',k);
-phase_equal_6(k)..                                                               p('1',k) + p('3',k) =e= r('6',k);
-phase_equal_7(k)..                                                               p('7',k) + p('8',k) =e= r('7',k);
+phase_equal_6(k)..                                                               p('1',k) + p('3',k) =e= r('4',k);
+phase_equal_7(k)..                                                               p('7',k) + p('8',k) =e= r('9',k);
 phase_equal_8(k)..                                                               p('5',k) + p('7',k) =e= r('8',k);
-phase_equal_9(k)..                                                               p('5',k) + p('7',k) =e= r('9',k);
-phase_equal_10(k)..                                                              p('2',k) + p('4',k) =e= r('10',k);
+phase_equal_9(k)..                                                               p('5',k) + p('7',k) =e= r('7',k);
+phase_equal_10(k)..                                                              p('2',k) + p('4',k) =e= r('12',k);
 phase_equal_11(k)..                                                              p('1',k) + p('2',k) =e= r('11',k);
-phase_equal_12(k)..                                                              p('1',k) + p('2',k) =e= r('12',k);
+phase_equal_12(k)..                                                              p('1',k) + p('2',k) =e= r('10',k);
 ped_phase_equal_1(k)..                                                           p('9',k) =e= q('1',k);
 ped_phase_equal_2(k)..                                                           p('9',k) =e= q('2',k);
 ped_phase_equal_3(k)..                                                           p('9',k) =e= q('3',k);

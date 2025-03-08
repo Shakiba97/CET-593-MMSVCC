@@ -5,7 +5,7 @@
     <input>
         <net-file value="single_intersection_pedestrian_X.net.xml"/>
         <route-files value="single_intersection.rou.xml"/>
-        <additional-files value="single_intersection.add.xml"/>
+        <additional-files value="single_intersection_Exclusive.add.xml"/>
     </input>
 
     <time>

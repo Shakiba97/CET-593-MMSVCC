@@ -31,15 +31,12 @@ def main(network_type, volume_type, control_type):
             # print("----Get control commands from the agent")
             (next_global_step_to_re_solve_the_network, phase_list_multi, duration_list_multi, should_update_signal, next_signal_phase, speed_commands) = (
                 agent_unified_four_legs_three_lanes.get_control_commands(
-                    paras, network_state, step
+                    network_state, step
                 )
             )
             env_single_intersection.apply_control_commands(
                 should_update_signal, next_signal_phase, speed_commands
             )
-
-        elif control_type == "actuated":
-             env_single_intersection.pedestrian_actuation()
 
             #env_single_intersection.pedestrian_movement_control()
         env_single_intersection.calculate_extra_metrics()

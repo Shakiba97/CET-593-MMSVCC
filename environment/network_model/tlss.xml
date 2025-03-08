@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- generated on 2024-04-23 21:01:16 by Eclipse SUMO netedit Version 1.19.0
+<!-- generated on 2025-03-07 12:08:52 by Eclipse SUMO netedit Version 1.20.0
 <configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/neteditConfiguration.xsd">
 
     <input>
-        <sumo-net-file value="C:\Users\Ohay\Desktop\Shakiba\Multiscale-Traffic-Control\SourceCodes\environment\network_model\single_intersection_pedestrian.net.xml"/>
+        <sumo-net-file value="/home/naderian/Desktop/Shakiba/CET593/environment/network_model/single_intersection_pedestrian_X.net.xml"/>
     </input>
 
     <processing>
@@ -31,13 +31,17 @@
 
 <additional xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/additional_file.xsd">
     <tlLogic id="1" type="static" programID="0" offset="0">
-        <phase duration="29" state="gGGGrrrrrrrrgGGGrrrrrrrrrGrG"/>
-        <phase duration="5" state="yyyyrrrrrrrryyyyrrrrrrrrrrrr"/>
-        <phase duration="6" state="rrrrGGrrrrrrrrrrGGrrrrrrrrrr"/>
-        <phase duration="5" state="rrrryyrrrrrrrrrryyrrrrrrrrrr"/>
-        <phase duration="29" state="rrrrrrgGGGrrrrrrrrgGGGrrGrGr"/>
-        <phase duration="5" state="rrrrrryyyyrrrrrrrryyyyrrrrrr"/>
-        <phase duration="6" state="rrrrrrrrrrGGrrrrrrrrrrGGrrrr"/>
-        <phase duration="5" state="rrrrrrrrrryyrrrrrrrrrryyrrrr"/>
+        <phase duration="19" state="grrrrrrGgrrrrrrGrrrrrr"/>
+        <phase duration="5"  state="gGGrsrrrgGGrsrrrrrrrrr"/>
+        <phase duration="5"  state="yyyrrrrryyyrrrrrrrrrrr"/>
+        <phase duration="6"  state="rrrGsrrrrrrGsrrrrrrrrr"/>
+        <phase duration="5"  state="rrrysrrrrrrysrrrrrrrrr"/>
+        <phase duration="19" state="srrrgGGrsrrrgGGrGrrrGr"/>
+        <phase duration="5"  state="srrrgGGrsrrrgGGrrrrrrr"/>
+        <phase duration="5"  state="srrryyyrsrrryyyrrrrrrr"/>
+        <phase duration="6"  state="srrrrrrGsrrrrrrGrrrrrr"/>
+        <phase duration="5"  state="srrrrrrysrrrrrryrrrrrr"/>
+        <phase duration="5"  state="rrrrrrrrrrrrrrrrGGGGGG"/>
+        <phase duration="5"  state="rrrrrrrrrrrrrrrrrrrrrr"/>
     </tlLogic>
 </additional>

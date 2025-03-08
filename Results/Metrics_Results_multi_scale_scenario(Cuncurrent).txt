@@ -1,0 +1,11 @@
+average fuel consumption for multi_scale scenario (external model) (in mg): 54.21605590295727
+average waiting time for multi_scale scenario (in s): 13.666058394160585
+average time loss for multi_scale scenario (in s): 25.821569343065722
+average queue length for multi_scale scenario (in m): 15.341810449574737
+average pedestrian time loss for multi_scale scenario (in s): 35.40390804597702
+number of right-turn conflicts between vehicles and pedestrians: 88
+number of CAVs passing through the specific intersection in multi_scale scenario: 274
+number of pedestrians passing through the specific intersection in multi_scale scenario: 261
+The time of simulation termination in multi_scale scenario: 876.0
+average phase lengths:  {2: 12.5, -1: 7.0, 4: 12.272727272727273, 7: 5.0, 0: 10.909090909090908, 5: 5.0, 3: 5.0, 6: 5.0, 1: 7.5}
+number of times each phase happened: {2: 10.0, -1: 56.0, 4: 27.0, 7: 4.0, 0: 24.0, 5: 4.0, 3: 3.0, 6: 1.0, 1: 3.0}
