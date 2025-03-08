@@ -57,6 +57,3 @@ UPDATE: .py files are updated and the new code is available in branch `main-gene
 #### to clone the new branch `main-general-networks` go to the terminal in your local directory:  
 ```terminal
 git clone --branch main-general-networks https://github.com/Shakiba97/CET-593-MMSVCC.git
-
-
-
