@@ -52,4 +52,8 @@ After adjusting the simulation input files, you need to manually adjust the opti
 Equation 23e should be adjusted based on right of ways of each vehicle lane r(j,k) and each pedestrian crossing q(m,k) based on their corresponding green phase p(l,k).  
   
   
-Feel free to ask your questions (naderian@uw.edu). I'll be pushing updates to the code (.py files) by tonight (March 7th). Make sure to run the new code after you changed the above files accordingly. 
+Feel free to ask your questions (naderian@uw.edu). I'll be pushing updates to the code (.py files). Make sure to run the new codes after you changed the above files accordingly.  
+UPDATE: .py files are updated and the new code is available in branch `main-general-networks`:  
+#### to clone the new branch `main-general-networks` go to the terminal in your local directory:  
+```terminal
+git clone --branch main-general-networks https://github.com/Shakiba97/CET-593-MMSVCC.git
