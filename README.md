@@ -37,12 +37,19 @@ Detailed documentiations of the algorithm can be found in /Slides/documentation.
 for those interested in changing the study network the following adjustments should be made to the simulation inputs located at /environment/network_model:  
   
 1- single_intersection_pedestrian_X.net.xml:  
-    this includes the infrastructure information (edges, nodes, etc.,) of the network you want to work on. This file can be created using netedit software included in SUMO package. You can also upload the current network file and modify it using netedit. [netedit documentation](https://sumo.dlr.de/docs/Netedit/index.html).  
+    this includes the infrastructure information (edges, nodes, etc.,) of the network you want to work on. This file can be created using netedit software included in SUMO package. You can also upload the current network file and modify it using netedit. [netedit documentation](https://sumo.dlr.de/docs/Netedit/index.html).   
+      
 2- single_intersection.rou.xml:  
-    This file includes the information of the routes and demand of different modes (pedestrians and vehicles). You can find useful information to create or modify this file [here](https://sumo.dlr.de/docs/Definition_of_Vehicles%2C_Vehicle_Types%2C_and_Routes.html). You can also model the demand using [netedit](https://sumo.dlr.de/docs/Netedit/elementsDemand.html).  
-3- Additional files (single_intersection.add_fixed_time.xml, single_intersection.add_actuated.xml, single_intersection.add.xml):   
+    This file includes the information of the routes and demand of different modes (pedestrians and vehicles). You can find useful information to create or modify this file [here](https://sumo.dlr.de/docs/Definition_of_Vehicles%2C_Vehicle_Types%2C_and_Routes.html). You can also model the demand using [netedit](https://sumo.dlr.de/docs/Netedit/elementsDemand.html).   
+      
+3- Additional files (single_intersection.add_fixed_time.xml, single_intersection.add_actuated.xml, single_intersection.add.xml(for both Concurrent phasing: ingle_intersection_Concurrent.add.xml and for Exclusive phaseing ingle_intersection_Exclusive.add.xml if desired)):   
     these files take account of signal phasing for the fixed time, actuated and multiscale scenario respectively. These additional files can be extracted from netedit after you define your desired signal phasing plan. You can find the instructions [here](https://sumo.dlr.de/docs/Simulation/Traffic_Lights.html). It should also be convenient to just manually adjust the add.xml files according to your new signal timing plan. NOTE: You wanna make sure that the green phases come first, followed by their respective yellow phases, and the all-red phase at the end.  
+
+After adjusting the simulation input files, you need to manually adjust the optimization files located in /agent/gams_models:  
+4- unified_four_legs_three_lanes_slower_Pedestrians.gms for the Cuncurrent phasing, and unified_four_legs_three_lanes_slower_Pedestrians (Exclusive).gms for Exclusive phasing (of you want to also model the exclusive pedestrian phasing):   
+Equation 23e should be adjusted based on right of ways of each vehicle lane r(j,k) and each pedestrian crossing q(m,k) based on their corresponding green phase p(l,k).  
   
 **important: after you finished changing these files accordingly, make sure to update the sumo configuration file inputs in `.sumocfg` files (for all three scenarions) if any input file name is adjusted.  
 
+  
 Feel free to ask your questions (naderian@uw.edu). I'll be pushing updates to the code (.py files) by tonight (March 7th). Make sure to run the new code after you changed the above files accordingly. 
