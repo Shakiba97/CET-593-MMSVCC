@@ -45,11 +45,11 @@ for those interested in changing the study network the following adjustments sho
 3- `Additional files` (`single_intersection.add_fixed_time.xml`, `single_intersection.add_actuated.xml`, single_intersection.add.xml(for both Concurrent phasing: `single_intersection_Concurrent.add.xml` and for Exclusive phaseing `single_intersection_Exclusive.add.xml` if desired)):   
     these files take account of signal phasing for the fixed time, actuated and multiscale scenario respectively. These additional files can be extracted from netedit after you define your desired signal phasing plan. You can find the instructions [here](https://sumo.dlr.de/docs/Simulation/Traffic_Lights.html). It should also be convenient to just manually adjust the add.xml files according to your new signal timing plan. NOTE: You wanna make sure that the green phases come first, followed by their respective yellow phases, and the all-red phase at the end.  
 
+**important: after you finished changing these files accordingly, make sure to update the sumo configuration file inputs in `.sumocfg` files (for all three scenarions) if any input file name is adjusted.  
+  
 After adjusting the simulation input files, you need to manually adjust the optimization files located in /agent/gams_models:  
 4- `unified_four_legs_three_lanes_slower_Pedestrians.gms` for the Cuncurrent phasing, and `unified_four_legs_three_lanes_slower_Pedestrians (Exclusive).gms` for Exclusive phasing (of you want to also model the exclusive pedestrian phasing):   
 Equation 23e should be adjusted based on right of ways of each vehicle lane r(j,k) and each pedestrian crossing q(m,k) based on their corresponding green phase p(l,k).  
   
-**important: after you finished changing these files accordingly, make sure to update the sumo configuration file inputs in `.sumocfg` files (for all three scenarions) if any input file name is adjusted.  
-
   
 Feel free to ask your questions (naderian@uw.edu). I'll be pushing updates to the code (.py files) by tonight (March 7th). Make sure to run the new code after you changed the above files accordingly. 
