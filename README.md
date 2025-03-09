@@ -50,9 +50,14 @@ for those interested in changing the study network the following adjustments sho
 After adjusting the simulation input files, you need to manually adjust the optimization files located in /agent/gams_models:  
 4- `unified_four_legs_three_lanes_slower_Pedestrians.gms` for the Cuncurrent phasing, and `unified_four_legs_three_lanes_slower_Pedestrians (Exclusive).gms` for Exclusive phasing:   
 Equation 23e should be adjusted based on right of ways of each vehicle lane r(j,k) and each pedestrian crossing q(m,k) based on their corresponding green phase p(l,k).  
+For lane indexes: check their order of storing in self.network_graph[inter_id][‘incoming_veh’] which are the incoming vehicle lanes to the intersection in sumo_network_reader.py. then based on their order, their index will start from 1 to the total number of lanes. It should be the same order of their appearance in the SUMO network file you generated as well.  
+For phase indexes: The index is again based on the order of appearance of green phases in the additional file for signal phasing.   
+For crossing indexes: the dictionary "crossing_number_map" (line 172 of single_intersection.py) should give you that.  
+*** note: indexing in GAMS starts from 1  
+
   
   
-Feel free to ask your questions (naderian@uw.edu). I'll be pushing updates to the code (.py files) by tonight (March 7th). Make sure to run the new modules after you changed the above files accordingly.  
+Feel free to ask your questions (naderian@uw.edu). I'll be pushing updates to the code (.py files). Make sure to run the new modules after you changed the above files accordingly.  
 #### UPDATE: .py files are updated and the new code is available in branch `main-general-networks` for those who want to change the study network:  
 to clone the new branch `main-general-networks` go to the terminal in your local directory:  
 ```terminal
