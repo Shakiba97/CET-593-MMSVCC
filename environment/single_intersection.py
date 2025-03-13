@@ -556,8 +556,8 @@ class SingleIntersection:
                 cnt_ped += 1
         #print("wt cnt: ", cnt)
         #print("max wt: ", wt_max)
-        self.waiting_time_avg = wt / len(self.paras["cav_ids"]["all"])
-        self.lost_time_avg = tl / len(self.paras["cav_ids"]["all"])
+        self.waiting_time_avg = wt / cnt
+        self.lost_time_avg = tl / cnt
         self.lost_time_avg_ped = tl_ped / len(self.paras["ped_ids"])
 
     def get_average_queue_length_endtime(self, file):
