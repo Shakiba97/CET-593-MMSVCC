@@ -33,7 +33,7 @@ def set_common_paras(paras):
 
     ## Simulation parameters.
     # Penetration rate of CAVs.
-    paras["penetration"] = 1
+    paras["penetration"] = 0.5
     # Concurrent or Exclusive Pedestrian phasing
     paras["ped_phasing"] = "Concurrent" #"Concurrent" or "Exclusive"
     # Random seed used to generate the volume.

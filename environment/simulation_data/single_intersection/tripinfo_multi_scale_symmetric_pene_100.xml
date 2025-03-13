@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- generated on 2025-03-07 21:20:26 by Eclipse SUMO GUI Version 1.20.0
+<!-- generated on 2025-03-13 16:19:41 by Eclipse SUMO GUI Version 1.20.0
 <configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/sumoConfiguration.xsd">
 
     <input>
@@ -29,7 +29,7 @@
     </report>
 
     <traci_server>
-        <remote-port value="34647"/>
+        <remote-port value="32845"/>
     </traci_server>
 
     <gui_only>
@@ -524,12 +524,12 @@
     <personinfo id="person_SW_diag.18" depart="234.15" type="DEFAULT_PEDTYPE" speedFactor="1.14" duration="203.50" waitingTime="0.00" timeLoss="59.12" traveltime="203.50">
         <walk depart="234.50" departPos="100.00" arrival="438.00" arrivalPos="93.20" duration="203.50" routeLength="228.50" timeLoss="59.12" maxSpeed="1.58"/>
     </personinfo>
-    <tripinfo id="SN_110" depart="391.00" departLane="3_1_2" departPos="5.10" departSpeed="0.00" departDelay="0.00" arrival="438.00" arrivalLane="1_5_1" arrivalPos="186.40" arrivalSpeed="13.00" duration="47.00" routeLength="395.15" waitingTime="3.00" waitingCount="1" stopTime="0.00" timeLoss="16.55" rerouteNo="0" devices="tripinfo_SN_110" vType="cars" speedFactor="0.91" vaporized=""/>
+    <tripinfo id="SN_110" depart="391.00" departLane="3_1_2" departPos="5.10" departSpeed="0.00" departDelay="0.00" arrival="438.00" arrivalLane="1_5_2" arrivalPos="186.40" arrivalSpeed="13.00" duration="47.00" routeLength="395.15" waitingTime="3.00" waitingCount="1" stopTime="0.00" timeLoss="16.55" rerouteNo="0" devices="tripinfo_SN_110" vType="cars" speedFactor="0.91" vaporized=""/>
     <tripinfo id="NS_109" depart="390.00" departLane="5_1_2" departPos="5.10" departSpeed="0.00" departDelay="0.00" arrival="438.50" arrivalLane="1_3_2" arrivalPos="186.40" arrivalSpeed="13.00" duration="48.50" routeLength="395.15" waitingTime="5.00" waitingCount="1" stopTime="0.00" timeLoss="17.87" rerouteNo="0" devices="tripinfo_NS_109" vType="cars" speedFactor="0.97" vaporized=""/>
     <personinfo id="person_EW_n.6" depart="282.38" type="DEFAULT_PEDTYPE" speedFactor="1.17" duration="156.50" waitingTime="0.00" timeLoss="20.18" traveltime="156.50">
         <walk depart="282.50" departPos="100.00" arrival="439.00" arrivalPos="93.20" duration="156.50" routeLength="221.32" timeLoss="20.18" maxSpeed="1.62"/>
     </personinfo>
-    <tripinfo id="SN_106" depart="383.00" departLane="3_1_2" departPos="5.10" departSpeed="0.00" departDelay="0.00" arrival="439.50" arrivalLane="1_5_1" arrivalPos="186.40" arrivalSpeed="13.00" duration="56.50" routeLength="395.15" waitingTime="14.00" waitingCount="1" stopTime="0.00" timeLoss="26.09" rerouteNo="0" devices="tripinfo_SN_106" vType="cars" speedFactor="1.00" vaporized=""/>
+    <tripinfo id="SN_106" depart="383.00" departLane="3_1_2" departPos="5.10" departSpeed="0.00" departDelay="0.00" arrival="439.50" arrivalLane="1_5_1" arrivalPos="186.40" arrivalSpeed="13.00" duration="56.50" routeLength="395.15" waitingTime="14.00" waitingCount="1" stopTime="0.00" timeLoss="26.05" rerouteNo="0" devices="tripinfo_SN_106" vType="cars" speedFactor="1.00" vaporized=""/>
     <tripinfo id="WS_108" depart="390.00" departLane="2_1_1" departPos="5.10" departSpeed="0.00" departDelay="0.00" arrival="440.00" arrivalLane="1_3_1" arrivalPos="186.40" arrivalSpeed="13.00" duration="50.00" routeLength="379.43" waitingTime="9.50" waitingCount="1" stopTime="0.00" timeLoss="19.71" rerouteNo="0" devices="tripinfo_WS_108" vType="cars" speedFactor="1.02" vaporized=""/>
     <tripinfo id="NS_112" depart="403.00" departLane="5_1_2" departPos="5.10" departSpeed="0.00" departDelay="0.00" arrival="440.50" arrivalLane="1_3_2" arrivalPos="186.40" arrivalSpeed="13.00" duration="37.50" routeLength="395.15" waitingTime="0.00" waitingCount="0" stopTime="0.00" timeLoss="6.71" rerouteNo="0" devices="tripinfo_NS_112" vType="cars" speedFactor="0.88" vaporized=""/>
     <tripinfo id="SN_111" depart="397.00" departLane="3_1_2" departPos="5.10" departSpeed="0.00" departDelay="0.00" arrival="441.00" arrivalLane="1_5_2" arrivalPos="186.40" arrivalSpeed="13.00" duration="44.00" routeLength="395.15" waitingTime="0.00" waitingCount="0" stopTime="0.00" timeLoss="13.23" rerouteNo="0" devices="tripinfo_SN_111" vType="cars" speedFactor="1.17" vaporized=""/>
