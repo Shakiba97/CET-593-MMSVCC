@@ -44,7 +44,7 @@ for those interested in changing the study network the following adjustments sho
       
 3- `Additional files` (`single_intersection.add_fixed_time.xml`, `single_intersection.add_actuated.xml`, single_intersection.add.xml(for both Concurrent phasing: `single_intersection_Concurrent.add.xml` and for Exclusive phaseing `single_intersection_Exclusive.add.xml` if desired)):   
     these files take account of signal phasing for the fixed time, actuated and multiscale scenario respectively. These additional files can be extracted from netedit after you define your desired signal phasing plan. You can find the instructions [here](https://sumo.dlr.de/docs/Simulation/Traffic_Lights.html). It should also be convenient to just manually adjust the add.xml files according to your new signal timing plan.  
-NOTE1: For the Multiscale additional file, you wanna make sure that the green phases come first, followed by their respective yellow phases, and the all-red phase at the end.  
+NOTE1: For the Multiscale additional file, you wanna make sure that the green phases come first, followed by their respective yellow phases (in the same order of their corresponding green), and the all-red phase at the end. set the program ID to "my_program".  
 NOTE2: Make sure to allocate enough time for pedestrians crossing the street when defining the minimum duration for actuated signal phasing (e.g., approximate time needed to cross = length of crossing/average pedestrian speed).  
 
 
