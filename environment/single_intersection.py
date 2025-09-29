@@ -172,7 +172,6 @@ class SingleIntersection:
             for crossing in self.paras["network_graph"][inter_id]["crossing"]:
                 crossing_number_map[crossing]= int(crossing[-1])+1
 
-
             for cc in self.paras["network_graph"][inter_id]["crossing"]:
                 cross_demand_current[cc] = set()  ## demand on different crossings of the current step
                 for i in range(1, num_predict_steps +2):
