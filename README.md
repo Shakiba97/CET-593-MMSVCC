@@ -3,34 +3,79 @@
 ## About
 This project involves the implementation of an MPC-based Signal-Vehicle Coupled Control (SVCC) model (Developed by Dr. Qiangqiang Guo (guoqq77@gmail.com)) on a single unified 4-leg, 3-lane intersection (inspired by the intersection at Fairview Avenue and Denny Way, Downtown Seattle, WA). The optimization process aims at maximizing throughput, minimizing the total delay and fuel consumption of connected and automated vehicles (CAVs) at signalized intersections.
 
-## Requirements
-Python 3.12   
-GAMS 46.5 ([Download](https://www.gams.com/download/))  
-SUMO 1.20.0  ([Download](https://eclipse.dev/sumo/))  
-traci  
-sumolib  
-numpy  
-gamsapi  
-matplotlib  
-
-### Installation
-Please follow the instruction on [this link](https://www.gams.com/latest/docs/API_PY_GETTING_STARTED.html) for installing the GAMS dependencies and troubleshooting if needed. 
-
-## Structure
-- `agent`: Contains the MPC Agent Class which includes the MPC Optimization process.  
-    - gams_models: Contains GAMS files solving the Slower-Scale (A2), and Faster-Scale (A3) Optimization problems (refer to the paper [Guo and Ban (2023)](https://www.sciencedirect.com/science/article/abs/pii/S0191261523001121))  
-- `config`: Contains functions for setting up the model parameters.
-- `environment`: Contains SUMO files and configurations as well as single_intersection class which covers the route builder and network generator of simulation as well as the Input, Output Interfaces (communication with SUMO) for the Unified 4-leg intersection.
-- `Results`: Contains Output files generated at the end of simulation provide the following metrics to compare the MMSVCC project performance with other signal timing scenarios (e.g., fixed-time and actuated)
-- `Slides`: Contains detailed diagram and documentation on the algorithm.
-
+  
 The whole process is summarized in the diagram below:  
 
 ![MPC Agent Diagram](Slides/Diagram2.png)
 
  
-Detailed documentiations of the algorithm can be found in /Slides/documentation.docx.  
 
+## Requirements
+| Dependency | Version | Notes |
+|------------|---------|-------|
+| Python | 3.12 | |
+| [GAMS](https://www.gams.com/download/) | 46.5 | Requires valid license; see [Python API setup](https://www.gams.com/latest/docs/API_PY_GETTING_STARTED.html) |
+| [SUMO](https://eclipse.dev/sumo/) | 1.20.0 | Must be on `PATH`; set `SUMO_HOME` env variable |
+| numpy | latest | |
+| matplotlib | latest | |
+| gamsapi | matched to GAMS 46.5 | Installed via GAMS installer, not pip |
+| traci | latest | Bundled with SUMO |
+| sumolib | latest | Bundled with SUMO |
+
+## Structure
+
+```
+M2SVCC/
+├── main.py                      # Entry point — configure and run a scenario here
+├── setup.py                     # Package setup
+├── Requirements.txt             # Python dependencies
+│
+├── agent/
+│   ├── mpc_agent.py             # MPC agent: orchestrates A1/A2/A3 control loop
+│   └── gams_models/             # GAMS files for A2 (signal) and A3 (trajectory) optimization
+│
+├── environment/
+│   └── single_intersection.py   # SUMO interface: network builder, TraCI I/O, metrics
+│
+├── configs/
+│   └── set_parameters.py        # All model parameters: phasing, turning treatments, demand
+│
+├── Results/                     # Simulation output (generated at runtime)
+└── Slides/
+    ├── Diagram2.png             # Architecture diagram
+    └── documentation.docx       # Detailed algorithm documentation
+```
+
+
+## Usage
+To change the scenario, edit the bottom of `main.py`:
+
+```python
+if __name__ == "__main__":
+    main(
+        network_type="single_intersection",
+        volume_type="asymmetric",   # "symmetric" | "asymmetric"
+        control_type="multi_scale"  # "multi_scale" | "actuated" | "fixed_time"
+    )
+```
+  
+> **Signal phasing** (concurrent vs exclusive) and **turning treatment** (permitted, protected, LPI/LBI, delayed right turn) are configured in `configs/set_parameters.py`.
+
+## Contributors
+
+- **Shakiba Naderian** [naderian@uw.edu](mailto:naderian@uw.edu)
+- **Qiangqiang Guo** [guoqq77@gmail.com](mailto:guoqq77@gmail.com)
+- **Xuegang (Jeff) Ban** 
+
+## Related work
+
+> Naderian, S., et al. (2026). *Multimodal MultiScale Signal-Vehicle Coupled Control* (in press). [(link)](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6172842)
+  
+> Guo, Q., & Ban, X. (2023). *A multi-scale control framework for urban traffic control with connected and automated vehicles* Transportation Research Part B. [(link)](https://www.sciencedirect.com/science/article/abs/pii/S0191261523001121)
+
+Real-world validation of the base SVCC model was conducted at the Mcity connected and automated testbed:
+
+> Naderian, S., et al. (2025). *Testing Multiscale Signal-Vehicle Coupled Control with Connected and Automated Vehicles through remote access of Mcity 2.0* [(link)](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5202811)
 
 ## Instructions
 ### 1- Changing the network:
