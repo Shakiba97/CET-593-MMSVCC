@@ -67,16 +67,6 @@ if __name__ == "__main__":
 - **Qiangqiang Guo** [guoqq77@gmail.com](mailto:guoqq77@gmail.com)
 - **Xuegang (Jeff) Ban** 
 
-## Related work
-
-> Naderian, S., et al. (2026). *Multimodal MultiScale Signal-Vehicle Coupled Control* (in press). [(link)](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6172842)
-  
-> Guo, Q., & Ban, X. (2023). *A multi-scale control framework for urban traffic control with connected and automated vehicles* Transportation Research Part B. [(link)](https://www.sciencedirect.com/science/article/abs/pii/S0191261523001121)
-
-Real-world validation of the base SVCC model was conducted at the Mcity connected and automated testbed:
-
-> Naderian, S., et al. (2025). *Testing Multiscale Signal-Vehicle Coupled Control with Connected and Automated Vehicles through remote access of Mcity 2.0* [(link)](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5202811)
-
 ## Instructions
 ### 1- Changing the network:
 for those interested in changing the study network the following adjustments should be made to the simulation inputs located at /environment/network_model:  
